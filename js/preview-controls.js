@@ -9,14 +9,14 @@ import { navigate } from './router.js';
  */
 
 const CHEVRON_ICON = `
-  <svg class="dev-preview__chevron" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
-    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 6l4 4 4-4" />
+  <svg class="dev-preview__chevron" viewBox="0 0 16 16" width="9" height="9" aria-hidden="true" focusable="false">
+    <path fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" d="M4 6l4 4 4-4" />
   </svg>
 `;
 
 const RESET_ICON = `
-  <svg class="dev-preview__reset-icon" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false">
-    <path fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"
+  <svg class="dev-preview__reset-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" focusable="false">
+    <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
       d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6" />
   </svg>
 `;
