@@ -1,0 +1,214 @@
+/* Development / client presentation — custom variant menu + reset (not app UI) */
+
+.dev-preview {
+  position: fixed;
+  z-index: 10000;
+  top: auto;
+  left: auto;
+  right: max(10px, env(safe-area-inset-right));
+  bottom: max(10px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  max-width: calc(100vw - 20px);
+  font-family: var(--app-font-sans);
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+.dev-preview > * {
+  pointer-events: auto;
+}
+
+.dev-preview__bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+  padding: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(12, 16, 28, 0.88);
+  color: #f4f6ff;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+.dev-preview__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  padding: 0 8px 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: 600 11px/1.2 var(--app-font-sans);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dev-preview__trigger:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dev-preview__trigger:focus-visible {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 1px;
+}
+
+.dev-preview__trigger-label {
+  white-space: nowrap;
+}
+
+.dev-preview__chevron {
+  display: block;
+  flex: none;
+  opacity: 0.7;
+  transition: transform 160ms ease;
+}
+
+.dev-preview.is-open .dev-preview__chevron {
+  transform: rotate(180deg);
+}
+
+.dev-preview__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 132px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(14, 18, 32, 0.94);
+  color: #f4f6ff;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.36);
+}
+
+.dev-preview__menu[hidden] {
+  display: none !important;
+}
+
+.dev-preview__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  font: 600 12px/1.2 var(--app-font-sans);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dev-preview__option:hover,
+.dev-preview__option:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+
+.dev-preview__option.is-active {
+  background: rgba(124, 58, 237, 0.28);
+}
+
+.dev-preview__option-check {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  flex: none;
+}
+
+.dev-preview__option.is-active .dev-preview__option-check {
+  background: #c4b5fd;
+  box-shadow: 0 0 0 3px rgba(196, 181, 253, 0.18);
+}
+
+.dev-preview__reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f4f6ff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dev-preview__reset:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.dev-preview__reset:active {
+  transform: scale(0.94);
+}
+
+.dev-preview__reset:focus-visible {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 1px;
+}
+
+.dev-preview__reset-icon {
+  display: block;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+html[data-dev-preview='off'] .dev-preview {
+  display: none !important;
+}
+
+@media (max-width: 420px) {
+  .dev-preview {
+    right: max(8px, env(safe-area-inset-right));
+    bottom: max(8px, env(safe-area-inset-bottom));
+  }
+
+  .dev-preview__trigger {
+    font-size: 10.5px;
+    padding-left: 8px;
+  }
+
+  .dev-preview__option {
+    min-height: 36px;
+  }
+
+  .dev-preview__reset {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (min-width: 900px) {
+  .dev-preview {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}

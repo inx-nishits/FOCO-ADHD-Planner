@@ -1,0 +1,113 @@
+/* App shell — blank screen foundation */
+
+html,
+body {
+  height: 100%;
+  font-family: var(--app-font-sans);
+  font-size: var(--app-font-size);
+  font-weight: var(--app-font-weight);
+  line-height: var(--app-line-height);
+  color: var(--app-text);
+  background: var(--stage-bg);
+}
+
+body {
+  min-height: 100dvh;
+  min-height: 100svh;
+  overflow: hidden;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Allow selection inside future content regions when needed */
+.app-screen[data-selectable='true'],
+.app-screen input,
+.app-screen textarea {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* Desktop presentation stage */
+.app-stage {
+  min-height: 100dvh;
+  min-height: 100svh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: var(--app-spacing-lg);
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(255, 255, 255, 0.7), transparent 60%),
+    var(--stage-bg);
+}
+
+.app-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--app-bg);
+  color: var(--app-text);
+  overflow: hidden;
+}
+
+#app {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.app-screen {
+  width: 100%;
+  height: 100%;
+  padding-top: var(--safe-top);
+  padding-right: var(--safe-right);
+  padding-bottom: var(--safe-bottom);
+  padding-left: var(--safe-left);
+  background: var(--app-bg);
+  /* Intentionally blank — future screens mount here */
+  box-sizing: border-box;
+}
+
+/* Screens with sticky bottom CTAs / docks own their own safe-bottom padding */
+.app-screen:has(
+  .foco-onboarding__footer,
+  .foco-auth-footer,
+  .foco-focus__footer,
+  .foco-account__footer,
+  .foco-update__footer,
+  .foco-task-form__footer,
+  .foco-task-detail__footer,
+  .foco-stats__footer,
+  .foco-planner__dock,
+  .foco-app-tabs--dock,
+  .foco-dock,
+  .foco-ai__composer
+),
+.app-screen.foco-onboarding,
+.app-screen.foco-auth-screen,
+.app-screen.foco-focus,
+.app-screen.foco-account,
+.app-screen.foco-update,
+.app-screen.foco-planner,
+.app-screen.foco-stats,
+.app-screen.foco-ai {
+  padding-bottom: 0;
+}
+
+/* Frame OFF: real mobile / PWA — full bleed stage */
+html[data-device-frame='off'] body {
+  background: var(--app-bg);
+  overflow: hidden;
+}
+
+html[data-device-frame='off'] .app-stage {
+  display: block;
+  padding: 0;
+  min-height: 100dvh;
+  min-height: 100svh;
+  background: var(--app-bg);
+}

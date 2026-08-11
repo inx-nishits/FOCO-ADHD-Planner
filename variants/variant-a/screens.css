@@ -1,0 +1,420 @@
+/**
+ * Variant A — Splash + Version Update screens (Phase 02 / 02A)
+ */
+
+/* -------------------------------------------------------------------------- */
+/* Splash — premium FOCO launch moment                                          */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-splash {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+body[data-variant='a'] .foco-splash__atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(70% 48% at 50% 44%, rgba(124, 58, 237, 0.2), transparent 58%),
+    radial-gradient(90% 60% at 50% 100%, rgba(42, 28, 64, 0.55), transparent 70%),
+    radial-gradient(40% 30% at 50% 0%, rgba(167, 139, 250, 0.05), transparent 65%);
+  pointer-events: none;
+}
+
+body[data-variant='a'] .foco-splash__stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: min(100%, 280px);
+  padding-block: var(--space-4);
+  gap: 0;
+  margin: auto;
+}
+
+body[data-variant='a'] .foco-splash__tagline {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0 var(--space-5);
+  padding-bottom: max(28px, calc(var(--safe-bottom) + 16px));
+  max-width: 22rem;
+  font: 700 12px/1.4 var(--foco-font-display-family);
+  letter-spacing: var(--foco-tracking-meta);
+  text-align: center;
+  text-transform: uppercase;
+  background: var(--foco-text-gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* Logo cluster */
+body[data-variant='a'] .foco-splash__mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 220px;
+  height: 220px;
+  margin-bottom: var(--space-5);
+  transform-origin: 50% 70%;
+}
+
+body[data-variant='a'] .foco-splash__halo {
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(167, 139, 250, 0.42) 0%,
+    rgba(124, 58, 237, 0.18) 42%,
+    transparent 72%
+  );
+  opacity: 0;
+  transform: scale(0.85);
+  filter: blur(6px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body[data-variant='a'] .foco-splash__halo--soft {
+  inset: -4%;
+  opacity: 0;
+  filter: blur(14px);
+  background: radial-gradient(
+    circle,
+    rgba(196, 181, 253, 0.28) 0%,
+    rgba(124, 58, 237, 0.1) 45%,
+    transparent 70%
+  );
+}
+
+body[data-variant='a'] .foco-splash__spark {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+}
+
+body[data-variant='a'] .foco-splash__spark i {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 8px rgba(196, 181, 253, 0.85);
+  opacity: 0;
+}
+
+body[data-variant='a'] .foco-splash__spark i:nth-child(1) {
+  top: 14%;
+  left: 54%;
+}
+body[data-variant='a'] .foco-splash__spark i:nth-child(2) {
+  top: 34%;
+  right: 12%;
+}
+body[data-variant='a'] .foco-splash__spark i:nth-child(3) {
+  bottom: 26%;
+  right: 18%;
+}
+body[data-variant='a'] .foco-splash__spark i:nth-child(4) {
+  bottom: 20%;
+  left: 18%;
+}
+body[data-variant='a'] .foco-splash__spark i:nth-child(5) {
+  top: 28%;
+  left: 14%;
+}
+body[data-variant='a'] .foco-splash__spark i:nth-child(6) {
+  top: 10%;
+  right: 28%;
+  width: 2px;
+  height: 2px;
+}
+
+body[data-variant='a'] .foco-splash__fluff {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  transform-origin: 50% 80%;
+  will-change: transform;
+  filter: drop-shadow(0 10px 18px rgba(124, 58, 237, 0.28));
+}
+
+body[data-variant='a'] .foco-splash__logo {
+  position: relative;
+  z-index: 1;
+  width: 200px;
+  height: auto;
+  aspect-ratio: var(--foco-logo-aspect);
+  opacity: 0;
+  transform: scale(0.92);
+  will-change: opacity, transform;
+}
+
+/* Wordmark — clear but not oversized */
+body[data-variant='a'] .foco-splash__name {
+  margin: 0;
+  font: 800 22px/1.06 var(--foco-font-display-family);
+  letter-spacing: 0.12em;
+  text-indent: 0.12em;
+  background: var(--foco-text-gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+body[data-variant='a'] .foco-splash__slogan {
+  margin: var(--space-3) 0 0;
+  font: 500 14px/1.55 var(--foco-font);
+  letter-spacing: var(--foco-tracking-body);
+  color: var(--foco-text-secondary);
+  opacity: 0;
+  transform: translateY(6px);
+  max-width: 22ch;
+}
+
+/* —— Entrance + fluffy idle loop —— */
+@media (prefers-reduced-motion: no-preference) {
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__mark {
+    animation: foco-splash-float 2.8s ease-in-out 0.65s infinite;
+  }
+
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__fluff {
+    animation: foco-splash-fluffy 2.2s ease-in-out 0.7s infinite;
+  }
+
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__logo {
+    animation: foco-splash-logo-in 700ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+  }
+
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__halo {
+    animation: foco-splash-halo-breathe 2.6s ease-in-out 0.2s infinite;
+  }
+
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__halo--soft {
+    animation: foco-splash-halo-soft 3.2s ease-in-out 0.35s infinite;
+  }
+
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__spark {
+    animation: foco-splash-spark-host 900ms var(--app-ease) 240ms both;
+  }
+
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__spark i:nth-child(1) {
+    animation: foco-splash-twinkle 1.8s ease-in-out 0.35s infinite;
+  }
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__spark i:nth-child(2) {
+    animation: foco-splash-twinkle 2.1s ease-in-out 0.55s infinite;
+  }
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__spark i:nth-child(3) {
+    animation: foco-splash-twinkle 1.7s ease-in-out 0.75s infinite;
+  }
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__spark i:nth-child(4) {
+    animation: foco-splash-twinkle 2.3s ease-in-out 0.45s infinite;
+  }
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__spark i:nth-child(5) {
+    animation: foco-splash-twinkle 1.9s ease-in-out 0.65s infinite;
+  }
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__spark i:nth-child(6) {
+    animation: foco-splash-twinkle 2.4s ease-in-out 0.9s infinite;
+  }
+
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__name {
+    animation: foco-splash-text 420ms var(--app-ease) 480ms both;
+  }
+
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__tagline,
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__slogan {
+    animation: foco-splash-text 420ms var(--app-ease) 620ms both;
+  }
+}
+
+@keyframes foco-splash-logo-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.78) translateY(10px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.06) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Soft float — whole mark bobs gently */
+@keyframes foco-splash-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Fluffy squash & stretch */
+@keyframes foco-splash-fluffy {
+  0%,
+  100% {
+    transform: scale(1, 1) rotate(0deg);
+  }
+  35% {
+    transform: scale(1.05, 0.94) rotate(-1.2deg);
+  }
+  70% {
+    transform: scale(0.96, 1.06) rotate(1deg);
+  }
+}
+
+@keyframes foco-splash-halo-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.14);
+  }
+}
+
+@keyframes foco-splash-halo-soft {
+  0%,
+  100% {
+    opacity: 0.28;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.58;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes foco-splash-spark-host {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes foco-splash-twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.7);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+  70% {
+    opacity: 0.45;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes foco-splash-text {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* —— Reduced motion: simple fade / immediate —— */
+@media (prefers-reduced-motion: reduce) {
+  body[data-variant='a'] .foco-splash__halo,
+  body[data-variant='a'] .foco-splash__spark {
+    display: none;
+  }
+
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__logo,
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__name,
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__tagline,
+  body[data-variant='a'] .foco-splash.is-ready .foco-splash__slogan {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  body[data-variant='a'] .foco-splash--reduced .foco-splash__logo,
+  body[data-variant='a'] .foco-splash--reduced .foco-splash__name,
+  body[data-variant='a'] .foco-splash--reduced .foco-splash__tagline,
+  body[data-variant='a'] .foco-splash--reduced .foco-splash__slogan {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+body[data-variant='a'] .foco-update-backdrop {
+  z-index: 140;
+}
+
+body[data-variant='a'] .foco-update-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  padding: 22px 20px 18px;
+  text-align: center;
+}
+
+body[data-variant='a'] .foco-update-modal__logo {
+  align-self: center;
+  margin-bottom: 2px;
+}
+
+body[data-variant='a'] .foco-update-modal__title {
+  margin: 0;
+  font: 800 20px/1.08 var(--foco-font-display-family);
+  letter-spacing: var(--foco-tracking-title);
+  background: var(--foco-text-gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+body[data-variant='a'] .foco-update-modal__copy {
+  margin: 0;
+  font: 500 14px/1.45 var(--foco-font);
+  color: var(--foco-text-secondary);
+}
+
+body[data-variant='a'] .foco-update-modal__versions {
+  display: inline-block;
+  margin-top: 6px;
+  font: 600 13px/1.3 var(--foco-font);
+  color: var(--foco-purple-soft);
+}
+
+body[data-variant='a'] .foco-update-modal__actions {
+  margin-top: 8px;
+}
+
+body[data-variant='a'] .foco-update-modal__actions .foco-btn {
+  min-height: 48px;
+}

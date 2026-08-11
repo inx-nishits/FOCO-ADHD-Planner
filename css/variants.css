@@ -1,0 +1,48 @@
+/**
+ * Variant token overrides.
+ * Shared structure stays identical — only visual language changes.
+ *
+ * Variant A = FOCO Premium Evolution (full system in /variants/variant-a/)
+ * Variants B & C remain neutral placeholders until designed.
+ */
+
+/* Variant A — FOCO dark brand baseline (canonical detail in variant-a/variant.css) */
+body[data-variant='a'] {
+  color-scheme: dark;
+  --app-bg: #0a0410;
+  --app-bg-elevated: #120c1c;
+  --app-text: #f5f3ff;
+  --app-text-secondary: #b8b0cc;
+  --app-primary: #7c3aed;
+  --app-border: rgba(255, 255, 255, 0.08);
+  --app-focus: #a78bfa;
+  --app-radius-md: 14px;
+  --app-radius-lg: 18px;
+  --stage-bg: #16121f;
+}
+
+/* Variant B — soft cool contrast */
+body[data-variant='b'] {
+  --app-bg: #f7f8fa;
+  --app-bg-elevated: #ffffff;
+  --app-text: #0f172a;
+  --app-text-secondary: #64748b;
+  --app-primary: #1e293b;
+  --app-border: rgba(15, 23, 42, 0.1);
+  --app-radius-md: 14px;
+  --app-radius-lg: 22px;
+  --stage-bg: #dbe2ea;
+}
+
+/* Variant C — warm neutral */
+body[data-variant='c'] {
+  --app-bg: #fbfaf7;
+  --app-bg-elevated: #f3efe6;
+  --app-text: #1c1917;
+  --app-text-secondary: #78716c;
+  --app-primary: #292524;
+  --app-border: rgba(28, 25, 23, 0.1);
+  --app-radius-md: 10px;
+  --app-radius-lg: 18px;
+  --stage-bg: #e7e2d9;
+}

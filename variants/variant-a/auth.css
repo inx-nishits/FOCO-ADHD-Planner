@@ -1,0 +1,609 @@
+/**
+ * Variant A — Authentication (Phase 03)
+ */
+
+/* -------------------------------------------------------------------------- */
+/* Auth shell — keyboard-safe scroll + sticky footer                            */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-auth-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+body[data-variant='a'] .foco-auth-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+  padding: var(--space-2) var(--space-4) var(--space-2);
+}
+
+body[data-variant='a'] .foco-auth-header--nav {
+  min-height: 72px;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+body[data-variant='a'] .foco-auth-header__spacer {
+  display: block;
+  width: 44px;
+  height: 44px;
+}
+
+body[data-variant='a'] .foco-auth-header__logo {
+  width: 72px;
+  height: auto;
+  filter:
+    drop-shadow(0 0 12px rgba(167, 139, 250, 0.35))
+    drop-shadow(0 8px 20px rgba(124, 58, 237, 0.4));
+  opacity: 1;
+}
+
+body[data-variant='a'] .foco-auth-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: var(--space-2) var(--space-5) var(--space-4);
+}
+
+body[data-variant='a'] .foco-auth-scroll--keyboard {
+  padding-bottom: var(--space-6);
+}
+
+body[data-variant='a'] .foco-auth-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: var(--space-3) var(--foco-cta-inset);
+  padding-bottom: max(var(--foco-cta-inset), var(--safe-bottom));
+  background: linear-gradient(180deg, transparent 0%, var(--foco-bg) 28%);
+  border-top: 1px solid transparent;
+}
+
+body[data-variant='a'] .foco-auth-footer__cta {
+  width: 100%;
+}
+
+body[data-variant='a'] .foco-auth-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+body[data-variant='a'] .foco-auth-actions .foco-btn {
+  width: 100%;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Landing — sign-in welcome                                                    */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-auth-landing {
+  position: relative;
+}
+
+body[data-variant='a'] .foco-auth-landing .foco-auth-header {
+  min-height: calc(12px + var(--safe-top));
+  padding: 0;
+}
+
+body[data-variant='a'] .foco-auth-landing .foco-auth-header__spacer {
+  display: none;
+}
+
+body[data-variant='a'] .foco-auth-landing .foco-auth-scroll {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: var(--space-4) var(--space-5);
+  padding-bottom: var(--space-2);
+}
+
+body[data-variant='a'] .foco-auth-landing .foco-auth-footer {
+  padding-top: var(--space-3);
+  background: linear-gradient(180deg, transparent 0%, rgba(8, 10, 18, 0.88) 32%);
+}
+
+body[data-variant='a'] .foco-auth-landing__atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(70% 45% at 50% 18%, rgba(124, 58, 237, 0.2), transparent 58%),
+    radial-gradient(40% 30% at 85% 70%, rgba(99, 102, 241, 0.1), transparent 60%),
+    linear-gradient(rgba(167, 139, 250, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 139, 250, 0.035) 1px, transparent 1px);
+  background-size: auto, auto, 28px 28px, 28px 28px;
+  mask-image: radial-gradient(120% 90% at 50% 35%, #000 40%, transparent 88%);
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 35%, #000 40%, transparent 88%);
+}
+
+body[data-variant='a'] .foco-auth-landing__bubble {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(1px);
+  opacity: 0.55;
+}
+
+body[data-variant='a'] .foco-auth-landing__bubble--a {
+  width: 10px;
+  height: 10px;
+  top: 18%;
+  left: 16%;
+  background: rgba(196, 181, 253, 0.55);
+  box-shadow: 0 0 16px rgba(167, 139, 250, 0.35);
+}
+
+body[data-variant='a'] .foco-auth-landing__bubble--b {
+  width: 7px;
+  height: 7px;
+  top: 28%;
+  right: 18%;
+  background: rgba(124, 58, 237, 0.5);
+}
+
+body[data-variant='a'] .foco-auth-landing__bubble--c {
+  width: 12px;
+  height: 12px;
+  bottom: 22%;
+  right: 24%;
+  background: rgba(99, 102, 241, 0.4);
+}
+
+body[data-variant='a'] .foco-auth-landing__hero {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  margin: 0 auto;
+  max-width: 20rem;
+}
+
+body[data-variant='a'] .foco-auth-landing__mark {
+  display: grid;
+  place-items: center;
+  margin-bottom: var(--space-2);
+}
+
+body[data-variant='a'] .foco-auth-landing__mark .foco-auth-logo {
+  width: 148px;
+  height: auto;
+  filter: drop-shadow(0 12px 28px rgba(76, 29, 149, 0.45));
+}
+
+body[data-variant='a'] .foco-auth-landing__eyebrow {
+  margin: 0;
+  font: 700 11px/1.3 var(--foco-font-display-family);
+  letter-spacing: var(--foco-tracking-meta);
+  text-transform: uppercase;
+  background: var(--foco-text-gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+body[data-variant='a'] .foco-auth-landing__title {
+  margin: 0;
+  font: 800 clamp(1.75rem, 7.8vw, 2rem)/1.02 var(--foco-font-display-family);
+  letter-spacing: var(--foco-tracking-display);
+  text-wrap: balance;
+  background: var(--foco-text-gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 24px rgba(196, 181, 253, 0.22));
+}
+
+body[data-variant='a'] .foco-auth-landing__lead {
+  margin: 0;
+  max-width: 28ch;
+  font: var(--foco-font-body);
+  letter-spacing: var(--foco-tracking-body);
+  color: var(--foco-text-secondary);
+}
+
+body[data-variant='a'] .foco-auth-logo {
+  flex-shrink: 0;
+}
+
+body[data-variant='a'] .foco-auth-actions {
+  gap: 12px;
+}
+
+body[data-variant='a'] .foco-auth-actions .foco-btn {
+  width: 100%;
+  min-height: 52px;
+  gap: 10px;
+  font-weight: 600;
+  transition:
+    background-color 160ms var(--app-ease),
+    border-color 160ms var(--app-ease),
+    box-shadow 160ms var(--app-ease),
+    transform 140ms var(--app-ease),
+    filter 160ms var(--app-ease),
+    color 160ms var(--app-ease);
+}
+
+/* Apple — official light button on dark UI */
+body[data-variant='a'] .foco-btn--apple {
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+}
+
+body[data-variant='a'] .foco-btn--apple .foco-apple-icon {
+  color: #111111;
+  flex-shrink: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body[data-variant='a'] .foco-btn--apple:hover:not(:disabled) {
+    background: #f3f4f6;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  }
+}
+
+body[data-variant='a'] .foco-btn--apple:active:not(:disabled) {
+  background: #e5e7eb;
+  transform: scale(0.985) translateY(0);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Google — dark surface, multicolor mark */
+body[data-variant='a'] .foco-btn--google {
+  background: rgba(255, 255, 255, 0.06);
+  color: #f5f3ff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+body[data-variant='a'] .foco-btn--google .foco-google-icon {
+  flex-shrink: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body[data-variant='a'] .foco-btn--google:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.11);
+    border-color: rgba(167, 139, 250, 0.38);
+    transform: translateY(-1px);
+    box-shadow:
+      0 10px 24px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+}
+
+body[data-variant='a'] .foco-btn--google:active:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(0.985) translateY(0);
+}
+
+/* Email primary — stronger hover lift */
+@media (hover: hover) and (pointer: fine) {
+  body[data-variant='a'] .foco-auth-actions .foco-btn--primary:hover:not(:disabled) {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+    box-shadow: var(--foco-cta-shadow-hover), var(--foco-cta-highlight);
+  }
+}
+
+body[data-variant='a'] .foco-auth-actions .foco-btn--primary:active:not(:disabled) {
+  transform: scale(0.985) translateY(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body[data-variant='a'] .foco-auth-landing__bubble--a {
+    animation: foco-auth-bubble 9s ease-in-out infinite;
+  }
+  body[data-variant='a'] .foco-auth-landing__bubble--b {
+    animation: foco-auth-bubble 11s ease-in-out infinite reverse;
+  }
+  body[data-variant='a'] .foco-auth-landing__bubble--c {
+    animation: foco-auth-bubble 8s ease-in-out infinite;
+  }
+}
+
+@keyframes foco-auth-bubble {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-variant='a'] .foco-auth-landing__bubble--a,
+  body[data-variant='a'] .foco-auth-landing__bubble--b,
+  body[data-variant='a'] .foco-auth-landing__bubble--c {
+    animation: none;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Forms                                                                        */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-auth-form-head {
+  margin-bottom: var(--space-6);
+}
+
+body[data-variant='a'] .foco-auth-form-head .foco-auth-logo {
+  margin-bottom: var(--space-4);
+}
+
+body[data-variant='a'] .foco-auth-form-head .foco-title {
+  margin: 0 0 var(--space-2);
+}
+
+body[data-variant='a'] .foco-auth-form-head .foco-body-secondary {
+  margin: 0;
+  max-width: 34ch;
+}
+
+body[data-variant='a'] .foco-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body[data-variant='a'] .foco-auth-form .foco-field-error[hidden] {
+  display: none;
+  margin: 0;
+}
+
+body[data-variant='a'] .foco-auth-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+@media (max-width: 360px) {
+  body[data-variant='a'] .foco-auth-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+body[data-variant='a'] .foco-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--space-1);
+  font: 600 12px/1.3 var(--foco-font);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: rgba(232, 228, 255, 0.88);
+}
+
+body[data-variant='a'] .foco-label__mark {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--foco-purple-soft);
+  box-shadow: 0 0 8px rgba(167, 139, 250, 0.45);
+  flex-shrink: 0;
+}
+
+body[data-variant='a'] .foco-field {
+  display: block;
+}
+
+body[data-variant='a'] .foco-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+body[data-variant='a'] .foco-input-wrap .foco-input {
+  padding-right: var(--space-4);
+}
+
+body[data-variant='a'] .foco-input-wrap--password .foco-input {
+  padding-right: 48px;
+}
+
+body[data-variant='a'] .foco-input-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--foco-purple-soft);
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  line-height: 0;
+}
+
+body[data-variant='a'] .foco-input-toggle .foco-ico,
+body[data-variant='a'] .foco-input-toggle svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+body[data-variant='a'] .foco-input-toggle:active {
+  background: rgba(124, 58, 237, 0.16);
+}
+
+body[data-variant='a'] .foco-input-toggle:focus-visible {
+  outline: 2px solid var(--foco-focus-ring);
+  outline-offset: 2px;
+}
+
+body[data-variant='a'] .foco-input--disabled,
+body[data-variant='a'] .foco-input:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+body[data-variant='a'] .foco-field--error .foco-input {
+  border-color: rgba(248, 113, 113, 0.55);
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.12);
+}
+
+body[data-variant='a'] .foco-field--valid .foco-input:not(:focus) {
+  border-color: rgba(52, 211, 153, 0.35);
+}
+
+body[data-variant='a'] .foco-field-error {
+  margin: var(--space-2) 0 0;
+  font: var(--foco-font-caption);
+  color: var(--foco-error);
+}
+
+body[data-variant='a'] .foco-field-hint {
+  margin: var(--space-2) 0 0;
+}
+
+body[data-variant='a'] .foco-auth-inline {
+  margin: calc(var(--space-1) * -1) 0 0;
+  text-align: right;
+}
+
+body[data-variant='a'] .foco-auth-switch {
+  margin: var(--space-6) 0 0;
+  font: var(--foco-font-body-sm);
+  color: var(--foco-text-secondary);
+  text-align: center;
+}
+
+body[data-variant='a'] .foco-auth-footer .foco-auth-switch {
+  margin: var(--space-3) 0 0;
+}
+
+body[data-variant='a'] .foco-link,
+body[data-variant='a'] .foco-auth-link-btn {
+  font: 700 14px/1.3 var(--foco-font);
+  background: var(--foco-text-gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body[data-variant='a'] .foco-auth-link-btn {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+body[data-variant='a'] .foco-link:focus-visible,
+body[data-variant='a'] .foco-auth-link-btn:focus-visible {
+  outline: 2px solid var(--foco-focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+body[data-variant='a'] .foco-auth-email {
+  color: var(--foco-text);
+  font-weight: 600;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Status screens (verify, forgot success)                                      */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-auth-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+}
+
+body[data-variant='a'] .foco-auth-status__badge {
+  margin-top: var(--space-2);
+}
+
+body[data-variant='a'] .foco-auth-status__copy {
+  margin: 0;
+  max-width: 34ch;
+}
+
+body[data-variant='a'] .foco-auth-status__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-2);
+  width: 100%;
+  margin-top: var(--space-4);
+}
+
+body[data-variant='a'] .foco-auth-status__actions .foco-btn {
+  width: 100%;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Loading spinner on buttons                                                   */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: foco-spin 0.7s linear infinite;
+}
+
+body[data-variant='a'] .foco-btn--secondary .foco-spinner {
+  border-color: rgba(255, 255, 255, 0.2);
+  border-top-color: var(--foco-text);
+}
+
+body[data-variant='a'] .foco-btn--apple .foco-spinner {
+  border-color: rgba(17, 17, 17, 0.2);
+  border-top-color: #111;
+}
+
+body[data-variant='a'] .foco-btn--google .foco-spinner {
+  border-color: rgba(255, 255, 255, 0.2);
+  border-top-color: #f5f3ff;
+}
+
+body[data-variant='a'] .foco-btn.is-loading {
+  gap: var(--space-2);
+}
+
+@keyframes foco-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-variant='a'] .foco-spinner {
+    animation: none;
+    opacity: 0.85;
+  }
+}
+
+/* Future onboarding gate */
+body[data-variant='a'] .foco-onboarding-gate {
+  background: transparent;
+}

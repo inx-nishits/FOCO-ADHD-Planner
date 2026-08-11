@@ -1,0 +1,820 @@
+/**
+ * FOCO Variant A — Gen 2 visual evolution layer
+ * Cross-screen polish: atmosphere, glass, motion, composition.
+ * Loads last — overrides phase CSS without changing product logic.
+ */
+
+/* -------------------------------------------------------------------------- */
+/* Shared atmospheric backdrops (product moments)                               */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] :is(
+  .foco-planner,
+  .foco-auth-screen,
+  .foco-onboarding,
+  .foco-stats,
+  .foco-ai,
+  .foco-account,
+  .foco-focus,
+  .foco-splash,
+  .foco-update
+) {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Soft violet mesh + depth */
+body[data-variant='a'] :is(
+  .foco-planner,
+  .foco-auth-screen,
+  .foco-onboarding,
+  .foco-stats,
+  .foco-ai,
+  .foco-account,
+  .foco-focus--setup,
+  .foco-focus--active,
+  .foco-splash,
+  .foco-update
+)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+}
+
+/* Faint check grid + floating focus bubbles (planner excluded — no bubbles) */
+body[data-variant='a'] :is(
+  .foco-auth-screen,
+  .foco-stats,
+  .foco-ai,
+  .foco-account,
+  .foco-focus--setup,
+  .foco-focus--active
+)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  background:
+    /* soft bubbles */
+    radial-gradient(circle at 18% 22%, rgba(167, 139, 250, 0.16) 0 2.5%, transparent 3.2%),
+    radial-gradient(circle at 82% 16%, rgba(124, 58, 237, 0.14) 0 1.8%, transparent 2.4%),
+    radial-gradient(circle at 74% 68%, rgba(99, 102, 241, 0.12) 0 3%, transparent 3.8%),
+    radial-gradient(circle at 28% 78%, rgba(196, 181, 253, 0.1) 0 2%, transparent 2.6%),
+    radial-gradient(circle at 52% 42%, rgba(124, 58, 237, 0.07) 0 4.5%, transparent 5.5%),
+    /* minor gradient check grid */
+    linear-gradient(rgba(167, 139, 250, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 139, 250, 0.035) 1px, transparent 1px);
+  background-size:
+    auto,
+    auto,
+    auto,
+    auto,
+    auto,
+    28px 28px,
+    28px 28px;
+  background-position: 0 0;
+  mask-image: radial-gradient(120% 90% at 50% 30%, #000 35%, transparent 88%);
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 30%, #000 35%, transparent 88%);
+}
+
+/* Daily Planner: no bubble layer */
+body[data-variant='a'] .foco-planner::after {
+  content: none;
+  display: none;
+}
+
+body[data-variant='a'] .foco-planner::before {
+  background:
+    radial-gradient(55% 35% at 12% 8%, rgba(124, 58, 237, 0.18), transparent 55%),
+    radial-gradient(45% 30% at 88% 18%, rgba(99, 102, 241, 0.12), transparent 50%),
+    radial-gradient(40% 28% at 70% 90%, rgba(52, 211, 153, 0.05), transparent 55%),
+    linear-gradient(180deg, rgba(167, 139, 250, 0.05) 0%, transparent 28%);
+}
+
+body[data-variant='a'] .foco-auth-screen::before {
+  background:
+    radial-gradient(70% 45% at 50% 0%, rgba(124, 58, 237, 0.16), transparent 58%),
+    radial-gradient(50% 40% at 100% 80%, rgba(42, 28, 64, 0.4), transparent 65%),
+    radial-gradient(35% 28% at 8% 70%, rgba(99, 102, 241, 0.1), transparent 60%);
+}
+
+body[data-variant='a'] .foco-stats::before {
+  background:
+    radial-gradient(60% 38% at 50% 0%, rgba(52, 211, 153, 0.08), transparent 55%),
+    radial-gradient(55% 35% at 100% 40%, rgba(124, 58, 237, 0.12), transparent 52%),
+    radial-gradient(30% 24% at 10% 85%, rgba(251, 191, 36, 0.05), transparent 60%);
+}
+
+body[data-variant='a'] .foco-ai::before {
+  background:
+    radial-gradient(80% 50% at 50% -5%, rgba(167, 139, 250, 0.18), transparent 55%),
+    conic-gradient(from 200deg at 80% 20%, rgba(124, 58, 237, 0.1), transparent 40%),
+    radial-gradient(28% 22% at 15% 75%, rgba(99, 102, 241, 0.1), transparent 65%);
+}
+
+body[data-variant='a'] .foco-account::before {
+  background:
+    radial-gradient(65% 40% at 50% 0%, rgba(124, 58, 237, 0.1), transparent 60%),
+    radial-gradient(40% 30% at 90% 85%, rgba(167, 139, 250, 0.08), transparent 60%);
+}
+
+body[data-variant='a'] .foco-focus--setup::before {
+  background:
+    radial-gradient(75% 55% at 50% 0%, rgba(124, 58, 237, 0.18), transparent 58%),
+    radial-gradient(50% 40% at 20% 100%, rgba(59, 130, 246, 0.1), transparent 55%);
+}
+
+body[data-variant='a'] .foco-focus--active::before {
+  background:
+    radial-gradient(70% 50% at 50% 38%, rgba(124, 58, 237, 0.24), transparent 62%),
+    radial-gradient(90% 70% at 50% 100%, rgba(20, 12, 36, 0.65), transparent 72%);
+  animation: foco-focus-breathe 8s var(--foco-ease-in-out) infinite;
+}
+
+@keyframes foco-focus-breathe {
+  0%,
+  100% {
+    opacity: 0.88;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body[data-variant='a'] :is(
+    .foco-planner,
+    .foco-auth-screen,
+    .foco-stats,
+    .foco-ai,
+    .foco-account,
+    .foco-focus--setup
+  )::after {
+    animation: foco-ambient-drift 18s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes foco-ambient-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.48;
+  }
+  100% {
+    transform: translate3d(0, -10px, 0);
+    opacity: 0.62;
+  }
+}
+
+body[data-variant='a'] :is(
+  .foco-planner__header,
+  .foco-planner__scroll,
+  .foco-planner__quick,
+  .foco-auth-header,
+  .foco-auth-scroll,
+  .foco-auth-footer,
+  .foco-onboarding__header,
+  .foco-onboarding__viewport,
+  .foco-onboarding__footer,
+  .foco-stats__header,
+  .foco-stats__scroll,
+  .foco-stats__footer,
+  .foco-ai__header,
+  .foco-ai__messages,
+  .foco-ai__composer,
+  .foco-account__header,
+  .foco-account__scroll,
+  .foco-account__footer,
+  .foco-focus__header,
+  .foco-focus__scroll,
+  .foco-focus__footer,
+  .foco-focus-active__main
+) {
+  position: relative;
+  z-index: 1;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Glass surfaces & open layout (fewer heavy cards)                             */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-glass {
+  background: var(--foco-glass-bg);
+  border: 1px solid var(--foco-glass-border);
+  backdrop-filter: blur(var(--foco-blur-sm));
+  -webkit-backdrop-filter: blur(var(--foco-blur-sm));
+}
+
+body[data-variant='a'] .foco-card {
+  background: var(--foco-glass-bg);
+  border: 1px solid var(--foco-glass-border);
+  backdrop-filter: blur(var(--foco-blur-sm));
+  -webkit-backdrop-filter: blur(var(--foco-blur-sm));
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+  transition:
+    border-color var(--foco-motion-fast) var(--foco-ease-out),
+    box-shadow var(--foco-motion-fast) var(--foco-ease-out),
+    transform var(--foco-motion-fast) var(--foco-spring);
+}
+
+body[data-variant='a'] .foco-surface-open {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding-inline: 0;
+}
+
+body[data-variant='a'] .foco-group {
+  background: var(--foco-glass-bg);
+  border: 1px solid var(--foco-glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  backdrop-filter: blur(var(--foco-blur-sm));
+  -webkit-backdrop-filter: blur(var(--foco-blur-sm));
+}
+
+body[data-variant='a'] .foco-divider {
+  height: 1px;
+  margin: var(--space-3) 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.1) 80%,
+    transparent
+  );
+  border: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Buttons — refined geometry & states                                        */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-btn {
+  min-height: 48px;
+  padding-inline: var(--space-5);
+  transition:
+    background-color var(--foco-motion-fast) var(--foco-ease-out),
+    box-shadow var(--foco-motion-fast) var(--foco-ease-out),
+    opacity var(--foco-motion-fast) var(--foco-ease-out),
+    transform var(--foco-motion-instant) var(--foco-spring);
+}
+
+body[data-variant='a'] .foco-btn--sm {
+  min-height: 40px;
+  padding-inline: var(--space-4);
+  font-size: 13px;
+}
+
+body[data-variant='a'] .foco-btn--compact {
+  min-height: 44px;
+}
+
+body[data-variant='a'] .foco-btn--tertiary {
+  background: rgba(124, 58, 237, 0.12);
+  color: var(--foco-purple-soft);
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+body[data-variant='a'] .foco-btn--tertiary:active:not(:disabled) {
+  transform: scale(0.98);
+  background: rgba(124, 58, 237, 0.2);
+}
+
+body[data-variant='a'] .foco-icon-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition:
+    background var(--foco-motion-fast) var(--foco-ease-out),
+    transform var(--foco-motion-instant) var(--foco-spring);
+}
+
+body[data-variant='a'] .foco-icon-btn:active {
+  transform: scale(0.94);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Inputs — premium focus & surfaces                                          */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-input,
+body[data-variant='a'] .foco-textarea,
+body[data-variant='a'] .foco-select {
+  background: rgba(10, 14, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition:
+    border-color var(--foco-motion-fast) var(--foco-ease-out),
+    box-shadow var(--foco-motion-fast) var(--foco-ease-out),
+    background var(--foco-motion-fast) var(--foco-ease-out);
+}
+
+body[data-variant='a'] .foco-input:focus,
+body[data-variant='a'] .foco-textarea:focus,
+body[data-variant='a'] .foco-select:focus {
+  background: rgba(14, 18, 32, 0.72);
+  border-color: rgba(167, 139, 250, 0.45);
+  box-shadow: none;
+  outline: none;
+}
+
+body[data-variant='a'] .foco-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font: 600 12px/1.3 var(--foco-font);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: rgba(232, 228, 255, 0.88);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Legacy / non-dock tab chrome (dock styles live in tab-bar.css)               */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-app-tabs:not(.foco-app-tabs--dock) {
+  position: relative;
+  margin: 0 var(--space-3) calc(var(--space-2) + var(--safe-bottom));
+  padding: var(--space-2) var(--space-3);
+  gap: var(--space-1);
+  border: 1px solid var(--foco-glass-border);
+  border-radius: var(--radius-xl);
+  background: var(--foco-glass-bg);
+  backdrop-filter: blur(var(--foco-blur-md));
+  -webkit-backdrop-filter: blur(var(--foco-blur-md));
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+body[data-variant='a'] .foco-planner:not(.foco-planner--premium) .foco-planner__quick .foco-app-tabs,
+body[data-variant='a'] .foco-stats__footer .foco-app-tabs--dock,
+body[data-variant='a'] .foco-stats__footer .foco-dock,
+body[data-variant='a'] .foco-account__footer .foco-app-tabs--dock,
+body[data-variant='a'] .foco-account__footer .foco-dock,
+body[data-variant='a'] .foco-ai__composer .foco-app-tabs--dock,
+body[data-variant='a'] .foco-ai__composer .foco-dock {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+body[data-variant='a'] .foco-stats__footer,
+body[data-variant='a'] .foco-account__footer:has(.foco-app-tabs--dock):not(:has(.foco-btn)),
+body[data-variant='a'] .foco-account__footer:has(.foco-dock):not(:has(.foco-btn)) {
+  border-top: none;
+  background: transparent;
+  padding: 14px 16px max(12px, var(--safe-bottom));
+}
+
+body[data-variant='a'] .foco-account__footer:has(.foco-btn) {
+  background: linear-gradient(180deg, transparent 0%, rgba(8, 10, 18, 0.92) 32%);
+  padding: var(--space-3) var(--foco-cta-inset);
+  padding-bottom: max(var(--foco-cta-inset), var(--safe-bottom));
+}
+
+body[data-variant='a'] .foco-app-tabs:not(.foco-app-tabs--dock) .foco-nav-item {
+  flex: 1;
+  min-width: 0;
+  font: var(--foco-font-nav);
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-md);
+  transition:
+    color var(--foco-motion-fast) var(--foco-ease-out),
+    background var(--foco-motion-fast) var(--foco-ease-out),
+    transform var(--foco-motion-instant) var(--foco-spring);
+}
+
+body[data-variant='a'] .foco-app-tabs:not(.foco-app-tabs--dock) .foco-nav-item:active {
+  transform: scale(0.96);
+}
+
+body[data-variant='a'] .foco-app-tabs:not(.foco-app-tabs--dock) .foco-nav-item.is-active,
+body[data-variant='a'] .foco-app-tabs:not(.foco-app-tabs--dock) .foco-nav-item[aria-current='page'] {
+  color: var(--foco-text);
+  background: rgba(124, 58, 237, 0.18);
+}
+
+body[data-variant='a'] .foco-nav-item.is-active::before,
+body[data-variant='a'] .foco-nav-item[aria-current='page']::before {
+  display: none;
+}
+
+body[data-variant='a'] .foco-app-tabs:not(.foco-app-tabs--dock) .foco-app-tabs__icon {
+  font-size: 17px;
+  opacity: 0.85;
+}
+
+body[data-variant='a'] .foco-app-tabs:not(.foco-app-tabs--dock) .foco-nav-item.is-active .foco-app-tabs__icon,
+body[data-variant='a'] .foco-app-tabs:not(.foco-app-tabs--dock) .foco-nav-item[aria-current='page'] .foco-app-tabs__icon {
+  opacity: 1;
+  filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.45));
+}
+
+/* -------------------------------------------------------------------------- */
+/* Planner — command center rhythm                                            */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-planner__header {
+  padding-bottom: var(--space-2);
+}
+
+body[data-variant='a'] .foco-planner__date-label {
+  font: var(--foco-font-h2);
+  letter-spacing: -0.02em;
+}
+
+body[data-variant='a'] .foco-planner__block {
+  margin-bottom: var(--space-5);
+}
+
+body[data-variant='a'] .foco-planner__block-head .foco-h3 {
+  font: var(--foco-font-h3);
+}
+
+body[data-variant='a'] .foco-planner__timeline-line {
+  background: linear-gradient(
+    180deg,
+    rgba(167, 139, 250, 0.5),
+    rgba(124, 58, 237, 0.15) 80%,
+    transparent
+  );
+}
+
+body[data-variant='a'] .foco-planner--premium {
+  position: relative;
+}
+
+body[data-variant='a'] .foco-planner:not(.foco-planner--premium) .foco-task-card {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: rgba(22, 28, 46, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    opacity var(--foco-motion-base) var(--foco-ease-out),
+    transform var(--foco-motion-fast) var(--foco-spring),
+    border-color var(--foco-motion-fast) var(--foco-ease-out);
+}
+
+body[data-variant='a'] .foco-task-card:active {
+  transform: scale(0.995);
+}
+
+body[data-variant='a'] .foco-task-card__title {
+  font: var(--foco-font-task);
+}
+
+body[data-variant='a'] .foco-task-card__check {
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  transition:
+    background var(--foco-motion-fast) var(--foco-spring),
+    border-color var(--foco-motion-fast) var(--foco-ease-out),
+    transform var(--foco-motion-instant) var(--foco-spring),
+    box-shadow var(--foco-motion-fast) var(--foco-ease-out);
+}
+
+body[data-variant='a'] .foco-task-card__check:active {
+  transform: scale(0.88);
+}
+
+body[data-variant='a'] .foco-task-card__check.is-checked {
+  transform: scale(1);
+  box-shadow: 0 0 14px rgba(124, 58, 237, 0.45);
+}
+
+body[data-variant='a'] .foco-task-card__check.is-checked::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 9px;
+  margin: 0 0 1px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+body[data-variant='a'] .foco-planner__quick {
+  padding-top: var(--space-2);
+  background: linear-gradient(180deg, transparent 0%, rgba(10, 13, 24, 0.92) 32%);
+}
+
+body[data-variant='a'] .foco-planner__quick-input {
+  border-radius: var(--radius-pill);
+  padding-inline: var(--space-4);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Focus — immersive timer typography                                         */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-focus--active {
+  background: #05030a;
+}
+
+body[data-variant='a'] .foco-focus-ring__time {
+  font: var(--foco-font-timer);
+  letter-spacing: -0.04em;
+  text-shadow: 0 0 40px rgba(167, 139, 250, 0.25);
+}
+
+body[data-variant='a'] .foco-focus-ring__progress {
+  stroke: var(--foco-purple-soft);
+  filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.5));
+}
+
+body[data-variant='a'] .foco-focus-env {
+  background: rgba(22, 28, 46, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+body[data-variant='a'] .foco-focus-env.is-selected {
+  background: rgba(124, 58, 237, 0.14);
+}
+
+/* -------------------------------------------------------------------------- */
+/* AI — conversational intelligence                                           */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-ai {
+  background: transparent;
+}
+
+body[data-variant='a'] .foco-ai-prompt {
+  border-radius: var(--radius-pill);
+  background: rgba(34, 42, 68, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform var(--foco-motion-instant) var(--foco-spring);
+}
+
+body[data-variant='a'] .foco-ai-prompt:active {
+  transform: scale(0.97);
+}
+
+body[data-variant='a'] .foco-ai-msg--user .foco-ai-msg__bubble {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.35), rgba(124, 58, 237, 0.28));
+  border: 1px solid rgba(167, 139, 250, 0.22);
+}
+
+body[data-variant='a'] .foco-ai-msg--assistant .foco-ai-msg__bubble {
+  background: rgba(18, 24, 40, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body[data-variant='a'] .foco-ai-card {
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: var(--radius-lg);
+}
+
+body[data-variant='a'] .foco-ai-voice {
+  backdrop-filter: blur(var(--foco-blur-md));
+  -webkit-backdrop-filter: blur(var(--foco-blur-md));
+}
+
+body[data-variant='a'] .foco-ai-voice__pulse {
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.25), transparent 70%);
+}
+
+body[data-variant='a'] .foco-ai-voice__pulse.is-active {
+  border-color: rgba(167, 139, 250, 0.55);
+}
+
+body[data-variant='a'] .foco-ai-brain__intro {
+  border-radius: var(--radius-xl);
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.12), rgba(18, 24, 40, 0.8));
+  border: 1px solid rgba(167, 139, 250, 0.18);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Statistics — editorial insight hierarchy                                     */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-stats {
+  background: transparent;
+}
+
+body[data-variant='a'] .foco-stats-overview-tile {
+  border-radius: var(--radius-lg);
+  background: rgba(22, 28, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+body[data-variant='a'] .foco-stats-overview-value {
+  font: var(--foco-font-numeric);
+  font-size: 22px;
+}
+
+body[data-variant='a'] .foco-stats-insight {
+  border-left: 3px solid var(--foco-purple-soft);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: rgba(18, 24, 40, 0.55);
+}
+
+body[data-variant='a'] .foco-stats-week-bar {
+  border-radius: 8px 8px 3px 3px;
+}
+
+body[data-variant='a'] .foco-stats-donut {
+  box-shadow:
+    0 0 24px rgba(124, 58, 237, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Auth polish                                                                  */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-auth-footer {
+  background: linear-gradient(180deg, transparent 0%, rgba(10, 13, 24, 0.94) 36%);
+  border-top: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Account, subscription, legal reading layout                                  */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-account-list,
+body[data-variant='a'] .foco-account-toggles {
+  background: var(--foco-glass-bg);
+  border: 1px solid var(--foco-glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(var(--foco-blur-sm));
+  -webkit-backdrop-filter: blur(var(--foco-blur-sm));
+}
+
+body[data-variant='a'] .foco-account-profile-card {
+  border-radius: 22px;
+  background:
+    linear-gradient(145deg, rgba(124, 58, 237, 0.22) 0%, rgba(24, 18, 48, 0.72) 42%, rgba(12, 14, 28, 0.92) 100%);
+  border: 1px solid rgba(167, 139, 250, 0.22);
+}
+
+body[data-variant='a'] .foco-sub-plan {
+  border-radius: var(--radius-xl);
+  transition:
+    transform var(--foco-motion-fast) var(--foco-spring),
+    box-shadow var(--foco-motion-fast) var(--foco-ease-out);
+}
+
+body[data-variant='a'] .foco-sub-plan--highlight {
+  background: linear-gradient(160deg, rgba(124, 58, 237, 0.14), rgba(18, 24, 40, 0.9));
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.28),
+    0 20px 48px rgba(76, 29, 149, 0.22);
+}
+
+body[data-variant='a'] .foco-sub-plan__price {
+  font: var(--foco-font-display);
+  font-size: 28px;
+  letter-spacing: -0.03em;
+}
+
+body[data-variant='a'] .foco-legal,
+body[data-variant='a'] .foco-faq__item {
+  border-radius: var(--radius-lg);
+  background: rgba(18, 24, 40, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body[data-variant='a'] .foco-legal__lead {
+  font: var(--foco-font-h3);
+  line-height: 1.35;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Sheets, modals, toasts                                                     */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-sheet {
+  background: rgba(14, 18, 32, 0.94);
+  backdrop-filter: blur(var(--foco-blur-md));
+  -webkit-backdrop-filter: blur(var(--foco-blur-md));
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body[data-variant='a'] .foco-modal {
+  background: rgba(20, 26, 42, 0.96);
+  backdrop-filter: blur(var(--foco-blur-md));
+  -webkit-backdrop-filter: blur(var(--foco-blur-md));
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+body[data-variant='a'] .foco-dialog-backdrop {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Splash & update — product reveal                                             */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-splash__atmosphere {
+  background:
+    radial-gradient(65% 50% at 50% 42%, rgba(124, 58, 237, 0.26), transparent 58%),
+    radial-gradient(80% 55% at 50% 100%, rgba(42, 28, 64, 0.55), transparent 72%),
+    radial-gradient(35% 25% at 20% 15%, rgba(59, 130, 246, 0.1), transparent 60%),
+    radial-gradient(28% 22% at 85% 20%, rgba(167, 139, 250, 0.12), transparent 65%);
+}
+
+/* Splash floating bubbles + soft check veil */
+body[data-variant='a'] .foco-splash__atmosphere::before,
+body[data-variant='a'] .foco-splash__atmosphere::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+body[data-variant='a'] .foco-splash__atmosphere::before {
+  inset: 0;
+  opacity: 0.4;
+  background:
+    linear-gradient(rgba(167, 139, 250, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 139, 250, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(circle at 50% 45%, #000 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at 50% 45%, #000 20%, transparent 70%);
+}
+
+body[data-variant='a'] .foco-splash__atmosphere::after {
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  background:
+    radial-gradient(circle at 22% 28%, rgba(196, 181, 253, 0.35) 0 5px, transparent 6px),
+    radial-gradient(circle at 78% 24%, rgba(167, 139, 250, 0.28) 0 4px, transparent 5px),
+    radial-gradient(circle at 68% 72%, rgba(124, 58, 237, 0.3) 0 7px, transparent 8px),
+    radial-gradient(circle at 30% 70%, rgba(99, 102, 241, 0.22) 0 3px, transparent 4px),
+    radial-gradient(circle at 48% 18%, rgba(251, 191, 36, 0.18) 0 2px, transparent 3px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body[data-variant='a'] .foco-splash__atmosphere::after {
+    animation: foco-splash-bubbles 10s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes foco-splash-bubbles {
+  0% {
+    transform: translate3d(0, 4px, 0) scale(1);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate3d(0, -8px, 0) scale(1.04);
+    opacity: 1;
+  }
+}
+
+body[data-variant='a'] .foco-splash__name {
+  font: 700 24px/1.15 var(--foco-font);
+  letter-spacing: 0.18em;
+}
+
+body[data-variant='a'] .foco-update__title {
+  font: var(--foco-font-hero);
+}
+
+body[data-variant='a'] .foco-update__atmosphere {
+  background:
+    radial-gradient(70% 45% at 50% 20%, rgba(124, 58, 237, 0.18), transparent 58%),
+    radial-gradient(40% 30% at 85% 75%, rgba(167, 139, 250, 0.1), transparent 60%);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Desktop iPhone stage — premium presentation                                */
+/* -------------------------------------------------------------------------- */
+html[data-device-frame='on'] body[data-variant='a'] .app-stage {
+  background:
+    radial-gradient(80% 60% at 50% 20%, rgba(124, 58, 237, 0.08), transparent 55%),
+    var(--stage-bg);
+}
+
+html[data-device-frame='on'] body[data-variant='a'] .device-frame {
+  filter: drop-shadow(0 32px 72px rgba(0, 0, 0, 0.45));
+}
+
+/* -------------------------------------------------------------------------- */
+/* Reduced motion                                                             */
+/* -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  body[data-variant='a'] .foco-focus--active::before,
+  body[data-variant='a'] .foco-onboarding__visual-glow,
+  body[data-variant='a'] .foco-splash__atmosphere::after,
+  body[data-variant='a'] :is(
+    .foco-planner,
+    .foco-auth-screen,
+    .foco-stats,
+    .foco-ai,
+    .foco-account,
+    .foco-focus--setup
+  )::after {
+    animation: none;
+  }
+
+  body[data-variant='a'] .foco-task-card,
+  body[data-variant='a'] .foco-task-card__check,
+  body[data-variant='a'] .foco-btn,
+  body[data-variant='a'] .foco-nav-item,
+  body[data-variant='a'] .foco-card,
+  body[data-variant='a'] .foco-sub-plan {
+    transition: none;
+  }
+}

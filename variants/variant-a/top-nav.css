@@ -1,0 +1,85 @@
+/**
+ * Variant A — global top safe area + iOS-like back controls.
+ * Single override layer (loads last). Do not duplicate per-screen padding.
+ */
+
+body[data-variant='a'] {
+  --foco-nav-bar-height: 44px;
+  /* First app chrome row begins immediately below the hardware safe inset */
+  --foco-header-pad-top: var(--safe-top);
+}
+
+/* Secondary screens with a top navigation row */
+body[data-variant='a'] :is(
+  .foco-auth-header,
+  .foco-onboarding__header,
+  .foco-planner__header,
+  .foco-task-form__header,
+  .foco-task-detail__header,
+  .foco-focus__header,
+  .foco-ai__header,
+  .foco-stats__header,
+  .foco-account__header
+) {
+  padding-top: var(--foco-header-pad-top);
+  padding-bottom: var(--space-2);
+  align-items: center;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+body[data-variant='a'] .foco-auth-header {
+  min-height: 0;
+}
+
+body[data-variant='a'] .foco-auth-header--nav {
+  min-height: 72px;
+  align-items: center;
+}
+
+/* Centered full-screen moments — less top air than headers */
+body[data-variant='a'] .foco-focus-summary__content {
+  padding-top: calc(var(--safe-top) + var(--space-5));
+}
+
+/* iOS-style back control (chevron, no floating card) */
+body[data-variant='a'] :is(
+  .foco-auth-back,
+  .foco-task-detail__back,
+  .foco-focus__back,
+  [data-back].foco-icon-btn,
+  [data-account-back]
+) {
+  width: var(--foco-nav-bar-height);
+  height: var(--foco-nav-bar-height);
+  margin-left: calc(-1 * var(--space-1));
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--foco-purple-soft);
+  box-shadow: none;
+  flex-shrink: 0;
+}
+
+body[data-variant='a'] :is(
+  .foco-auth-back,
+  .foco-task-detail__back,
+  .foco-focus__back,
+  [data-back].foco-icon-btn,
+  [data-account-back]
+) svg {
+  width: 22px;
+  height: 22px;
+}
+
+body[data-variant='a'] :is(
+  .foco-auth-back,
+  .foco-task-detail__back,
+  .foco-focus__back,
+  [data-back].foco-icon-btn,
+  [data-account-back]
+):active {
+  background: rgba(167, 139, 250, 0.12);
+  transform: none;
+}

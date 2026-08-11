@@ -1,0 +1,37 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/variant-a"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/variant-a/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/variant-b"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/variant-b/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/variant-c"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/variant-c/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"

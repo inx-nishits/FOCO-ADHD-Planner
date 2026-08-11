@@ -1,0 +1,54 @@
+/* Responsive viewport system */
+
+/* Tablets with fine pointer: keep framed phone presentation */
+@media (min-width: 768px) and (max-width: 1024px) and (pointer: fine) {
+  .app-stage {
+    padding: var(--app-spacing-xl);
+  }
+}
+
+/* Touch-primary narrow devices always fill viewport (JS also sets data-device-frame=off) */
+@media (max-width: 820px) and (pointer: coarse) {
+  html body {
+    background: var(--app-bg);
+  }
+
+  .app-stage {
+    padding: 0;
+    background: var(--app-bg);
+  }
+
+  .device-frame {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: auto;
+    height: 100dvh;
+    height: 100svh;
+    margin: 0;
+    filter: none;
+  }
+
+  .device-frame__sides,
+  .device-frame__hardware,
+  .device-frame__home-indicator {
+    display: none !important;
+  }
+
+  .device-frame__chassis,
+  .device-frame__chassis::before,
+  .device-frame__bezel {
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .device-frame__chassis::before {
+    content: none !important;
+  }
+
+  .device-frame__screen {
+    border-radius: 0;
+    clip-path: none;
+  }
+}

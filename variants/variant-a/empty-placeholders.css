@@ -1,0 +1,258 @@
+/**
+ * Variant A — empty placeholder screens (Daily / AI / Stats)
+ */
+
+body[data-variant='a'] .foco-empty-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  background: var(--foco-bg);
+}
+
+body[data-variant='a'] .foco-empty-page__header {
+  flex-shrink: 0;
+  padding: var(--space-4);
+  padding-top: calc(var(--space-4) + var(--safe-top));
+}
+
+body[data-variant='a'] .foco-empty-page__eyebrow {
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--foco-text-muted);
+}
+
+body[data-variant='a'] .foco-empty-page__header .foco-title {
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+body[data-variant='a'] .foco-empty-page__body {
+  position: relative;
+  flex: 1 1 0%;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  overflow: hidden;
+}
+
+body[data-variant='a'] .foco-empty-atmosphere {
+  position: absolute;
+  inset: 8% 6% 18%;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 45% at 50% 38%, rgba(124, 58, 237, 0.22), transparent 70%),
+    radial-gradient(40% 30% at 20% 70%, rgba(99, 102, 241, 0.1), transparent 70%),
+    radial-gradient(35% 28% at 82% 24%, rgba(167, 139, 250, 0.12), transparent 72%);
+  filter: blur(2px);
+}
+
+body[data-variant='a'] .foco-empty-state {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 300px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+}
+
+body[data-variant='a'] .foco-empty-state__mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 132px;
+  height: 132px;
+  margin-bottom: 10px;
+}
+
+body[data-variant='a'] .foco-empty-state__halo {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(196, 181, 253, 0.4) 0%,
+    rgba(124, 58, 237, 0.18) 46%,
+    transparent 72%
+  );
+  filter: blur(10px);
+  animation: foco-empty-halo 4.2s ease-in-out infinite;
+}
+
+body[data-variant='a'] .foco-empty-state__logo {
+  position: relative;
+  z-index: 1;
+  width: 88px;
+  height: auto;
+  filter: drop-shadow(0 12px 28px rgba(76, 29, 149, 0.45));
+  animation: foco-empty-float 4.8s ease-in-out infinite;
+}
+
+@keyframes foco-empty-halo {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes foco-empty-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-variant='a'] .foco-empty-state__halo,
+  body[data-variant='a'] .foco-empty-state__logo,
+  body[data-variant='a'] .foco-empty-motif--spark i {
+    animation: none;
+  }
+}
+
+body[data-variant='a'] .foco-empty-motif {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0 22px;
+  opacity: 0.72;
+}
+
+body[data-variant='a'] .foco-empty-motif--timeline {
+  width: 180px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+body[data-variant='a'] .foco-empty-motif--timeline span {
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(167, 139, 250, 0.28), rgba(167, 139, 250, 0.06));
+  border: 1px solid rgba(167, 139, 250, 0.14);
+}
+
+body[data-variant='a'] .foco-empty-motif--timeline span:nth-child(1) {
+  width: 100%;
+}
+body[data-variant='a'] .foco-empty-motif--timeline span:nth-child(2) {
+  width: 72%;
+}
+body[data-variant='a'] .foco-empty-motif--timeline span:nth-child(3) {
+  width: 48%;
+}
+
+body[data-variant='a'] .foco-empty-motif--bars {
+  height: 42px;
+  gap: 10px;
+}
+
+body[data-variant='a'] .foco-empty-motif--bars i {
+  display: block;
+  width: 12px;
+  border-radius: 8px 8px 4px 4px;
+  background: linear-gradient(180deg, rgba(196, 181, 253, 0.55), rgba(124, 58, 237, 0.12));
+}
+
+body[data-variant='a'] .foco-empty-motif--bars i:nth-child(1) {
+  height: 18px;
+}
+body[data-variant='a'] .foco-empty-motif--bars i:nth-child(2) {
+  height: 32px;
+}
+body[data-variant='a'] .foco-empty-motif--bars i:nth-child(3) {
+  height: 24px;
+}
+body[data-variant='a'] .foco-empty-motif--bars i:nth-child(4) {
+  height: 38px;
+}
+
+body[data-variant='a'] .foco-empty-motif--spark {
+  position: relative;
+  width: 120px;
+  height: 28px;
+}
+
+body[data-variant='a'] .foco-empty-motif--spark i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(196, 181, 253, 0.85);
+  box-shadow: 0 0 12px rgba(167, 139, 250, 0.65);
+  animation: foco-empty-spark 2.8s ease-in-out infinite;
+}
+
+body[data-variant='a'] .foco-empty-motif--spark i:nth-child(1) {
+  left: 18%;
+  top: 40%;
+}
+body[data-variant='a'] .foco-empty-motif--spark i:nth-child(2) {
+  left: 48%;
+  top: 10%;
+  width: 5px;
+  height: 5px;
+  animation-delay: 0.45s;
+}
+body[data-variant='a'] .foco-empty-motif--spark i:nth-child(3) {
+  left: 74%;
+  top: 48%;
+  width: 6px;
+  height: 6px;
+  animation-delay: 0.9s;
+}
+
+@keyframes foco-empty-spark {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+body[data-variant='a'] .foco-empty-state__heading {
+  margin: 0 0 10px;
+  font: 800 clamp(1.625rem, 7vw, 1.875rem)/1.04 var(--foco-font-display-family);
+  letter-spacing: var(--foco-tracking-display);
+  text-wrap: balance;
+  background: var(--foco-text-gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 20px rgba(196, 181, 253, 0.2));
+}
+
+body[data-variant='a'] .foco-empty-state__copy {
+  margin: 0;
+  max-width: 28ch;
+  font: 400 15px/1.62 var(--foco-font);
+  letter-spacing: var(--foco-tracking-body);
+  color: var(--foco-text-secondary);
+}
+
+body[data-variant='a'] .foco-empty-page__footer {
+  flex-shrink: 0;
+  padding: 14px 16px max(12px, var(--safe-bottom));
+  background: transparent;
+}

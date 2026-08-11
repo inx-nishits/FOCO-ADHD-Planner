@@ -1,0 +1,468 @@
+/**
+ * FOCO Variant A — component visual foundation
+ * Classes are ready for future screens. No product UI is mounted yet.
+ *
+ * Hierarchy principle: one primary action per view; calm chrome; purple
+ * intensity reserved for CTA / active / focus / AI / progress moments.
+ */
+
+/* Shared interactive reset */
+body[data-variant='a'] .foco-btn,
+body[data-variant='a'] .foco-icon-btn,
+body[data-variant='a'] .foco-chip,
+body[data-variant='a'] .foco-nav-item {
+  font-family: var(--foco-font);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body[data-variant='a'] .foco-btn:focus-visible,
+body[data-variant='a'] .foco-icon-btn:focus-visible,
+body[data-variant='a'] .foco-chip:focus-visible,
+body[data-variant='a'] .foco-nav-item:focus-visible {
+  outline: 2px solid var(--foco-focus-ring);
+  outline-offset: 2px;
+}
+
+body[data-variant='a'] .foco-input:focus,
+body[data-variant='a'] .foco-input:focus-visible {
+  outline: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Buttons                                                                      */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 52px;
+  padding: 0 var(--space-6);
+  border-radius: var(--radius-pill);
+  font: var(--foco-font-button);
+  border: 1px solid transparent;
+  transition:
+    background-color var(--app-motion-fast) var(--app-ease),
+    box-shadow var(--app-motion-fast) var(--app-ease),
+    opacity var(--app-motion-fast) var(--app-ease),
+    transform var(--app-motion-fast) var(--app-ease);
+}
+
+body[data-variant='a'] .foco-btn:disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Primary — premium gradient CTA */
+body[data-variant='a'] .foco-btn--primary {
+  background: var(--foco-cta-gradient);
+  color: #ffffff;
+  border: 1px solid var(--foco-cta-border);
+  box-shadow: var(--foco-cta-shadow), var(--foco-cta-highlight);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body[data-variant='a'] .foco-btn--primary:hover:not(:disabled) {
+    box-shadow: var(--foco-cta-shadow-hover), var(--foco-cta-highlight);
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+  }
+}
+
+body[data-variant='a'] .foco-btn--primary:active:not(:disabled) {
+  transform: scale(0.985);
+  background: var(--foco-cta-gradient-pressed);
+  filter: brightness(0.98);
+  box-shadow: 0 6px 18px rgba(76, 29, 149, 0.32), var(--foco-cta-highlight);
+}
+
+body[data-variant='a'] .foco-btn--primary:disabled {
+  opacity: 0.42;
+  filter: grayscale(0.15);
+  box-shadow: none;
+}
+
+body[data-variant='a'] .foco-btn--primary.is-loading {
+  opacity: 0.88;
+  pointer-events: none;
+}
+
+/* Secondary — translucent surface */
+body[data-variant='a'] .foco-btn--secondary {
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--foco-text);
+  border-color: var(--foco-border-strong);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body[data-variant='a'] .foco-btn--secondary:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(167, 139, 250, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  }
+}
+
+body[data-variant='a'] .foco-btn--secondary:active:not(:disabled) {
+  background: var(--foco-card);
+  transform: scale(0.99);
+}
+
+/* Ghost */
+body[data-variant='a'] .foco-btn--ghost {
+  background: transparent;
+  color: var(--foco-purple-soft);
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body[data-variant='a'] .foco-btn--ghost:hover:not(:disabled) {
+    background: rgba(167, 139, 250, 0.12);
+    color: #ddd6fe;
+  }
+}
+
+body[data-variant='a'] .foco-btn--ghost:active {
+  background: rgba(167, 139, 250, 0.1);
+  transform: scale(0.99);
+}
+
+/* Icon button */
+body[data-variant='a'] .foco-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--foco-surface);
+  color: var(--foco-text);
+  border: 1px solid var(--foco-border);
+}
+
+body[data-variant='a'] .foco-icon-btn:active {
+  background: var(--foco-card);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Input                                                                        */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-input {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--foco-border);
+  background: var(--foco-bg-elevated);
+  color: var(--foco-text);
+  font: var(--foco-font-body);
+  outline: none;
+  transition: border-color var(--app-motion-fast) var(--app-ease);
+}
+
+body[data-variant='a'] .foco-input::placeholder {
+  color: var(--foco-text-muted);
+}
+
+body[data-variant='a'] .foco-input:focus {
+  border-color: var(--foco-border-strong);
+  box-shadow: none;
+  outline: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Card / surfaces                                                              */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-card {
+  background: var(--foco-card);
+  border: 1px solid var(--foco-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: none;
+}
+
+body[data-variant='a'] .foco-card--elevated {
+  background: var(--foco-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Task row / task card                                                         */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-task-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 56px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--foco-surface);
+  border: 1px solid var(--foco-border);
+}
+
+body[data-variant='a'] .foco-task-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--foco-card);
+  border: 1px solid var(--foco-border);
+}
+
+body[data-variant='a'] .foco-task-card--active {
+  border-color: var(--foco-border-strong);
+  box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.2), var(--shadow-soft);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Chip                                                                         */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 32px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--foco-purple-deep);
+  color: var(--foco-purple-soft);
+  font: var(--foco-font-caption);
+  border: 1px solid rgba(167, 139, 250, 0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+body[data-variant='a'] .foco-chip--active {
+  background: rgba(124, 58, 237, 0.28);
+  color: var(--foco-text);
+  border-color: rgba(124, 58, 237, 0.45);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Progress — purple reserved for meaningful progress moments                   */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-progress {
+  --progress: 0%;
+  display: block;
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+body[data-variant='a'] .foco-progress::after {
+  content: '';
+  display: block;
+  width: var(--progress);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--foco-purple), var(--foco-purple-soft));
+  box-shadow: 0 0 12px var(--foco-glow);
+  transition: width var(--foco-motion-base) var(--foco-ease-out);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Bottom sheet / modal / toast                                                 */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-sheet {
+  background: var(--foco-bg-elevated);
+  border: 1px solid var(--foco-border);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: var(--space-4) var(--space-5) calc(var(--space-6) + var(--safe-bottom));
+  box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.45);
+}
+
+body[data-variant='a'] .foco-sheet__handle {
+  width: 40px;
+  height: 4px;
+  margin: var(--space-1) auto var(--space-4);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+body[data-variant='a'] .foco-modal {
+  background: var(--foco-card);
+  border: 1px solid var(--foco-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-soft);
+  max-width: 340px;
+  width: calc(100% - var(--space-8));
+}
+
+body[data-variant='a'] .foco-dialog-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--safe-top) + var(--space-5)) var(--space-4)
+    calc(76px + var(--safe-bottom) + var(--space-5));
+  background: rgba(0, 0, 0, 0.58);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+body[data-variant='a'] .foco-dialog-backdrop.is-visible {
+  opacity: 1;
+}
+
+body[data-variant='a'] .foco-dialog__title {
+  margin: 0 0 var(--space-3);
+}
+
+body[data-variant='a'] .foco-dialog__message {
+  margin: 0 0 var(--space-5);
+}
+
+body[data-variant='a'] .foco-dialog__actions {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-2);
+}
+
+body[data-variant='a'] .foco-dialog__actions .foco-btn {
+  width: 100%;
+  min-height: 44px;
+}
+
+body[data-variant='a'] .foco-btn--danger {
+  background: #dc2626;
+  color: #fff;
+  border-color: rgba(248, 113, 113, 0.45);
+}
+
+body[data-variant='a'] .foco-btn--danger:active:not(:disabled) {
+  transform: scale(0.99);
+  filter: brightness(0.96);
+}
+
+body[data-variant='a'] .foco-btn--danger:disabled {
+  opacity: 0.55;
+}
+
+body[data-variant='a'] .foco-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--foco-surface);
+  color: var(--foco-text);
+  border: 1px solid var(--foco-border);
+  font: var(--foco-font-body-sm);
+  box-shadow: var(--shadow-soft);
+}
+
+body[data-variant='a'] .foco-toast--success {
+  border-color: rgba(52, 211, 153, 0.35);
+}
+
+body[data-variant='a'] .foco-toast--error {
+  border-color: rgba(248, 113, 113, 0.35);
+}
+
+body[data-variant='a'] .foco-toast-host {
+  position: absolute;
+  left: 50%;
+  bottom: calc(76px + var(--safe-bottom));
+  transform: translateX(-50%) translateY(10px);
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+  max-width: calc(100% - var(--space-8));
+}
+
+body[data-variant='a'] .foco-toast-host.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+body[data-variant='a'] .foco-btn--apple {
+  background: #ffffff;
+  color: #111111;
+  border-color: rgba(255, 255, 255, 0.92);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body[data-variant='a'] .foco-btn--apple:hover:not(:disabled) {
+    background: #f3f4f6;
+    filter: none;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  }
+}
+
+body[data-variant='a'] .foco-btn--apple:active:not(:disabled) {
+  background: #e5e7eb;
+  transform: scale(0.985);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Navigation item                                                              */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-width: 64px;
+  min-height: 48px;
+  padding: var(--space-1);
+  color: var(--foco-text-muted);
+  font: var(--foco-font-caption);
+  background: transparent;
+  border-radius: var(--radius-md);
+}
+
+body[data-variant='a'] .foco-nav-item[aria-current='page'],
+body[data-variant='a'] .foco-nav-item.is-active {
+  color: var(--foco-purple-soft);
+}
+
+/* Active indicator — restrained, not glow-everywhere */
+body[data-variant='a'] .foco-nav-item.is-active::before {
+  display: none;
+}
+
+/* iOS-like scrolling — no visible scrollbars inside the app */
+body[data-variant='a'] .foco-planner__scroll,
+body[data-variant='a'] .foco-task-detail__scroll,
+body[data-variant='a'] .foco-task-form__scroll,
+body[data-variant='a'] .foco-stats__scroll,
+body[data-variant='a'] .foco-focus__scroll,
+body[data-variant='a'] .foco-account__scroll,
+body[data-variant='a'] .foco-ai__messages,
+body[data-variant='a'] .foco-ai__scroll,
+body[data-variant='a'] .foco-ai__prompts,
+body[data-variant='a'] .foco-auth__scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body[data-variant='a'] .foco-planner__scroll::-webkit-scrollbar,
+body[data-variant='a'] .foco-task-detail__scroll::-webkit-scrollbar,
+body[data-variant='a'] .foco-task-form__scroll::-webkit-scrollbar,
+body[data-variant='a'] .foco-stats__scroll::-webkit-scrollbar,
+body[data-variant='a'] .foco-focus__scroll::-webkit-scrollbar,
+body[data-variant='a'] .foco-account__scroll::-webkit-scrollbar,
+body[data-variant='a'] .foco-ai__messages::-webkit-scrollbar,
+body[data-variant='a'] .foco-ai__scroll::-webkit-scrollbar,
+body[data-variant='a'] .foco-ai__prompts::-webkit-scrollbar,
+body[data-variant='a'] .foco-auth__scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}

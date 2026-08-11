@@ -1,0 +1,465 @@
+/**
+ * Realistic modern iPhone presentation frame (desktop only).
+ *
+ * Layers:
+ * 1. Side hardware buttons (outside chassis)
+ * 2. Titanium chassis + dark bezel
+ * 3. App viewport (screen)
+ * 4. Hardware overlay (Dynamic Island) — paints above the app, never part of app content
+ * 5. Home indicator — inside screen bottom safe area
+ */
+
+/* Simulated iOS safe areas while the desktop frame is active */
+html[data-device-frame='on'] {
+  --safe-top: var(--phone-safe-top);
+  --safe-right: 0px;
+  --safe-bottom: var(--phone-safe-bottom);
+  --safe-left: 0px;
+
+  /**
+   * Viewport-only scale — never derived from app/content height.
+   * Applied via transform on the fixed-size device shell.
+   */
+  --frame-scale: min(
+    1,
+    calc((100vw - 72px) / var(--phone-width)),
+    calc((100dvh - 48px) / var(--phone-height))
+  );
+}
+
+/* Mobile / PWA: slot is not a layout box */
+html[data-device-frame='off'] .device-frame-slot {
+  display: contents;
+}
+
+.device-frame {
+  position: relative;
+  flex-shrink: 0;
+  margin-inline: 6px;
+  filter: drop-shadow(0 28px 60px rgba(0, 0, 0, 0.32));
+}
+
+/**
+ * Desktop preview: fixed iPhone dimensions (393×852).
+ * Scale the entire device uniformly to fit the stage — NEVER grow with app content.
+ */
+html[data-device-frame='on'] .device-frame-slot {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--phone-width) * var(--frame-scale));
+  height: calc(var(--phone-height) * var(--frame-scale));
+  overflow: visible;
+}
+
+html[data-device-frame='on'] .device-frame {
+  width: var(--phone-width);
+  height: var(--phone-height);
+  min-width: var(--phone-width);
+  min-height: var(--phone-height);
+  max-width: var(--phone-width);
+  max-height: var(--phone-height);
+  margin: 0;
+  flex: none;
+  transform: scale(var(--frame-scale));
+  transform-origin: center center;
+  overflow: hidden;
+  contain: layout style;
+  aspect-ratio: unset;
+}
+
+html[data-device-frame='on'] .device-frame__chassis {
+  position: absolute;
+  inset: 0;
+}
+
+html[data-device-frame='on'] .device-frame__bezel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+html[data-device-frame='on'] .device-frame__screen {
+  position: relative;
+  flex: 1 1 0%;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+html[data-device-frame='on'] .device-frame__hardware {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ——— Side hardware ——— */
+.device-frame__sides {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.device-frame__btn {
+  position: absolute;
+  display: block;
+  background: linear-gradient(
+    180deg,
+    #c5c5c8 0%,
+    #8e8e93 18%,
+    #636366 55%,
+    #48484a 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* Left: Action / mute */
+.device-frame__btn--action {
+  left: -3px;
+  top: 14.5%;
+  width: 3px;
+  height: 4.2%;
+  border-radius: 2px 0 0 2px;
+}
+
+/* Left: Volume Up */
+.device-frame__btn--vol-up {
+  left: -3px;
+  top: 21.5%;
+  width: 3px;
+  height: 7.2%;
+  border-radius: 2px 0 0 2px;
+}
+
+/* Left: Volume Down */
+.device-frame__btn--vol-down {
+  left: -3px;
+  top: 30.5%;
+  width: 3px;
+  height: 7.2%;
+  border-radius: 2px 0 0 2px;
+}
+
+/* Right: Side / Power */
+.device-frame__btn--power {
+  right: -3px;
+  top: 23.5%;
+  width: 3px;
+  height: 11.5%;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ——— Chassis (titanium outer body) ——— */
+.device-frame__chassis {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--phone-radius);
+  padding: 1.5px;
+  background:
+    linear-gradient(
+      145deg,
+      #f0f0f3 0%,
+      #c8c8cd 12%,
+      #8e8e93 38%,
+      #636366 62%,
+      #3a3a3c 88%,
+      #1c1c1e 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.45),
+    inset 1px 0 0 rgba(255, 255, 255, 0.2),
+    inset -1px 0 0 rgba(0, 0, 0, 0.25);
+}
+
+.device-frame__chassis::before {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  border-radius: calc(var(--phone-radius) - 1.5px);
+  background:
+    linear-gradient(
+      160deg,
+      #2c2c2e 0%,
+      #1c1c1e 40%,
+      #0b0b0c 100%
+    );
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Dark inner bezel ring around the display */
+.device-frame__bezel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--phone-radius) - 1.5px);
+  padding: var(--phone-bezel);
+  background: #050505;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  isolation: isolate;
+}
+
+/* Physical top bezel lip (above display glass — island sits below this band) */
+.device-frame__bezel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--phone-bezel) + 2px);
+  border-radius: calc(var(--phone-radius) - 1.5px) calc(var(--phone-radius) - 1.5px) 0 0;
+  background: linear-gradient(180deg, #121214 0%, #070708 55%, transparent 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ——— App viewport (screen glass) ——— */
+.device-frame__screen {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--phone-screen-radius);
+  overflow: hidden;
+  background: var(--app-bg);
+  clip-path: inset(0 round var(--phone-screen-radius));
+}
+
+/* ——— Hardware overlay: Dynamic Island (aligned to display glass) ——— */
+.device-frame__hardware {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.device-frame__island {
+  position: absolute;
+  top: var(--phone-island-air);
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--phone-island-width);
+  height: var(--phone-island-height);
+  border-radius: 999px;
+  background:
+    radial-gradient(120% 140% at 50% 0%, #1a1a1c 0%, #000 55%, #000 100%);
+  box-shadow:
+    0 0 0 0.75px rgba(255, 255, 255, 0.07),
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  padding-inline: 11px 12px;
+  z-index: 1;
+}
+
+.device-frame__island::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.65);
+  pointer-events: none;
+}
+
+.device-frame__island-speaker {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 38%;
+  max-width: 46px;
+  height: 18%;
+  min-height: 4px;
+  transform: translate(-52%, -50%);
+  border-radius: 999px;
+  background: #070707;
+  box-shadow:
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.05),
+    inset 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.device-frame__island-camera {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, #5a6a8a 0%, #243048 38%, #0a0c12 68%, #000 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(12, 16, 24, 0.95),
+    0 0 0 0.5px rgba(255, 255, 255, 0.08),
+    0 0 6px rgba(60, 100, 180, 0.25);
+  flex-shrink: 0;
+}
+
+/* Home indicator — hidden (cleaner frame; safe-area padding still applies) */
+.device-frame__home-indicator {
+  display: none !important;
+}
+
+/* ——— Frame OFF: real mobile / PWA ——— */
+html[data-device-frame='off'] .device-frame {
+  width: 100%;
+  max-width: none;
+  aspect-ratio: auto;
+  height: 100dvh;
+  height: 100svh;
+  margin: 0;
+  filter: none;
+}
+
+html[data-device-frame='off'] .device-frame__sides,
+html[data-device-frame='off'] .device-frame__hardware,
+html[data-device-frame='off'] .device-frame__home-indicator {
+  display: none !important;
+}
+
+html[data-device-frame='off'] .device-frame__chassis,
+html[data-device-frame='off'] .device-frame__chassis::before,
+html[data-device-frame='off'] .device-frame__bezel {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+html[data-device-frame='off'] .device-frame__chassis::before {
+  content: none;
+}
+
+html[data-device-frame='off'] .device-frame__bezel::after {
+  content: none;
+}
+
+html[data-device-frame='off'] .device-frame__screen {
+  border-radius: 0;
+  clip-path: none;
+  display: block;
+  flex: none;
+  max-height: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Framed desktop: fixed device → fixed viewport → scrollable app content    */
+/* -------------------------------------------------------------------------- */
+html[data-device-frame='on'] .app-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  height: 100svh;
+  min-height: 0;
+  max-height: 100dvh;
+  max-height: 100svh;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+html[data-device-frame='on'] .app-shell {
+  flex: 1 1 0%;
+  min-height: 0;
+  max-height: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+html[data-device-frame='on'] #app {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  min-height: 0;
+  max-height: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Safe top is applied on screen headers — avoid doubling with .app-screen padding */
+html[data-device-frame='on'] .app-screen:not(.foco-splash):not(.foco-update) {
+  padding-top: 0;
+}
+
+html[data-device-frame='on'] #app > .app-screen,
+html[data-device-frame='on'] .app-shell .app-screen {
+  flex: 1 1 0%;
+  min-height: 0;
+  max-height: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Simple screens without an internal scroll region may scroll at the screen root */
+html[data-device-frame='on'] .app-screen.foco-splash,
+html[data-device-frame='on'] .app-screen.foco-update,
+html[data-device-frame='on'] .app-screen.foco-auth-gate,
+html[data-device-frame='on'] .app-screen.foco-onboarding-gate,
+html[data-device-frame='on'] .app-screen.foco-focus--summary {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Screens with internal scroll regions manage their own overflow */
+html[data-device-frame='on'] .foco-auth-screen,
+html[data-device-frame='on'] .foco-onboarding {
+  overflow: hidden;
+  max-height: 100%;
+}
+
+html[data-device-frame='on'] .foco-planner,
+html[data-device-frame='on'] .foco-task-form,
+html[data-device-frame='on'] .foco-task-detail,
+html[data-device-frame='on'] .foco-focus,
+html[data-device-frame='on'] .foco-ai,
+html[data-device-frame='on'] .foco-stats,
+html[data-device-frame='on'] .foco-account {
+  overflow: hidden;
+  max-height: 100%;
+}
+
+html[data-device-frame='on'] .foco-planner__scroll,
+html[data-device-frame='on'] .foco-task-form__scroll,
+html[data-device-frame='on'] .foco-task-detail__scroll,
+html[data-device-frame='on'] .foco-focus__scroll,
+html[data-device-frame='on'] .foco-ai__messages,
+html[data-device-frame='on'] .foco-ai__scroll,
+html[data-device-frame='on'] .foco-stats__scroll,
+html[data-device-frame='on'] .foco-account__scroll {
+  flex: 1 1 0%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+html[data-device-frame='on'] .foco-auth-scroll,
+html[data-device-frame='on'] .foco-onboarding__viewport {
+  min-height: 0;
+}

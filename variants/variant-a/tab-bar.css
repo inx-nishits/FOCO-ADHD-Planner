@@ -1,0 +1,246 @@
+/**
+ * Variant A — frameless bottom dock
+ * No menu box. Active tab uses the AI orb style.
+ */
+
+body[data-variant='a'] .foco-dock {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+body[data-variant='a'] .foco-dock__row,
+body[data-variant='a'] .foco-dock__glass {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: end;
+  gap: 4px;
+  width: min(100%, 360px);
+  padding: 4px 4px 2px;
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body[data-variant='a'] .foco-dock__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  min-width: 0;
+  min-height: 56px;
+  margin: 0;
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  color: rgba(236, 232, 255, 0.78);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 180ms ease, transform 140ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body[data-variant='a'] .foco-dock__item::before,
+body[data-variant='a'] .foco-dock__item::after {
+  content: none !important;
+  display: none !important;
+}
+
+body[data-variant='a'] .foco-dock__well {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  transition:
+    background 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body[data-variant='a'] .foco-dock__icon {
+  display: grid;
+  place-items: center;
+  line-height: 0;
+}
+
+body[data-variant='a'] .foco-dock__svg {
+  width: 20px;
+  height: 20px;
+  opacity: 0.92;
+  transition: opacity 160ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1), color 160ms ease;
+}
+
+body[data-variant='a'] .foco-dock__label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  opacity: 0.88;
+  color: rgba(240, 236, 255, 0.82);
+  transition: opacity 160ms ease, color 160ms ease, font-weight 160ms ease;
+}
+
+/* Active = same orb style as previous AI featured button */
+body[data-variant='a'] .foco-dock__item.is-active,
+body[data-variant='a'] .foco-dock__item[aria-current='page'] {
+  color: #fff;
+  transform: translateY(-4px);
+}
+
+body[data-variant='a'] .foco-dock__item.is-active .foco-dock__well,
+body[data-variant='a'] .foco-dock__item[aria-current='page'] .foco-dock__well {
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(160deg, #c4b5fd 0%, #7c3aed 72%);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 12px 28px rgba(124, 58, 237, 0.48),
+    0 0 20px rgba(167, 139, 250, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+body[data-variant='a'] .foco-dock__item.is-active .foco-dock__svg,
+body[data-variant='a'] .foco-dock__item[aria-current='page'] .foco-dock__svg {
+  opacity: 1;
+  color: #fff;
+  width: 21px;
+  height: 21px;
+  transform: scale(1.02);
+}
+
+body[data-variant='a'] .foco-dock__item.is-active .foco-dock__label,
+body[data-variant='a'] .foco-dock__item[aria-current='page'] .foco-dock__label {
+  opacity: 1;
+  font-weight: 600;
+  color: #fff;
+}
+
+body[data-variant='a'] .foco-dock__item.is-pressing {
+  transform: scale(0.94);
+}
+
+body[data-variant='a'] .foco-dock__item.is-active.is-pressing,
+body[data-variant='a'] .foco-dock__item[aria-current='page'].is-pressing {
+  transform: translateY(-4px) scale(0.94);
+}
+
+body[data-variant='a'] .foco-dock__item:focus-visible {
+  outline: 2px solid rgba(196, 181, 253, 0.7);
+  outline-offset: 3px;
+  border-radius: 18px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body[data-variant='a'] .foco-dock__item:not(.is-active):not([aria-current='page']):hover {
+    color: rgba(250, 248, 255, 0.95);
+  }
+
+  body[data-variant='a'] .foco-dock__item:not(.is-active):not([aria-current='page']):hover .foco-dock__well {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  body[data-variant='a'] .foco-dock__item:not(.is-active):not([aria-current='page']):hover .foco-dock__svg,
+  body[data-variant='a'] .foco-dock__item:not(.is-active):not([aria-current='page']):hover .foco-dock__label {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-variant='a'] .foco-dock__item,
+  body[data-variant='a'] .foco-dock__well,
+  body[data-variant='a'] .foco-dock__svg,
+  body[data-variant='a'] .foco-dock__label {
+    transition: none !important;
+  }
+}
+
+body[data-variant='a'] .foco-tab-dock-host {
+  position: relative;
+  z-index: 4;
+  isolation: isolate;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 14px 16px max(12px, var(--safe-bottom));
+  border-top: none;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* Soft top feather + glass — no flat bar */
+body[data-variant='a'] .foco-tab-dock-host::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(12, 14, 24, 0.28) 34%,
+      rgba(10, 12, 22, 0.58) 72%,
+      rgba(8, 10, 18, 0.72) 100%
+    );
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 38%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 38%, #000 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body[data-variant='a'] .foco-planner--premium .foco-planner__dock {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: max(10px, var(--safe-bottom));
+}
+
+body[data-variant='a'] .foco-planner--premium .foco-dock {
+  width: 100%;
+  margin: 0;
+}
+
+body[data-variant='a'] .foco-stats__footer.foco-tab-dock-host,
+body[data-variant='a'] .foco-account__footer.foco-tab-dock-host,
+body[data-variant='a'] .foco-empty-page__footer.foco-tab-dock-host {
+  padding: 14px 16px max(12px, var(--safe-bottom));
+  background: transparent;
+}
+
+body[data-variant='a'] .foco-ai__composer.foco-tab-dock-host {
+  padding-top: 14px;
+}
+
+body[data-variant='a'] .foco-app-tabs--dock,
+body[data-variant='a'] .foco-tab-dock--v2 {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  body[data-variant='a'] .foco-tab-dock-host::before {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(10, 12, 22, 0.82) 42%,
+      rgba(8, 10, 18, 0.94) 100%
+    );
+  }
+}

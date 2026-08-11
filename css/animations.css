@@ -1,0 +1,49 @@
+/**
+ * Animation foundation — reusable primitives.
+ * Do not animate the blank screen by default.
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --app-transition: var(--app-motion-base) var(--app-ease);
+  }
+
+  .motion-fade-in {
+    animation: foundation-fade-in var(--app-motion-base) var(--app-ease) both;
+  }
+
+  .motion-slide-up {
+    animation: foundation-slide-up var(--app-motion-slow) var(--app-ease) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes foundation-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes foundation-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

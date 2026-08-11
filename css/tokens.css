@@ -1,0 +1,71 @@
+/**
+ * Design tokens — neutral foundation values.
+ * Variants override these via body[data-variant].
+ * Do not treat these as final brand identity.
+ */
+:root {
+  color-scheme: light;
+
+  --app-bg: #ffffff;
+  --app-bg-elevated: #f5f5f7;
+  --app-text: #111111;
+  --app-text-secondary: #6e6e73;
+  --app-primary: #000000;
+  --app-border: rgba(0, 0, 0, 0.08);
+  --app-focus: #0a84ff;
+  --app-overlay: rgba(0, 0, 0, 0.4);
+
+  --app-radius-sm: 8px;
+  --app-radius-md: 12px;
+  --app-radius-lg: 20px;
+  --app-radius-xl: 28px;
+
+  --app-spacing-xs: 4px;
+  --app-spacing-sm: 8px;
+  --app-spacing-md: 16px;
+  --app-spacing-lg: 24px;
+  --app-spacing-xl: 32px;
+
+  --app-font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
+  --app-font-size: 16px;
+  --app-line-height: 1.4;
+  --app-font-weight: 400;
+
+  --app-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --app-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  --app-motion-fast: 150ms;
+  --app-motion-base: 220ms;
+  --app-motion-slow: 360ms;
+  --app-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Safe areas */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+
+  /* Device frame — modern iPhone Pro proportions (~393×852) */
+  --phone-width: 393px;
+  --phone-height: 852px;
+  --phone-radius: 55px;
+  --phone-bezel: 13px;
+  --phone-screen-radius: 44px;
+  --phone-island-width: 114px;
+  --phone-island-height: 30px;
+  /* Air above island measured from display glass top (see .device-frame__screen) */
+  --phone-island-air: 11px;
+  /* Gap between island bottom and first app chrome row */
+  --phone-island-gap: 5px;
+  /* Derived — synced with island position on display glass */
+  --phone-safe-top: calc(
+    var(--phone-island-air) + var(--phone-island-height) + var(--phone-island-gap)
+  );
+  /* Home indicator is hidden in the desktop frame — keep a tight bottom inset */
+  --phone-safe-bottom: 12px;
+
+  --stage-bg: #e8e8ed;
+  --dev-panel-bg: rgba(28, 28, 30, 0.92);
+  --dev-panel-text: #f5f5f7;
+}

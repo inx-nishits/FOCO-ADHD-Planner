@@ -1,0 +1,1232 @@
+/**
+ * Variant A — Account, Subscription, Settings, Support (Phase 09)
+ */
+
+body[data-variant='a'] .foco-account {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  background: var(--foco-bg);
+}
+
+body[data-variant='a'] .foco-account__header {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  padding-top: calc(var(--space-2) + var(--safe-top));
+}
+
+body[data-variant='a'] .foco-account__header--solo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0;
+  padding: var(--space-4);
+  padding-top: calc(var(--space-4) + var(--safe-top));
+}
+
+body[data-variant='a'] .foco-account__header--solo .foco-account__head-text {
+  width: 100%;
+}
+
+body[data-variant='a'] .foco-account__head-text .foco-title {
+  margin: 0;
+}
+
+body[data-variant='a'] .foco-account__eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+body[data-variant='a'] .foco-account__spacer {
+  width: 44px;
+  height: 44px;
+}
+
+body[data-variant='a'] .foco-account__scroll {
+  flex: 1 1 0%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: 0 var(--space-4) var(--space-4);
+}
+
+body[data-variant='a'] .foco-account__scroll--flush {
+  padding-top: calc(var(--safe-top) + var(--space-4));
+}
+
+body[data-variant='a'] .foco-account__footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--foco-cta-inset);
+  padding-bottom: max(var(--foco-cta-inset), var(--safe-bottom));
+  border-top: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(8, 10, 18, 0.92) 32%);
+}
+
+body[data-variant='a'] .foco-account__footer:empty {
+  display: none;
+  padding: 0;
+}
+
+body[data-variant='a'] .foco-account__footer .foco-btn {
+  width: 100%;
+  min-height: 48px;
+}
+
+body[data-variant='a'] .foco-account__footer .foco-app-tabs--dock,
+body[data-variant='a'] .foco-account__footer .foco-dock {
+  margin-top: 0;
+}
+
+/* Match Daily / AI / Stats dock — glass host handles the surface */
+body[data-variant='a'] .foco-account__footer:has(.foco-app-tabs--dock):not(:has(.foco-btn)),
+body[data-variant='a'] .foco-account__footer:has(.foco-dock):not(:has(.foco-btn)) {
+  gap: 0;
+  padding: 14px 16px max(12px, var(--safe-bottom));
+  background: transparent;
+}
+
+body[data-variant='a'] .foco-account-section-label {
+  margin: var(--space-5) 0 var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--foco-text-muted);
+}
+
+body[data-variant='a'] .foco-account-lede + .foco-account-section-label {
+  margin-top: var(--space-3);
+}
+
+body[data-variant='a'] .foco-account-profile-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  background:
+    linear-gradient(145deg, rgba(124, 58, 237, 0.22) 0%, rgba(24, 18, 48, 0.72) 42%, rgba(12, 14, 28, 0.92) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 18px 40px rgba(0, 0, 0, 0.28);
+  isolation: isolate;
+}
+
+body[data-variant='a'] .foco-account-profile-card__glow {
+  position: absolute;
+  inset: -20% auto auto -10%;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.35) 0%, transparent 70%);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body[data-variant='a'] .foco-account-profile-card__top {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
+}
+
+body[data-variant='a'] .foco-account-avatar-wrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+}
+
+body[data-variant='a'] .foco-account-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font: 700 22px/1 var(--foco-font);
+  background: rgba(124, 58, 237, 0.28);
+  color: var(--foco-text);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+body[data-variant='a'] .foco-account-avatar--photo {
+  display: block;
+  padding: 0;
+  border: 2px solid rgba(232, 228, 255, 0.85);
+  background: rgba(18, 24, 40, 0.4);
+  box-shadow:
+    0 0 0 3px rgba(124, 58, 237, 0.28),
+    0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+body[data-variant='a'] .foco-account-avatar-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  pointer-events: none;
+  animation: foco-avatar-pulse 3.2s ease-in-out infinite;
+}
+
+@keyframes foco-avatar-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-variant='a'] .foco-account-avatar-ring {
+    animation: none;
+  }
+}
+
+body[data-variant='a'] .foco-account-profile-card__meta {
+  min-width: 0;
+  padding-top: 2px;
+}
+
+body[data-variant='a'] .foco-account-profile-card__name {
+  margin: 0;
+  font: 700 20px/1.2 var(--foco-font);
+  letter-spacing: -0.02em;
+  color: var(--foco-text);
+}
+
+body[data-variant='a'] .foco-account-profile-card__email {
+  margin: 4px 0 10px;
+  font: 500 13px/1.35 var(--foco-font);
+  color: rgba(186, 180, 220, 0.78);
+  overflow-wrap: anywhere;
+}
+
+body[data-variant='a'] .foco-account-profile-card__chips {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  min-width: 0;
+}
+
+body[data-variant='a'] .foco-account-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  max-width: 100%;
+  padding: 0 8px;
+  border-radius: 999px;
+  font: 600 10px/1 var(--foco-font);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: rgba(232, 228, 255, 0.88);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body[data-variant='a'] .foco-account-plan-chip {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font: 600 10px/1 var(--foco-font);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #f3e8ff;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.55), rgba(79, 70, 229, 0.35));
+  border: 1px solid rgba(196, 181, 253, 0.35);
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.22);
+}
+
+body[data-variant='a'] .foco-account-profile-card__goal {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body[data-variant='a'] .foco-account-profile-card__goal-label {
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(196, 181, 253, 0.8);
+}
+
+body[data-variant='a'] .foco-account-profile-card__goal-text {
+  margin: 0;
+  font: 600 15px/1.35 var(--foco-font);
+  color: var(--foco-text);
+}
+
+body[data-variant='a'] .foco-account-profile-card__edit {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: rgba(232, 228, 255, 0.92);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  line-height: 0;
+  transition:
+    background 160ms ease,
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+body[data-variant='a'] .foco-account-profile-card__edit .foco-ico,
+body[data-variant='a'] .foco-account-profile-card__edit svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+body[data-variant='a'] .foco-account-profile-card__edit:active {
+  transform: scale(0.96);
+  background: rgba(124, 58, 237, 0.28);
+  border-color: rgba(167, 139, 250, 0.4);
+}
+
+body[data-variant='a'] .foco-account-onboarding {
+  padding: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+body[data-variant='a'] .foco-account-list {
+  padding: var(--space-1) 0;
+  margin-bottom: var(--space-2);
+}
+
+body[data-variant='a'] .foco-account-list--spaced {
+  margin-top: var(--space-4);
+}
+
+body[data-variant='a'] .foco-account-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+body[data-variant='a'] .foco-account-stack > .foco-sub-hero,
+body[data-variant='a'] .foco-account-stack > .foco-account-list,
+body[data-variant='a'] .foco-account-stack > .foco-sub-matrix,
+body[data-variant='a'] .foco-account-stack > .foco-card {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+body[data-variant='a'] .foco-sub-matrix {
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  background:
+    linear-gradient(145deg, rgba(124, 58, 237, 0.12), transparent 42%),
+    rgba(16, 20, 34, 0.92);
+}
+
+body[data-variant='a'] .foco-sub-matrix .foco-h3 {
+  margin: 0;
+}
+
+body[data-variant='a'] .foco-sub-matrix__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 16px 14px;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.14);
+}
+
+body[data-variant='a'] .foco-sub-matrix__head-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+body[data-variant='a'] .foco-sub-matrix__eyebrow {
+  margin: 0;
+}
+
+body[data-variant='a'] .foco-sub-matrix__lede {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  max-width: 36ch;
+}
+
+body[data-variant='a'] .foco-sub-matrix__badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.35), rgba(124, 58, 237, 0.55));
+  border: 1px solid rgba(196, 181, 253, 0.35);
+  color: #f5f3ff;
+  font: 700 11px/1 var(--foco-font);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba(76, 29, 149, 0.28);
+}
+
+body[data-variant='a'] .foco-sub-matrix__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body[data-variant='a'] .foco-account-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 12px;
+  text-align: left;
+  padding: 12px 10px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  border-bottom: 1px solid var(--foco-border);
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+body[data-variant='a'] .foco-account-row:last-child {
+  border-bottom: none;
+}
+
+body[data-variant='a'] .foco-account-row__icon {
+  grid-column: 1;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  background: rgba(124, 58, 237, 0.18);
+  color: #c4b5fd;
+  border: 1px solid rgba(167, 139, 250, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+body[data-variant='a'] .foco-account-row__icon .foco-ico,
+body[data-variant='a'] .foco-account-row__icon svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+body[data-variant='a'] .foco-account-row__text {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+body[data-variant='a'] .foco-account-row__label {
+  display: block;
+  line-height: 1.25;
+}
+
+body[data-variant='a'] .foco-account-row__sub {
+  display: block;
+  line-height: 1.3;
+}
+
+body[data-variant='a'] .foco-account-row__chev {
+  grid-column: 3;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: var(--foco-text-muted);
+}
+
+body[data-variant='a'] .foco-account-row--danger .foco-account-row__label {
+  color: var(--foco-error);
+}
+
+body[data-variant='a'] .foco-account-form {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+body[data-variant='a'] .foco-account-form .foco-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+body[data-variant='a'] .foco-account-form .foco-input-wrap--password .foco-input {
+  padding-right: 48px;
+}
+
+body[data-variant='a'] .foco-account-form .foco-field {
+  margin-bottom: 0;
+}
+
+body[data-variant='a'] .foco-account-form .foco-field:last-child {
+  margin-bottom: 0;
+}
+
+body[data-variant='a'] .foco-account-form .foco-form-hero {
+  margin-bottom: var(--space-4);
+}
+
+body[data-variant='a'] .foco-account-intro,
+body[data-variant='a'] .foco-account-lede {
+  margin: 0 0 18px;
+  font: 500 14px/1.5 var(--foco-font);
+  color: rgba(186, 180, 220, 0.78);
+  max-width: 36ch;
+}
+
+body[data-variant='a'] .foco-account-toggles {
+  padding: 2px 0;
+  overflow: hidden;
+}
+
+body[data-variant='a'] .foco-account-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  min-height: 64px;
+}
+
+body[data-variant='a'] .foco-account-toggle:last-child {
+  border-bottom: none;
+}
+
+body[data-variant='a'] .foco-account-toggle__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+body[data-variant='a'] .foco-account-toggle__label {
+  display: block;
+  font: 600 15px/1.25 var(--foco-font);
+  color: var(--foco-text);
+}
+
+body[data-variant='a'] .foco-account-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+body[data-variant='a'] .foco-switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 48px;
+  height: 28px;
+}
+
+body[data-variant='a'] .foco-switch__track {
+  display: block;
+  width: 48px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+body[data-variant='a'] .foco-switch__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #f5f3ff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
+  transition: transform 160ms ease;
+}
+
+body[data-variant='a'] .foco-switch input:checked + .foco-switch__track {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  border-color: rgba(196, 181, 253, 0.45);
+}
+
+body[data-variant='a'] .foco-switch input:checked + .foco-switch__track .foco-switch__thumb {
+  transform: translateX(20px);
+}
+
+body[data-variant='a'] .foco-account-theme-note {
+  padding: var(--space-4);
+  margin-top: var(--space-3);
+}
+
+body[data-variant='a'] .foco-sub-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 18px;
+  margin-bottom: 16px;
+  border-radius: 22px;
+  border: 1px solid rgba(167, 139, 250, 0.24);
+  background:
+    linear-gradient(145deg, rgba(124, 58, 237, 0.28) 0%, rgba(24, 18, 48, 0.78) 48%, rgba(12, 14, 28, 0.94) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 16px 36px rgba(0, 0, 0, 0.24);
+  isolation: isolate;
+}
+
+body[data-variant='a'] .foco-sub-hero--compact {
+  padding: 18px;
+}
+
+body[data-variant='a'] .foco-sub-hero__glow {
+  position: absolute;
+  inset: -30% auto auto -20%;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.35), transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body[data-variant='a'] .foco-sub-hero__name,
+body[data-variant='a'] .foco-sub-hero__tagline,
+body[data-variant='a'] .foco-sub-hero__meta,
+body[data-variant='a'] .foco-sub-hero .foco-panel__eyebrow,
+body[data-variant='a'] .foco-sub-pending {
+  position: relative;
+  z-index: 1;
+}
+
+body[data-variant='a'] .foco-sub-hero__name {
+  margin: 6px 0 8px;
+  font: 700 28px/1.1 var(--foco-font);
+  letter-spacing: -0.03em;
+  color: var(--foco-text);
+}
+
+body[data-variant='a'] .foco-sub-hero__tagline {
+  margin: 0;
+  font: 500 14px/1.45 var(--foco-font);
+  color: rgba(214, 210, 235, 0.82);
+}
+
+body[data-variant='a'] .foco-sub-hero__meta {
+  margin: 10px 0 0;
+}
+
+body[data-variant='a'] .foco-sub-pending {
+  margin: 10px 0 0;
+  color: #fbbf24;
+}
+
+body[data-variant='a'] .foco-sub-plans {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+body[data-variant='a'] .foco-sub-plan {
+  position: relative;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(167, 139, 250, 0.18);
+  background: rgba(18, 22, 38, 0.88);
+}
+
+body[data-variant='a'] .foco-sub-plan--highlight {
+  border-color: rgba(167, 139, 250, 0.4);
+  background:
+    linear-gradient(160deg, rgba(124, 58, 237, 0.2), rgba(18, 22, 38, 0.92));
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.12),
+    0 18px 40px rgba(76, 29, 149, 0.22);
+}
+
+body[data-variant='a'] .foco-sub-plan__badge {
+  margin-bottom: 10px;
+}
+
+body[data-variant='a'] .foco-sub-plan__name {
+  margin: 0;
+  font: 700 18px/1.2 var(--foco-font);
+}
+
+body[data-variant='a'] .foco-sub-plan__price {
+  font: 700 30px/1.1 var(--foco-font);
+  letter-spacing: -0.03em;
+  margin: 10px 0 6px;
+}
+
+body[data-variant='a'] .foco-sub-plan__price span {
+  margin-left: 4px;
+  font: 500 13px/1 var(--foco-font);
+  color: var(--foco-text-muted);
+}
+
+body[data-variant='a'] .foco-sub-plan .foco-btn {
+  width: 100%;
+  margin-top: 14px;
+}
+
+body[data-variant='a'] .foco-sub-table {
+  width: 100%;
+  min-width: 300px;
+  border-collapse: collapse;
+  font: var(--foco-font-body-sm);
+  margin: 0;
+  table-layout: fixed;
+}
+
+body[data-variant='a'] .foco-sub-table th,
+body[data-variant='a'] .foco-sub-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: left;
+  vertical-align: middle;
+}
+
+body[data-variant='a'] .foco-sub-table thead th {
+  padding: 10px;
+  font: 600 11px/1.2 var(--foco-font);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(186, 180, 220, 0.72);
+  background: rgba(8, 10, 18, 0.35);
+  border-bottom-color: rgba(167, 139, 250, 0.16);
+}
+
+body[data-variant='a'] .foco-sub-table thead th:first-child,
+body[data-variant='a'] .foco-sub-table tbody th {
+  width: 46%;
+  padding-left: 16px;
+}
+
+body[data-variant='a'] .foco-sub-table thead th:nth-child(2),
+body[data-variant='a'] .foco-sub-table td:nth-child(2) {
+  width: 27%;
+  text-align: center;
+}
+
+body[data-variant='a'] .foco-sub-table thead th.foco-sub-table__premium,
+body[data-variant='a'] .foco-sub-table td.foco-sub-table__premium {
+  width: 27%;
+  text-align: center;
+  padding-right: 14px;
+}
+
+body[data-variant='a'] .foco-sub-table thead th.foco-sub-table__premium {
+  color: #ddd6fe;
+  background: linear-gradient(180deg, rgba(124, 58, 237, 0.22), rgba(124, 58, 237, 0.08));
+}
+
+body[data-variant='a'] .foco-sub-table tbody th {
+  font: 600 13px/1.35 var(--foco-font);
+  color: rgba(245, 243, 255, 0.92);
+  font-weight: 600;
+}
+
+body[data-variant='a'] .foco-sub-table tbody td.foco-sub-table__premium {
+  background: rgba(124, 58, 237, 0.06);
+}
+
+body[data-variant='a'] .foco-sub-table tbody tr:last-child th,
+body[data-variant='a'] .foco-sub-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+body[data-variant='a'] .foco-sub-table__row--highlight th,
+body[data-variant='a'] .foco-sub-table__row--highlight td {
+  background: rgba(124, 58, 237, 0.1);
+  border-bottom-color: rgba(167, 139, 250, 0.12);
+}
+
+body[data-variant='a'] .foco-sub-table__row--highlight td.foco-sub-table__premium {
+  background: rgba(124, 58, 237, 0.16);
+}
+
+body[data-variant='a'] .foco-sub-table__star {
+  display: inline-block;
+  margin-left: 6px;
+  color: #c4b5fd;
+  font-size: 10px;
+  vertical-align: middle;
+}
+
+body[data-variant='a'] .foco-sub-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  max-width: 100%;
+  min-height: 26px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font: 600 11px/1.25 var(--foco-font);
+  letter-spacing: 0.01em;
+  box-sizing: border-box;
+  text-wrap: balance;
+}
+
+body[data-variant='a'] .foco-sub-cell--yes {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(52, 211, 153, 0.14);
+  color: #6ee7b7;
+  border: 1px solid rgba(52, 211, 153, 0.28);
+}
+
+body[data-variant='a'] .foco-sub-cell--no {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(186, 180, 220, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body[data-variant='a'] .foco-sub-cell--premium-yes {
+  background: rgba(124, 58, 237, 0.22);
+  color: #e9e2ff;
+  border: 1px solid rgba(167, 139, 250, 0.35);
+}
+
+body[data-variant='a'] .foco-sub-cell--boost {
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.28), rgba(124, 58, 237, 0.4));
+  color: #fff;
+  border: 1px solid rgba(196, 181, 253, 0.4);
+  box-shadow: 0 6px 16px rgba(76, 29, 149, 0.25);
+}
+
+body[data-variant='a'] .foco-sub-cell--premium-text {
+  background: rgba(124, 58, 237, 0.16);
+  color: #e4dcff;
+  border: 1px solid rgba(167, 139, 250, 0.28);
+}
+
+body[data-variant='a'] .foco-sub-cell--muted {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(214, 210, 235, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 500;
+}
+
+body[data-variant='a'] .foco-sub-success {
+  text-align: center;
+  padding: 36px 20px;
+  margin-bottom: 16px;
+  border-radius: 22px;
+  border: 1px solid rgba(52, 211, 153, 0.22);
+  background:
+    linear-gradient(160deg, rgba(52, 211, 153, 0.12), rgba(18, 24, 40, 0.9));
+}
+
+body[data-variant='a'] .foco-sub-success__mark {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #34d399, #059669);
+  color: #04140f;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 22px;
+  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.28);
+}
+
+body[data-variant='a'] .foco-sub-success__title {
+  margin: 0 0 8px;
+  font: 700 24px/1.15 var(--foco-font);
+  letter-spacing: -0.03em;
+}
+
+body[data-variant='a'] .foco-sub-review__list {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font: 500 14px/1.4 var(--foco-font);
+  color: rgba(214, 210, 235, 0.88);
+}
+
+body[data-variant='a'] .foco-sub-review__list li {
+  position: relative;
+  padding-left: 22px;
+}
+
+body[data-variant='a'] .foco-sub-review__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #a78bfa;
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.55);
+}
+
+body[data-variant='a'] .foco-sub-legal {
+  text-align: center;
+  margin-top: 12px;
+}
+
+body[data-variant='a'] .foco-account-delete-list {
+  margin: var(--space-3) 0;
+  padding-left: var(--space-5);
+  font: var(--foco-font-body-sm);
+}
+
+body[data-variant='a'] .foco-account-delete-copy {
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+body[data-variant='a'] .foco-input--danger {
+  border-color: rgba(248, 113, 113, 0.45);
+}
+
+body[data-variant='a'] .foco-account-delete-final:disabled {
+  opacity: 0.4;
+}
+
+body[data-variant='a'] .foco-account-delete-final:not(:disabled) {
+  color: var(--foco-error);
+  border-color: rgba(248, 113, 113, 0.35);
+  width: 100%;
+  min-height: 52px;
+}
+
+body[data-variant='a'] .foco-account-delete-check {
+  margin-top: var(--space-3);
+  font: var(--foco-font-body-sm);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Inner page panels, About, FAQ, Legal                                         */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-account--inner .foco-account__scroll {
+  padding-bottom: 28px;
+}
+
+body[data-variant='a'] .foco-panel {
+  position: relative;
+  margin-bottom: 18px;
+  padding: 18px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(16, 20, 34, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* List sections: no outer box — header free, one list surface */
+body[data-variant='a'] .foco-panel--list {
+  margin-bottom: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-variant='a'] .foco-panel--list .foco-panel__head {
+  padding: 0 2px 10px;
+  margin-bottom: 0;
+}
+
+body[data-variant='a'] .foco-panel--note {
+  background: rgba(167, 139, 250, 0.08);
+  border-color: rgba(167, 139, 250, 0.16);
+}
+
+body[data-variant='a'] .foco-panel__head {
+  margin-bottom: 12px;
+}
+
+body[data-variant='a'] .foco-panel__eyebrow {
+  margin: 0 0 4px;
+  font: 600 11px/1.2 var(--foco-font);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(167, 139, 250, 0.85);
+}
+
+body[data-variant='a'] .foco-panel__title {
+  margin: 0;
+  font: 700 17px/1.25 var(--foco-font);
+  letter-spacing: -0.02em;
+  color: var(--foco-text);
+}
+
+body[data-variant='a'] .foco-panel__cta {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Form panels: keep one surface; strip nested list chrome only here */
+body[data-variant='a'] .foco-panel:not(.foco-panel--list) .foco-account-list {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* List panels: single glass group is the only box */
+body[data-variant='a'] .foco-panel--list .foco-account-list,
+body[data-variant='a'] .foco-panel--list .foco-account-toggles {
+  margin: 0;
+  overflow: hidden;
+}
+
+body[data-variant='a'] .foco-about-hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 32px 20px 28px;
+  border-radius: 24px;
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  background:
+    linear-gradient(160deg, rgba(124, 58, 237, 0.24), rgba(14, 18, 32, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 18px 40px rgba(0, 0, 0, 0.26);
+}
+
+body[data-variant='a'] .foco-about-hero__glow {
+  position: absolute;
+  inset: -10% 10% auto;
+  height: 140px;
+  background: radial-gradient(circle, rgba(196, 181, 253, 0.35), transparent 70%);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+body[data-variant='a'] .foco-about-hero__logo {
+  position: relative;
+  z-index: 1;
+  width: 76px;
+  height: auto;
+  filter: drop-shadow(0 12px 28px rgba(76, 29, 149, 0.45));
+}
+
+body[data-variant='a'] .foco-about-hero__lead {
+  position: relative;
+  z-index: 1;
+  margin: 4px 0 0;
+  font: 700 22px/1.2 var(--foco-font);
+  letter-spacing: -0.03em;
+  color: var(--foco-text);
+}
+
+body[data-variant='a'] .foco-about-hero__body {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 32ch;
+  font: 500 14px/1.5 var(--foco-font);
+  color: rgba(186, 180, 220, 0.82);
+}
+
+body[data-variant='a'] .foco-about-hero__chip {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font: 600 11px/1 var(--foco-font);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #efe8ff;
+  background: rgba(124, 58, 237, 0.28);
+  border: 1px solid rgba(196, 181, 253, 0.3);
+}
+
+body[data-variant='a'] .foco-faq {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+body[data-variant='a'] .foco-faq__item {
+  margin: 0;
+  border-radius: 18px;
+  border: 1px solid rgba(167, 139, 250, 0.16);
+  background: rgba(16, 20, 34, 0.9);
+  overflow: hidden;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+body[data-variant='a'] .foco-faq__item[open] {
+  border-color: rgba(167, 139, 250, 0.34);
+  background:
+    linear-gradient(160deg, rgba(124, 58, 237, 0.14), rgba(16, 20, 34, 0.94));
+}
+
+body[data-variant='a'] .foco-faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  font: 600 15px/1.35 var(--foco-font);
+  color: var(--foco-text);
+  cursor: pointer;
+  list-style: none;
+}
+
+body[data-variant='a'] .foco-faq__q::-webkit-details-marker {
+  display: none;
+}
+
+body[data-variant='a'] .foco-faq__chev {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-right: 2px solid rgba(196, 181, 253, 0.8);
+  border-bottom: 2px solid rgba(196, 181, 253, 0.8);
+  transform: rotate(45deg);
+  transition: transform 160ms ease;
+}
+
+body[data-variant='a'] .foco-faq__item[open] .foco-faq__chev {
+  transform: rotate(-135deg);
+}
+
+body[data-variant='a'] .foco-faq__a {
+  margin: 0;
+  padding: 0 16px 16px;
+  font: 500 14px/1.5 var(--foco-font);
+  color: rgba(186, 180, 220, 0.8);
+}
+
+body[data-variant='a'] .foco-legal-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+body[data-variant='a'] .foco-legal-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(167, 139, 250, 0.16);
+  background:
+    linear-gradient(145deg, rgba(124, 58, 237, 0.1), rgba(16, 20, 34, 0.92));
+}
+
+body[data-variant='a'] .foco-legal-card__index {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  font: 700 12px/1 var(--foco-font);
+  letter-spacing: 0.04em;
+  color: #e9e0ff;
+  background: rgba(124, 58, 237, 0.28);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+}
+
+body[data-variant='a'] .foco-legal-card__title {
+  margin: 0 0 6px;
+  font: 700 16px/1.25 var(--foco-font);
+  color: var(--foco-text);
+}
+
+body[data-variant='a'] .foco-legal-card__body {
+  margin: 0;
+  font: 500 14px/1.5 var(--foco-font);
+  color: rgba(186, 180, 220, 0.8);
+}
+
+body[data-variant='a'] .foco-contact-email {
+  display: inline-block;
+  margin-top: 6px;
+  font: 600 16px/1.3 var(--foco-font);
+}
+
+body[data-variant='a'] .foco-account-restore-result {
+  margin-top: 12px;
+}
+
+body[data-variant='a'] .foco-account-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+body[data-variant='a'] .foco-account-stack .foco-btn {
+  width: 100%;
+}
+
+body[data-variant='a'] .foco-app-tabs--5 {
+  gap: var(--space-1);
+}
+
+body[data-variant='a'] .foco-app-tabs--5 .foco-nav-item {
+  min-width: 48px;
+  font-size: 10px;
+}

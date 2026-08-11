@@ -1,0 +1,11 @@
+{
+  "name": "app-foundation",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Native iOS-like PWA foundation with multi-variant URL architecture",
+  "scripts": {
+    "start": "npx --yes serve -s . -l 4173",
+    "serve": "npx --yes serve -s . -l 4173",
+    "sync:entries": "node scripts/sync-entries.js"
+  }
+}

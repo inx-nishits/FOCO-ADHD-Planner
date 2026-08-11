@@ -1,0 +1,396 @@
+/**
+ * FOCO Variant A — Premium FOCO Gen 2
+ * Brand & visual foundation (Phase 01 + evolution layer)
+ *
+ * Brand references:
+ * - Official logo: /assets/images/foco-logo.png (90×86, RGBA, preserve aspect)
+ * - Website: https://www.tryfoco.com/
+ *
+ * This file defines tokens, typography, spacing, radius, and shell atmosphere.
+ * Component primitives live in ./components.css
+ * Product screens are intentionally NOT built here.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+@import url('./components.css');
+@import url('./screens.css');
+@import url('./auth.css');
+@import url('./onboarding.css');
+@import url('./account.css');
+@import url('./empty-placeholders.css');
+@import url('./top-nav.css');
+@import url('./evolution.css');
+/* tab-bar last — owns the live bottom nav and must win over evolution */ 
+@import url('./tab-bar.css');
+@import url('./visual-polish.css');
+/* -------------------------------------------------------------------------- */
+/* Color system — controlled FOCO palette (normalized design-system values)   */
+/* Extracted / normalized from tryfoco.com + foco-logo.png                    */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] {
+  color-scheme: dark;
+
+  /* Brand */
+  --foco-purple: #7c3aed; /* primary — website CTA / brand violet */
+  --foco-purple-soft: #a78bfa; /* secondary violet — highlights, soft accents */
+  --foco-purple-deep: #2a1c40; /* deep tint — elevated surfaces / chips */
+  --foco-glow: rgba(124, 58, 237, 0.38);
+
+  /* Accent (non-purple, restrained) */
+  --foco-accent: #fbbf24; /* website warm accent — sparingly */
+
+  /* Surfaces — deep indigo atmosphere (not flat black) */
+  --foco-bg: #0a0d18;
+  --foco-bg-elevated: #121828;
+  --foco-surface: rgba(28, 36, 58, 0.72);
+  --foco-card: rgba(34, 42, 68, 0.88);
+  --foco-overlay: rgba(6, 8, 16, 0.82);
+
+  /* Primary CTA gradient system */
+  --foco-cta-gradient: linear-gradient(
+    135deg,
+    #4f46e5 0%,
+    #6d28d9 38%,
+    #7c3aed 62%,
+    #9333ea 100%
+  );
+  --foco-cta-gradient-pressed: linear-gradient(
+    135deg,
+    #4338ca 0%,
+    #5b21b6 38%,
+    #6d28d9 62%,
+    #7e22ce 100%
+  );
+  --foco-cta-border: rgba(255, 255, 255, 0.14);
+  --foco-cta-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  --foco-cta-shadow: 0 10px 28px rgba(76, 29, 149, 0.38), 0 2px 6px rgba(0, 0, 0, 0.28);
+  --foco-cta-shadow-hover: 0 14px 32px rgba(88, 28, 135, 0.42), 0 2px 8px rgba(0, 0, 0, 0.22);
+
+  /* Text */
+  --foco-text: #f8f6ff;
+  --foco-text-secondary: #cbc3e8;
+  --foco-text-muted: #9b93b8;
+  --foco-text-accent: #ddd6fe;
+  --foco-text-rich: #ece8ff;
+
+  /* Colorful type gradients */
+  --foco-text-gradient-hero: linear-gradient(
+    128deg,
+    #ffffff 0%,
+    #f5f3ff 24%,
+    #e9d5ff 52%,
+    #d8b4fe 78%,
+    #c084fc 100%
+  );
+  --foco-text-gradient-brand: linear-gradient(120deg, #f3e8ff 0%, #c4b5fd 45%, #a78bfa 100%);
+  --foco-text-gradient-warm: linear-gradient(120deg, #fde68a 0%, #f0abfc 52%, #c084fc 100%);
+  --foco-text-gradient-glow: 0 0 28px rgba(196, 181, 253, 0.28);
+
+  /* Lines */
+  --foco-border: rgba(255, 255, 255, 0.08);
+  --foco-border-strong: rgba(167, 139, 250, 0.22);
+
+  /* Feedback */
+  --foco-success: #34d399;
+  --foco-warning: #fbbf24;
+  --foco-error: #f87171;
+
+  /* Focus ring */
+  --foco-focus-ring: rgba(167, 139, 250, 0.55);
+
+  /* Map to shared app tokens (shell / future screens) */
+  --app-bg: var(--foco-bg);
+  --app-bg-elevated: var(--foco-bg-elevated);
+  --app-text: var(--foco-text);
+  --app-text-secondary: var(--foco-text-secondary);
+  --app-primary: var(--foco-purple);
+  --app-border: var(--foco-border);
+  --app-focus: var(--foco-purple-soft);
+  --app-overlay: var(--foco-overlay);
+
+  /* Typography — Plus Jakarta display + Inter UI */
+  --foco-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --foco-font-display-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --app-font-sans: var(--foco-font);
+  --app-font-size: 16px;
+  --app-line-height: 1.45;
+  --app-font-weight: 400;
+
+  --foco-tracking-display: -0.045em;
+  --foco-tracking-headline: -0.038em;
+  --foco-tracking-title: -0.028em;
+  --foco-tracking-body: -0.011em;
+  --foco-tracking-meta: 0.1em;
+
+  --foco-font-display: 800 34px/1.02 var(--foco-font-display-family);
+  --foco-font-hero: 800 32px/1.03 var(--foco-font-display-family);
+  --foco-font-h1: 800 26px/1.06 var(--foco-font-display-family);
+  --foco-font-h2: 700 22px/1.1 var(--foco-font-display-family);
+  --foco-font-h3: 700 17px/1.18 var(--foco-font-display-family);
+  --foco-font-title: 700 17px/1.2 var(--foco-font-display-family);
+  --foco-font-task: 600 15px/1.35 var(--foco-font);
+  --foco-font-body: 400 15px/1.6 var(--foco-font);
+  --foco-font-body-sm: 400 13px/1.55 var(--foco-font);
+  --foco-font-caption: 600 11px/1.35 var(--foco-font);
+  --foco-font-meta: 700 10px/1.25 var(--foco-font);
+  --foco-font-button: 600 15px/1.1 var(--foco-font);
+  --foco-font-nav: 600 10px/1.15 var(--foco-font);
+  --foco-font-timer: 800 52px/0.88 var(--foco-font-display-family);
+  --foco-font-numeric: 700 20px/1.05 var(--foco-font-display-family);
+
+  /* Motion — one FOCO animation language */
+  --foco-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
+  --foco-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --foco-ease-in-out: cubic-bezier(0.45, 0, 0.2, 1);
+  --foco-motion-instant: 120ms;
+  --foco-motion-fast: 180ms;
+  --foco-motion-base: 260ms;
+  --foco-motion-slow: 420ms;
+  --app-motion-fast: var(--foco-motion-fast);
+  --app-motion-base: var(--foco-motion-base);
+  --app-motion-slow: var(--foco-motion-slow);
+  --app-ease: var(--foco-ease-out);
+
+  /* Glass & depth */
+  --foco-blur-sm: 12px;
+  --foco-blur-md: 20px;
+  --foco-glass-bg: rgba(18, 24, 40, 0.62);
+  --foco-glass-border: rgba(255, 255, 255, 0.1);
+  --foco-layer-chrome: 10;
+  --foco-layer-sheet: 40;
+  --foco-layer-modal: 120;
+
+  /* Spacing scale: 4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+
+  /* Equal inset for bottom CTAs — side and bottom match */
+  --foco-cta-inset: 24px;
+
+  --app-spacing-xs: var(--space-1);
+  --app-spacing-sm: var(--space-2);
+  --app-spacing-md: var(--space-4);
+  --app-spacing-lg: var(--space-6);
+  --app-spacing-xl: var(--space-7);
+
+  /* Radius — soft modern, not childish */
+  --radius-sm: 10px; /* chips, small controls */
+  --radius-md: 14px; /* inputs, icon buttons */
+  --radius-lg: 18px; /* cards, task rows */
+  --radius-xl: 24px; /* sheets, large cards */
+  --radius-pill: 999px; /* primary CTA, chips */
+
+  --app-radius-sm: var(--radius-sm);
+  --app-radius-md: var(--radius-md);
+  --app-radius-lg: var(--radius-lg);
+  --app-radius-xl: var(--radius-xl);
+
+  /* Elevation — restrained; glow reserved for premium moments */
+  --shadow-soft: 0 8px 28px rgba(0, 0, 0, 0.35);
+  --shadow-cta: var(--foco-cta-shadow);
+  --app-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --app-shadow-md: var(--shadow-soft);
+
+  /* Logo asset (official — do not replace) */
+  --foco-logo-url: url('/assets/images/foco-logo.png');
+  --foco-logo-aspect: 90 / 86;
+
+  /* Desktop presentation stage behind the iPhone frame */
+  --stage-bg: #1a1f2e;
+}
+
+body[data-variant='a'] .app-shell {
+  background:
+    radial-gradient(120% 85% at 50% -22%, rgba(99, 102, 241, 0.18), transparent 54%),
+    radial-gradient(70% 50% at 100% 8%, rgba(124, 58, 237, 0.11), transparent 50%),
+    radial-gradient(65% 45% at 0% 92%, rgba(59, 130, 246, 0.08), transparent 52%),
+    radial-gradient(50% 40% at 78% 72%, rgba(167, 139, 250, 0.06), transparent 55%),
+    linear-gradient(172deg, #141a2e 0%, #0e1324 42%, #0a0d18 100%);
+  color: var(--foco-text);
+  font-family: var(--foco-font);
+  font-optical-sizing: auto;
+  font-feature-settings: 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv11' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body[data-variant='a'] .app-screen {
+  background: transparent;
+}
+
+/* Home indicator removed from device frame */
+
+/* -------------------------------------------------------------------------- */
+/* Typography utilities                                                         */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-text-gradient {
+  background: var(--foco-text-gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+body[data-variant='a'] .foco-text-gradient--brand {
+  background: var(--foco-text-gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+body[data-variant='a'] .foco-text-gradient--warm {
+  background: var(--foco-text-gradient-warm);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+body[data-variant='a'] .foco-headline,
+body[data-variant='a'] .foco-display,
+body[data-variant='a'] .foco-hero,
+body[data-variant='a'] .foco-screen-title,
+body[data-variant='a'] .foco-h1 {
+  font-family: var(--foco-font-display-family);
+  letter-spacing: var(--foco-tracking-display);
+  text-wrap: balance;
+  background: var(--foco-text-gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(var(--foco-text-gradient-glow));
+}
+
+body[data-variant='a'] .foco-h2,
+body[data-variant='a'] .foco-h3,
+body[data-variant='a'] .foco-title {
+  font-family: var(--foco-font-display-family);
+  color: var(--foco-text-rich);
+  letter-spacing: var(--foco-tracking-title);
+}
+
+body[data-variant='a'] .foco-section-title {
+  font: var(--foco-font-h3);
+  color: var(--foco-text-accent);
+  letter-spacing: var(--foco-tracking-title);
+}
+
+body[data-variant='a'] .foco-task-title {
+  font: var(--foco-font-task);
+  color: var(--foco-text-rich);
+  letter-spacing: var(--foco-tracking-body);
+}
+
+body[data-variant='a'] .foco-meta {
+  font: var(--foco-font-meta);
+  color: var(--foco-purple-soft);
+  letter-spacing: var(--foco-tracking-meta);
+  text-transform: uppercase;
+}
+
+body[data-variant='a'] .foco-numeric {
+  font: var(--foco-font-numeric);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--foco-tracking-title);
+  color: var(--foco-text-accent);
+}
+
+body[data-variant='a'] .foco-h2 {
+  font: var(--foco-font-h2);
+}
+
+body[data-variant='a'] .foco-h3 {
+  font: var(--foco-font-h3);
+}
+
+body[data-variant='a'] .foco-title {
+  font: var(--foco-font-title);
+}
+
+body[data-variant='a'] .foco-body {
+  font: var(--foco-font-body);
+  color: var(--foco-text-rich);
+  letter-spacing: var(--foco-tracking-body);
+}
+
+body[data-variant='a'] .foco-body-secondary {
+  font: var(--foco-font-body-sm);
+  color: var(--foco-text-secondary);
+  letter-spacing: var(--foco-tracking-body);
+}
+
+body[data-variant='a'] .foco-caption {
+  font: var(--foco-font-caption);
+  color: var(--foco-purple-soft);
+  letter-spacing: var(--foco-tracking-meta);
+}
+
+body[data-variant='a'] .foco-timer {
+  font: var(--foco-font-timer);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--foco-tracking-display);
+  background: var(--foco-text-gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Brand word emphasis */
+body[data-variant='a'] .foco-text-brand {
+  background: var(--foco-text-gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 800;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Official logo — proportions locked to asset (90×86)                          */
+/* -------------------------------------------------------------------------- */
+body[data-variant='a'] .foco-logo {
+  display: block;
+  width: 48px;
+  height: auto;
+  aspect-ratio: var(--foco-logo-aspect);
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  flex-shrink: 0;
+}
+
+body[data-variant='a'] .foco-logo--sm {
+  width: 32px;
+}
+
+body[data-variant='a'] .foco-logo--md {
+  width: 48px;
+}
+
+body[data-variant='a'] .foco-logo--lg {
+  width: 72px;
+}
+
+body[data-variant='a'] .foco-logo--xl {
+  width: 96px;
+}
+
+/**
+ * Mascot / logo usage rules (Variant A):
+ * USE for: splash/welcome, empty encouraging states, focus-mode companion,
+ *          celebration / streak moments, onboarding personality beats.
+ * DO NOT use on: every screen chrome, dense data lists, settings rows,
+ *                error-only states, or as a decorative bullet substitute.
+ * Intentional > frequent. Calm presence, not clutter.
+ */

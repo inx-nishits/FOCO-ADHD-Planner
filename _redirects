@@ -1,0 +1,10 @@
+# Netlify / compatible static hosts — SPA fallback for variant URLs
+/variant-a    /index.html   200
+/variant-a/   /index.html   200
+/variant-a/*  /index.html   200
+/variant-b    /index.html   200
+/variant-b/   /index.html   200
+/variant-b/*  /index.html   200
+/variant-c    /index.html   200
+/variant-c/   /index.html   200
+/variant-c/*  /index.html   200
