@@ -91,7 +91,7 @@ export function renderActiveScreen(root) {
   const route = getRoute();
   let renderer = screens.get(route);
 
-  if (!renderer && isVariantAAccountRoute(route)) {
+  if (!renderer && isAccountSubRoute(route)) {
     renderer = screens.get('account');
   }
 
@@ -115,8 +115,8 @@ export function renderActiveScreen(root) {
   root.appendChild(section);
 }
 
-/** Variant A account area */
-function isVariantAAccountRoute(route) {
+/** Account sub-routes shared by Variant A & B */
+function isAccountSubRoute(route) {
   if (route === 'profile' || route === 'settings' || route === 'subscription') return true;
   if (route === 'about' || route === 'privacy' || route === 'terms' || route === 'faq' || route === 'contact') {
     return true;

@@ -1,6 +1,8 @@
 /**
  * PWA install / display mode utilities (foundation only — no install UI).
  */
+import { APP_CONFIG } from './config.js';
+
 export function isStandaloneDisplay() {
   const mediaStandalone = window.matchMedia('(display-mode: standalone)').matches;
   const mediaFullscreen = window.matchMedia('(display-mode: fullscreen)').matches;
@@ -55,8 +57,20 @@ export function initPwa() {
     document.dispatchEvent(new CustomEvent('pwainstalled'));
   });
 
+  // In development preview mode we skip SW registration and attempt to remove
+  // any previously registered SW so variant JS imports always load fresh.
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
+      if (APP_CONFIG.developmentPreview) {
+        navigator.serviceWorker
+          .getRegistrations()
+          .then((regs) => Promise.all(regs.map((r) => r.unregister())))
+          .catch(() => {
+            /* ignore */
+          });
+        return;
+      }
+
       navigator.serviceWorker.register('/sw.js').catch((err) => {
         console.warn('[pwa] SW registration failed:', err);
       });

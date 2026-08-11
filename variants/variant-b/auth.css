@@ -1,0 +1,770 @@
+/* Variant B — authentication UI (open native screens, no cards) */
+
+body[data-variant='b'] .b-auth {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
+  contain: layout paint;
+}
+
+body[data-variant='b'] .b-auth__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(165deg, #faf8ff 0%, #f3efff 42%, #eef4ff 100%);
+}
+
+/* Abstract washes / rings / particles at 20% so copy stays readable */
+body[data-variant='b'] .b-auth__bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  pointer-events: none;
+  background:
+    radial-gradient(920px 560px at 8% -6%, rgba(109, 40, 217, 0.4), transparent 58%),
+    radial-gradient(720px 520px at 108% 8%, rgba(139, 92, 246, 0.36), transparent 56%),
+    radial-gradient(640px 420px at 50% 110%, rgba(167, 139, 250, 0.32), transparent 60%);
+}
+
+body[data-variant='b'] .b-auth__mesh {
+  position: absolute;
+  inset: -20% -10%;
+  background:
+    linear-gradient(115deg, transparent 0%, rgba(109, 40, 217, 0.14) 42%, transparent 70%),
+    repeating-linear-gradient(
+      -18deg,
+      transparent 0 18px,
+      rgba(109, 40, 217, 0.1) 18px 19px
+    );
+  opacity: 0.2;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 75%);
+}
+
+body[data-variant='b'] .b-auth__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(28px);
+  opacity: 0.2;
+  will-change: transform;
+}
+
+body[data-variant='b'] .b-auth__blob--a {
+  width: 220px;
+  height: 220px;
+  top: 8%;
+  right: -48px;
+  background: rgba(139, 92, 246, 0.72);
+}
+
+body[data-variant='b'] .b-auth__blob--b {
+  width: 180px;
+  height: 180px;
+  bottom: 18%;
+  left: -60px;
+  background: rgba(109, 40, 217, 0.52);
+}
+
+body[data-variant='b'] .b-auth__blob--c {
+  width: 140px;
+  height: 140px;
+  top: 42%;
+  left: 42%;
+  background: rgba(167, 139, 250, 0.52);
+}
+
+body[data-variant='b'] .b-auth__orbit {
+  position: absolute;
+  width: min(120vw, 520px);
+  height: min(120vw, 520px);
+  top: -12%;
+  right: -28%;
+  border-radius: 50%;
+  opacity: 0.2;
+  border: 2.5px solid rgba(109, 40, 217, 0.42);
+  box-shadow:
+    inset 0 0 0 2px rgba(139, 92, 246, 0.18),
+    inset 0 0 0 48px rgba(109, 40, 217, 0.12),
+    inset 0 0 0 50px rgba(139, 92, 246, 0.2),
+    inset 0 0 0 96px rgba(139, 92, 246, 0.14),
+    inset 0 0 0 98px rgba(167, 139, 250, 0.22),
+    0 0 0 1.5px rgba(139, 92, 246, 0.22);
+  pointer-events: none;
+}
+
+body[data-variant='b'] .b-auth__spark {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  opacity: 0.2;
+  background: rgba(124, 58, 237, 0.95);
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.95);
+}
+
+body[data-variant='b'] .b-auth__spark--1 {
+  top: 18%;
+  left: 18%;
+}
+
+body[data-variant='b'] .b-auth__spark--2 {
+  top: 34%;
+  right: 16%;
+  width: 5px;
+  height: 5px;
+}
+
+body[data-variant='b'] .b-auth__spark--3 {
+  bottom: 28%;
+  left: 28%;
+  width: 6px;
+  height: 6px;
+}
+
+body[data-variant='b'] .b-auth.is-ready .b-auth__blob--a {
+  animation: b-auth-drift-a 9s var(--b-ease) infinite alternate;
+}
+
+body[data-variant='b'] .b-auth.is-ready .b-auth__blob--b {
+  animation: b-auth-drift-b 11s var(--b-ease) infinite alternate;
+}
+
+body[data-variant='b'] .b-auth.is-ready .b-auth__blob--c {
+  animation: b-auth-drift-c 8s var(--b-ease) infinite alternate;
+}
+
+body[data-variant='b'] .b-auth.is-ready .b-auth__orbit {
+  animation: b-auth-orbit 18s linear infinite;
+}
+
+body[data-variant='b'] .b-auth.is-ready .b-auth__spark {
+  animation: b-auth-spark 3.2s var(--b-ease) infinite;
+}
+
+body[data-variant='b'] .b-auth__top {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  padding: calc(var(--safe-top) + 10px) 18px 4px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 10px;
+}
+
+body[data-variant='b'] .b-auth__top--tight {
+  padding-bottom: 2px;
+}
+
+body[data-variant='b'] .b-auth__topTitle {
+  min-height: 1px;
+}
+
+body[data-variant='b'] .b-auth__stage {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 22px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+body[data-variant='b'] .b-auth__footer {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  margin-top: auto;
+  padding: 10px 22px max(14px, calc(var(--safe-bottom) + 10px));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: transparent;
+}
+
+body[data-variant='b'] .b-auth__buddy {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 2px 0 4px;
+}
+
+body[data-variant='b'] .b-auth__buddyMark {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+
+body[data-variant='b'] .b-auth__buddyImg {
+  width: auto;
+  height: auto;
+  max-width: 68px;
+  max-height: 68px;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+
+body[data-variant='b'] .b-auth__whisper {
+  margin: 0;
+  flex: 1 1 auto;
+  padding: 10px 14px;
+  font: 600 13px/1.35 var(--b-font);
+  color: rgba(49, 46, 129, 0.88);
+  border-left: 2.5px solid rgba(109, 40, 217, 0.35);
+  background: linear-gradient(90deg, rgba(109, 40, 217, 0.07), transparent 85%);
+}
+
+body[data-variant='b'] .b-auth__titles {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+body[data-variant='b'] .b-auth__eyebrow {
+  margin: 0;
+  font: 800 11px/1.2 var(--b-font);
+  letter-spacing: var(--b-tracking-meta);
+  text-transform: uppercase;
+  color: rgba(109, 40, 217, 0.72);
+}
+
+body[data-variant='b'] .b-auth__title {
+  margin: 0;
+  padding: 0.1em 0 0.22em;
+  font: 800 clamp(1.55rem, 6.2vw, 2rem) / 1.28 var(--b-font-head);
+  letter-spacing: -0.03em;
+  overflow: visible;
+  background: linear-gradient(115deg, #3b0764 0%, #6d28d9 38%, #8b5cf6 62%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+body[data-variant='b'] .b-auth__titleAccent {
+  display: block;
+  width: 42px;
+  height: 3px;
+  margin-top: 2px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #6d28d9, #a78bfa);
+}
+
+body[data-variant='b'] .b-auth__lead {
+  margin: 0;
+  font: 500 14px / 1.5 var(--b-font);
+  color: rgba(30, 27, 75, 0.8);
+  max-width: 34ch;
+}
+
+body[data-variant='b'] .b-auth__signals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+body[data-variant='b'] .b-auth__signal {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font: 700 12px/1 var(--b-font);
+  color: rgba(49, 46, 129, 0.88);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(109, 40, 217, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+body[data-variant='b'] .b-auth__signalDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+  box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.12);
+}
+
+body[data-variant='b'] .b-auth__signalIcon {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  color: #7c3aed;
+}
+
+body[data-variant='b'] .b-auth__signalIcon .b-ico {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+body[data-variant='b'] .b-auth__visual {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 140px;
+  display: grid;
+  place-items: center;
+  margin: 4px 0;
+}
+
+body[data-variant='b'] .b-auth__visualMark {
+  position: relative;
+  width: 148px;
+  height: 148px;
+  display: grid;
+  place-items: center;
+}
+
+body[data-variant='b'] .b-auth__visualRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(109, 40, 217, 0.22);
+  animation: b-auth-orbit 22s linear infinite;
+}
+
+body[data-variant='b'] .b-auth__visualImg {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
+body[data-variant='b'] .b-auth__social,
+body[data-variant='b'] .b-auth__secondaryActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+body[data-variant='b'] .b-auth__divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  color: rgba(15, 23, 42, 0.52);
+  font: 700 12px/1 var(--b-font);
+}
+
+body[data-variant='b'] .b-auth__divider span:nth-child(1),
+body[data-variant='b'] .b-auth__divider span:nth-child(3) {
+  height: 1px;
+  background: rgba(15, 23, 42, 0.14);
+  flex: 1;
+}
+
+body[data-variant='b'] .b-auth__socialBtn {
+  width: 100%;
+}
+
+body[data-variant='b'] .b-auth__primary {
+  width: 100%;
+  min-height: 52px;
+  margin: 0;
+}
+
+body[data-variant='b'] .b-auth__switch {
+  margin: 0;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  color: var(--b-text-secondary);
+  font: 600 13px/1.3 var(--b-font);
+}
+
+body[data-variant='b'] .b-auth__spacer {
+  width: 44px;
+  height: 44px;
+}
+
+body[data-variant='b'] .b-auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+body[data-variant='b'] .b-auth__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+body[data-variant='b'] .b-auth__row .b-field__control--password .b-field__input {
+  padding-right: 42px;
+  font-size: 14px;
+}
+
+body[data-variant='b'] .b-auth__row .b-field__toggle {
+  right: 2px;
+  width: 36px;
+  height: 36px;
+}
+
+body[data-variant='b'] .b-auth__forgot {
+  align-self: flex-end;
+  margin-top: -4px;
+}
+
+body[data-variant='b'] .b-auth__error {
+  min-height: 18px;
+  font: 700 12px/1.25 var(--b-font);
+  color: rgba(239, 68, 68, 0.95);
+}
+
+body[data-variant='b'] .b-field__label {
+  pointer-events: none;
+}
+
+body[data-variant='b'] .b-field__input {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(15, 23, 42, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+body[data-variant='b'] .b-field__control--readonly .b-field__input,
+body[data-variant='b'] .b-field__input[readonly] {
+  opacity: 0.88;
+  cursor: default;
+  background: rgba(15, 23, 42, 0.04);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Auth landing — open hero, no card, CTAs pinned to bottom                   */
+/* -------------------------------------------------------------------------- */
+
+body[data-variant='b'] .b-auth-landing {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  contain: layout paint;
+}
+
+body[data-variant='b'] .b-auth-landing > .b-auth__bg {
+  inset: 0;
+}
+
+body[data-variant='b'] .b-auth-landing .b-auth__orbit,
+body[data-variant='b'] .b-empty .b-auth__orbit {
+  top: 2%;
+  left: 50%;
+  right: auto;
+  width: min(135vw, 580px);
+  height: min(135vw, 580px);
+  transform: translateX(-50%);
+  border: 2.5px solid rgba(109, 40, 217, 0.5);
+  box-shadow:
+    inset 0 0 0 2px rgba(139, 92, 246, 0.28),
+    inset 0 0 0 44px rgba(109, 40, 217, 0.08),
+    inset 0 0 0 46px rgba(139, 92, 246, 0.32),
+    inset 0 0 0 92px rgba(109, 40, 217, 0.07),
+    inset 0 0 0 94px rgba(139, 92, 246, 0.28),
+    inset 0 0 0 140px rgba(109, 40, 217, 0.05),
+    inset 0 0 0 142px rgba(167, 139, 250, 0.24),
+    0 0 0 2px rgba(139, 92, 246, 0.28);
+}
+
+body[data-variant='b'] .b-auth-landing .b-auth__mesh,
+body[data-variant='b'] .b-empty .b-auth__mesh {
+  opacity: 0.2;
+}
+
+body[data-variant='b'] .b-auth-landing .b-auth__blob,
+body[data-variant='b'] .b-empty .b-auth__blob {
+  opacity: 0.2;
+}
+
+body[data-variant='b'] .b-auth-landing .b-auth__spark,
+body[data-variant='b'] .b-empty .b-auth__spark {
+  width: 10px;
+  height: 10px;
+  opacity: 0.2;
+  background: #7c3aed;
+  box-shadow: 0 0 18px rgba(139, 92, 246, 1);
+}
+
+body[data-variant='b'] .b-auth-landing.is-ready .b-auth__orbit,
+body[data-variant='b'] .b-empty.is-ready .b-auth__orbit {
+  animation: none;
+}
+
+body[data-variant='b'] .b-auth-landing__stage {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: calc(var(--safe-top) + 28px) 24px 4px;
+}
+
+body[data-variant='b'] .b-auth-landing__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+body[data-variant='b'] .b-auth-landing__mark {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+
+body[data-variant='b'] .b-auth-landing__fluff {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 168px;
+  height: 168px;
+  overflow: visible;
+  opacity: 0;
+  transform: translateY(10px) scale(0.92);
+}
+
+body[data-variant='b'] .b-auth-landing__logo {
+  width: auto;
+  height: auto;
+  max-width: 156px;
+  max-height: 156px;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+
+body[data-variant='b'] .b-auth-landing__copy {
+  max-width: 22rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(12px);
+  position: relative;
+  z-index: 2;
+}
+
+body[data-variant='b'] .b-auth-landing__eyebrow {
+  margin: 0;
+  font: 800 12px/1.2 var(--b-font);
+  letter-spacing: var(--b-tracking-meta);
+  text-transform: uppercase;
+  color: rgba(109, 40, 217, 0.78);
+}
+
+body[data-variant='b'] .b-auth-landing__title {
+  margin: 0;
+  padding: 0.1em 0 0.22em;
+  font: 800 clamp(1.6rem, 6.4vw, 2rem) / 1.28 var(--b-font-head);
+  letter-spacing: -0.03em;
+  overflow: visible;
+  background: linear-gradient(115deg, #3b0764 0%, #6d28d9 38%, #8b5cf6 62%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+body[data-variant='b'] .b-auth-landing__lead {
+  margin: 0;
+  font: 500 14px / 1.5 var(--b-font);
+  color: rgba(30, 27, 75, 0.8);
+  max-width: 34ch;
+}
+
+body[data-variant='b'] .b-auth-landing__signals {
+  margin-top: 6px;
+  justify-content: center;
+}
+
+body[data-variant='b'] .b-auth-landing__footer {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  margin-top: auto;
+  padding: 8px 22px max(12px, calc(var(--safe-bottom) + 6px));
+  background: transparent;
+}
+
+body[data-variant='b'] .b-auth-landing__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+body[data-variant='b'] .b-auth-landing .b-auth__switch {
+  margin-top: 12px;
+}
+
+body[data-variant='b'] .b-auth-landing .b-auth__primary {
+  margin-top: 0;
+  min-height: 50px;
+  font-size: 15px;
+}
+
+body[data-variant='b'] .b-auth-landing .b-btn--apple,
+body[data-variant='b'] .b-auth-landing .b-btn--google {
+  min-height: 50px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+}
+
+/* Entrance + fluffy idle motion */
+body[data-variant='b'] .b-auth-landing.is-ready .b-auth-landing__fluff {
+  opacity: 1;
+  transform: none;
+}
+
+body[data-variant='b'] .b-auth-landing.is-ready .b-auth-landing__copy {
+  opacity: 1;
+  transform: none;
+  transition: opacity 520ms var(--b-ease) 180ms, transform 520ms var(--b-ease) 180ms;
+}
+
+@keyframes b-auth-fluff-in {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.86);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes b-auth-fluff-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes b-auth-fluff-squash {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  40% {
+    transform: scale(1.03, 0.97);
+  }
+  55% {
+    transform: scale(0.98, 1.04);
+  }
+  70% {
+    transform: scale(1.01, 0.99);
+  }
+}
+
+@keyframes b-auth-drift-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-18px, 22px, 0) scale(1.08);
+  }
+}
+
+@keyframes b-auth-drift-b {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(24px, -16px, 0);
+  }
+}
+
+@keyframes b-auth-drift-c {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-12px, -20px, 0) scale(1.12);
+  }
+}
+
+@keyframes b-auth-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes b-auth-spark {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes b-auth-buddy-bob {
+  0%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  40% {
+    transform: translateY(-6px) scale(1.03, 0.97);
+  }
+  55% {
+    transform: translateY(-2px) scale(0.98, 1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-variant='b'] .b-auth.is-ready .b-auth__blob--a,
+  body[data-variant='b'] .b-auth.is-ready .b-auth__blob--b,
+  body[data-variant='b'] .b-auth.is-ready .b-auth__blob--c,
+  body[data-variant='b'] .b-auth.is-ready .b-auth__orbit,
+  body[data-variant='b'] .b-auth.is-ready .b-auth__spark {
+    animation: none !important;
+  }
+
+  body[data-variant='b'] .b-auth-landing.is-ready .b-auth-landing__fluff,
+  body[data-variant='b'] .b-auth-landing.is-ready .b-auth-landing__copy {
+    opacity: 1;
+    transform: none;
+  }
+}

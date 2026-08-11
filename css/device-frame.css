@@ -398,10 +398,7 @@ html[data-device-frame='on'] #app {
   overflow: hidden;
 }
 
-/* Safe top is applied on screen headers — avoid doubling with .app-screen padding */
-html[data-device-frame='on'] .app-screen:not(.foco-splash):not(.foco-update) {
-  padding-top: 0;
-}
+/* Safe-top ownership for .app-screen chrome is handled globally in app.css */
 
 html[data-device-frame='on'] #app > .app-screen,
 html[data-device-frame='on'] .app-shell .app-screen {

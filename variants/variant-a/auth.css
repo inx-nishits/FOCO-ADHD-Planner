@@ -197,15 +197,19 @@ body[data-variant='a'] .foco-auth-landing__eyebrow {
 
 body[data-variant='a'] .foco-auth-landing__title {
   margin: 0;
-  font: 800 clamp(1.75rem, 7.8vw, 2rem)/1.02 var(--foco-font-display-family);
+  font: 800 clamp(1.75rem, 7.8vw, 2rem)/1.25 var(--foco-font-display-family);
   letter-spacing: var(--foco-tracking-display);
   text-wrap: balance;
+  overflow: visible;
+  padding: 0.08em 0 0.2em;
   background: var(--foco-text-gradient-hero);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  filter: drop-shadow(0 0 24px rgba(196, 181, 253, 0.22));
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  filter: none;
 }
 
 body[data-variant='a'] .foco-auth-landing__lead {

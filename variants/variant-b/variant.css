@@ -1,6 +1,122 @@
-/**
- * Variant B — additional visual language hooks.
+/* Variant B is currently intentionally emptied (visual reset in progress).
+ *
+ * Core shared neutral tokens are defined in `/css/tokens.css` + `/css/variants.css`.
+ * This file exists so the Variant stylesheet request never 404s.
  */
-body[data-variant='b'] .app-shell {
-  /* Foundation: intentionally minimal */
+
+/**
+ * Variant B — Lumen (fresh premium iOS UI direction)
+ * Light/dark hybrid foundation with refined iOS motion + typography.
+ *
+ * This file must be cohesive and self-contained; Variant B does not reuse
+ * Variant A’s styles or component classes.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@import url('./screens.css');
+@import url('./auth.css');
+@import url('./onboarding.css');
+@import url('./profile.css');
+@import url('./placeholders.css');
+@import url('./components.css');
+@import url('./tab-bar.css');
+
+body[data-variant='b'] {
+  color-scheme: light;
+
+  /* Brand palette (derived from FOCO violet logo) */
+  --b-primary: #6d28d9;
+  --b-primary-soft: #a78bfa;
+  --b-primary-deep: #2e1065;
+  --b-accent: #8b5cf6; /* soft violet accent — matches purple brand */
+  --b-accent-warm: #fbbf24;
+
+  --b-bg: #f6f8fe;
+  --b-bg-elevated: #ffffff;
+  --b-surface: rgba(255, 255, 255, 0.7);
+  --b-surface-solid: #ffffff;
+  --b-text: #0f172a;
+  --b-text-secondary: rgba(15, 23, 42, 0.68);
+  --b-text-muted: rgba(15, 23, 42, 0.48);
+  --b-border: rgba(15, 23, 42, 0.10);
+  --b-border-strong: rgba(109, 40, 217, 0.18);
+
+  --b-shadow-sm: 0 6px 18px rgba(15, 23, 42, 0.08);
+  --b-shadow-md: 0 18px 44px rgba(15, 23, 42, 0.12);
+
+  --b-glass: blur(14px);
+
+  /* Typography */
+  --b-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --b-font-head: 'Plus Jakarta Sans', var(--b-font);
+
+  --b-tracking-title: -0.02em;
+  --b-tracking-meta: 0.12em;
+
+  --b-h1: 800 clamp(1.55rem, 6.8vw, 2.05rem) / 1.02 var(--b-font-head);
+  --b-h2: 800 clamp(1.15rem, 4.8vw, 1.45rem) / 1.06 var(--b-font-head);
+  --b-h3: 700 1.05rem / 1.2 var(--b-font-head);
+
+  --b-body: 400 15px / 1.6 var(--b-font);
+  --b-body-sm: 500 13px / 1.45 var(--b-font);
+  --b-caption: 700 11px / 1.2 var(--b-font);
+
+  /* Button sizing */
+  --b-radius-lg: 22px;
+  --b-radius-md: 16px;
+  --b-radius-sm: 12px;
+  --b-radius-pill: 999px;
+  --b-touch: 48px;
+
+  /* Motion */
+  --b-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --b-fast: 140ms;
+  --b-base: 260ms;
 }
+
+body[data-variant='b'] .app-shell {
+  background:
+    radial-gradient(1100px 560px at 10% -10%, rgba(109, 40, 217, 0.18), transparent 55%),
+    radial-gradient(900px 520px at 100% 0%, rgba(139, 92, 246, 0.16), transparent 55%),
+    radial-gradient(800px 520px at 40% 110%, rgba(251, 191, 36, 0.08), transparent 55%),
+    linear-gradient(180deg, #fbfcff 0%, var(--b-bg) 60%, #eef2ff 100%);
+  color: var(--b-text);
+  font-family: var(--b-font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body[data-variant='b'] .app-screen {
+  background: transparent;
+}
+
+body[data-variant='b'] .b-auth__stage,
+body[data-variant='b'] .b-profile__content,
+body[data-variant='b'] .b-ready__stage,
+body[data-variant='b'] .b-empty__body,
+body[data-variant='b'] .b-onb__viewport {
+  overscroll-behavior: contain;
+}
+
+/* App-like scrolling — no visible scrollbars */
+body[data-variant='b'],
+body[data-variant='b'] *,
+body[data-variant='b'] .app-shell,
+body[data-variant='b'] .app-screen,
+body[data-variant='b'] .b-auth__stage,
+body[data-variant='b'] .b-profile__content,
+body[data-variant='b'] .b-ready__stage,
+body[data-variant='b'] .b-onb__viewport {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body[data-variant='b']::-webkit-scrollbar,
+body[data-variant='b'] *::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+

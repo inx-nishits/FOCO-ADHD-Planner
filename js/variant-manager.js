@@ -55,6 +55,17 @@ export function persistVariant(id) {
   }
 }
 
+function stylesheetHref(path) {
+  const version = APP_CONFIG.cacheVersion || '1';
+  const sep = path.includes('?') ? '&' : '?';
+  return `${path}${sep}v=${encodeURIComponent(version)}`;
+}
+
+/**
+ * Apply variant document attrs + stylesheet.
+ * Returns the variant descriptor. Await `ready` (on the return value) if you
+ * need the stylesheet to finish loading before rendering.
+ */
 export function applyVariant(id, { updateDocument = true } = {}) {
   if (!isValidVariant(id)) {
     id = APP_CONFIG.defaultVariant;
@@ -68,16 +79,17 @@ export function applyVariant(id, { updateDocument = true } = {}) {
     document.title = `${APP_CONFIG.appName} · ${variant.name}`;
   }
 
-  ensureVariantStylesheet(variant.stylesheet);
+  const ready = Promise.resolve(ensureVariantStylesheet(stylesheetHref(variant.stylesheet))).then(() => {
+    document.dispatchEvent(
+      new CustomEvent('variantchange', {
+        detail: { id, variant, ready: Promise.resolve(variant) },
+      }),
+    );
+    return variant;
+  });
+
   persistVariant(id);
-
-  document.dispatchEvent(
-    new CustomEvent('variantchange', {
-      detail: { id, variant },
-    }),
-  );
-
-  return variant;
+  return Object.assign({}, variant, { ready });
 }
 
 function ensureVariantStylesheet(href) {
@@ -88,37 +100,61 @@ function ensureVariantStylesheet(href) {
     link.rel = 'stylesheet';
     document.head.appendChild(link);
   }
-  if (link.getAttribute('href') !== href) {
-    link.setAttribute('href', href);
+
+  if (link.getAttribute('href') === href) {
+    // Already current — still wait if the sheet hasn't finished loading
+    if (link.sheet) return Promise.resolve();
+    return waitForLink(link);
   }
+
+  return new Promise((resolve) => {
+    const settle = () => resolve();
+    link.onload = settle;
+    link.onerror = settle;
+    link.setAttribute('href', href);
+    // Cached sheets may not fire load in some browsers
+    requestAnimationFrame(() => {
+      if (link.sheet) settle();
+    });
+  });
+}
+
+function waitForLink(link) {
+  if (link.sheet) return Promise.resolve();
+  return new Promise((resolve) => {
+    const settle = () => resolve();
+    link.addEventListener('load', settle, { once: true });
+    link.addEventListener('error', settle, { once: true });
+  });
 }
 
 /**
- * Navigate to a variant URL. Uses History API when possible.
- * For root → /variant-x/ and cross-path switches, uses pushState + popstate handling.
+ * Switch UI variant.
+ * Uses a full page load so boot + stylesheet always initialize cleanly
+ * (avoids stale screens / half-loaded CSS that previously needed a manual refresh).
  */
 export function navigateToVariant(id, { replace = false, syncFromPopstate = false } = {}) {
   if (!isValidVariant(id)) return null;
 
   const variant = getVariant(id);
-  const targetPath = variant.path;
-  const currentPath = normalizePath(window.location.pathname);
-  const nextPath = normalizePath(targetPath);
-
-  applyVariant(id);
 
   if (syncFromPopstate) {
+    applyVariant(id);
     return variant;
   }
 
-  if (currentPath !== nextPath) {
-    const url = new URL(window.location.href);
-    url.pathname = targetPath;
-    // Drop ?variant= when using clean path URLs
-    url.searchParams.delete('variant');
+  persistVariant(id);
 
-    const method = replace ? 'replaceState' : 'pushState';
-    history[method]({ variant: id }, '', url.pathname + url.search + url.hash);
+  const url = new URL(window.location.href);
+  url.pathname = variant.path;
+  url.searchParams.delete('variant');
+  url.hash = `${APP_CONFIG.hashPrefix}splash`;
+
+  const href = `${url.pathname}${url.search}${url.hash}`;
+  if (replace) {
+    window.location.replace(href);
+  } else {
+    window.location.assign(href);
   }
 
   return variant;

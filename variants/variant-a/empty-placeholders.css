@@ -232,15 +232,19 @@ body[data-variant='a'] .foco-empty-motif--spark i:nth-child(3) {
 
 body[data-variant='a'] .foco-empty-state__heading {
   margin: 0 0 10px;
-  font: 800 clamp(1.625rem, 7vw, 1.875rem)/1.04 var(--foco-font-display-family);
+  font: 800 clamp(1.625rem, 7vw, 1.875rem)/1.25 var(--foco-font-display-family);
   letter-spacing: var(--foco-tracking-display);
   text-wrap: balance;
+  overflow: visible;
+  padding: 0.08em 0 0.2em;
   background: var(--foco-text-gradient-hero);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  filter: drop-shadow(0 0 20px rgba(196, 181, 253, 0.2));
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  filter: none;
 }
 
 body[data-variant='a'] .foco-empty-state__copy {

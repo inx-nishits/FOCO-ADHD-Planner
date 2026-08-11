@@ -11,6 +11,17 @@ export const APP_CONFIG = {
   /** Official FOCO logo (mascot mark) — do not replace or regenerate */
   logoUrl: '/assets/images/foco-logo.png',
 
+  /** Variant B splash / brand wordmark (character + FOCO) */
+  logoFocoUrl: '/assets/icons/logo-foco.png',
+
+  /** Variant B character state icons */
+  focoStates: {
+    calm: '/assets/icons/foco_state_a.png',
+    happy: '/assets/icons/foco_state_b.png',
+    ready: '/assets/icons/foco_state_c.png',
+    focus: '/assets/icons/foco_state_d.png',
+  },
+
   /** Demo profile photo for Alex Rivera (Variant A account hub) */
   mockUserAvatarUrl: '/assets/images/mock-user-alex.png',
 
@@ -36,7 +47,7 @@ export const APP_CONFIG = {
   serviceWorkerUrl: '/sw.js',
 
   /** Cache version bump when shell assets change */
-  cacheVersion: 'v57',
+  cacheVersion: 'v75',
 
   /* ---------- Version / update gate (Phase 02) ---------- */
 

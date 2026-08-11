@@ -122,9 +122,10 @@ body[data-variant='a'] {
   --foco-tracking-body: -0.011em;
   --foco-tracking-meta: 0.1em;
 
-  --foco-font-display: 800 34px/1.02 var(--foco-font-display-family);
-  --foco-font-hero: 800 32px/1.03 var(--foco-font-display-family);
-  --foco-font-h1: 800 26px/1.06 var(--foco-font-display-family);
+  /* Line-heights ≥1.15 so background-clip:text titles keep descenders (y/g/p) */
+  --foco-font-display: 800 34px/1.15 var(--foco-font-display-family);
+  --foco-font-hero: 800 32px/1.15 var(--foco-font-display-family);
+  --foco-font-h1: 800 26px/1.18 var(--foco-font-display-family);
   --foco-font-h2: 700 22px/1.1 var(--foco-font-display-family);
   --foco-font-h3: 700 17px/1.18 var(--foco-font-display-family);
   --foco-font-title: 700 17px/1.2 var(--foco-font-display-family);
@@ -263,12 +264,17 @@ body[data-variant='a'] .foco-h1 {
   font-family: var(--foco-font-display-family);
   letter-spacing: var(--foco-tracking-display);
   text-wrap: balance;
+  overflow: visible;
+  padding: 0.08em 0 0.18em;
   background: var(--foco-text-gradient-hero);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  filter: drop-shadow(var(--foco-text-gradient-glow));
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  /* filter clips descenders when paired with background-clip:text */
+  filter: none;
 }
 
 body[data-variant='a'] .foco-h2,

@@ -193,13 +193,18 @@ body[data-variant='a'] .foco-auth-form-head .foco-title {
   margin-top: 10px;
   font-size: 28px;
   font-weight: 800;
+  line-height: 1.18;
   font-family: var(--foco-font-display-family);
   letter-spacing: var(--foco-tracking-headline);
+  overflow: visible;
+  padding: 0.04em 0 0.1em;
   background: var(--foco-text-gradient-hero);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 body[data-variant='a'] .foco-auth-form-head .foco-body-secondary {

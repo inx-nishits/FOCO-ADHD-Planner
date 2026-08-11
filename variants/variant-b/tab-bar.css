@@ -1,0 +1,158 @@
+/* Variant B — bottom dock (Daily / AI / Stats / You) */
+
+body[data-variant='b'] .b-dock {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+body[data-variant='b'] .b-dock__row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: end;
+  gap: 4px;
+  width: min(100%, 360px);
+  padding: 4px 4px 2px;
+}
+
+body[data-variant='b'] .b-dock__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  min-width: 0;
+  min-height: 56px;
+  margin: 0;
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  color: rgba(49, 46, 129, 0.55);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 180ms var(--b-ease), transform 140ms var(--b-ease);
+}
+
+body[data-variant='b'] .b-dock__well {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  transition:
+    background 220ms var(--b-ease),
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms var(--b-ease);
+}
+
+body[data-variant='b'] .b-dock__icon {
+  display: grid;
+  place-items: center;
+  line-height: 0;
+}
+
+body[data-variant='b'] .b-dock__svg {
+  width: 20px;
+  height: 20px;
+  opacity: 0.9;
+  transition: opacity 160ms ease, transform 220ms var(--b-ease), color 160ms ease;
+}
+
+body[data-variant='b'] .b-dock__label {
+  font: 600 10px/1 var(--b-font);
+  letter-spacing: 0.03em;
+  opacity: 0.88;
+  color: rgba(49, 46, 129, 0.58);
+  transition: opacity 160ms ease, color 160ms ease, font-weight 160ms ease;
+}
+
+body[data-variant='b'] .b-dock__item.is-active,
+body[data-variant='b'] .b-dock__item[aria-current='page'] {
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+body[data-variant='b'] .b-dock__item.is-active .b-dock__well,
+body[data-variant='b'] .b-dock__item[aria-current='page'] .b-dock__well {
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(160deg, #a78bfa 0%, #6d28d9 72%);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 10px 24px rgba(109, 40, 217, 0.35),
+    0 0 16px rgba(167, 139, 250, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+body[data-variant='b'] .b-dock__item.is-active .b-dock__svg,
+body[data-variant='b'] .b-dock__item[aria-current='page'] .b-dock__svg {
+  opacity: 1;
+  color: #fff;
+  width: 21px;
+  height: 21px;
+}
+
+body[data-variant='b'] .b-dock__item.is-active .b-dock__label,
+body[data-variant='b'] .b-dock__item[aria-current='page'] .b-dock__label {
+  opacity: 1;
+  font-weight: 700;
+  color: #6d28d9;
+}
+
+body[data-variant='b'] .b-dock__item.is-pressing {
+  transform: scale(0.94);
+}
+
+body[data-variant='b'] .b-dock__item.is-active.is-pressing,
+body[data-variant='b'] .b-dock__item[aria-current='page'].is-pressing {
+  transform: translateY(-3px) scale(0.94);
+}
+
+body[data-variant='b'] .b-dock__item:focus-visible {
+  outline: 2px solid rgba(109, 40, 217, 0.45);
+  outline-offset: 3px;
+  border-radius: 18px;
+}
+
+body[data-variant='b'] .b-tab-dock-host {
+  position: relative;
+  z-index: 6;
+  isolation: isolate;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 10px 16px max(10px, calc(var(--safe-bottom) + 6px));
+  background:
+    linear-gradient(180deg, rgba(246, 248, 254, 0) 0%, rgba(246, 248, 254, 0.92) 28%, rgba(255, 255, 255, 0.96) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body[data-variant='b'] .b-dock__item:not(.is-active):not([aria-current='page']):hover {
+    color: rgba(109, 40, 217, 0.9);
+  }
+
+  body[data-variant='b'] .b-dock__item:not(.is-active):not([aria-current='page']):hover .b-dock__well {
+    background: rgba(109, 40, 217, 0.08);
+    border-color: rgba(109, 40, 217, 0.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-variant='b'] .b-dock__item,
+  body[data-variant='b'] .b-dock__well,
+  body[data-variant='b'] .b-dock__svg,
+  body[data-variant='b'] .b-dock__label {
+    transition: none !important;
+  }
+}

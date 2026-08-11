@@ -43,7 +43,8 @@ body[data-variant='a'] .foco-splash__tagline {
   flex-shrink: 0;
   margin: 0;
   padding: 0 var(--space-5);
-  padding-bottom: max(28px, calc(var(--safe-bottom) + 16px));
+  /* Shell owns --safe-bottom; keep design clearance only (avoid double inset on mobile/PWA) */
+  padding-bottom: 28px;
   max-width: 22rem;
   font: 700 12px/1.4 var(--foco-font-display-family);
   letter-spacing: var(--foco-tracking-meta);
@@ -167,14 +168,18 @@ body[data-variant='a'] .foco-splash__logo {
 /* Wordmark — clear but not oversized */
 body[data-variant='a'] .foco-splash__name {
   margin: 0;
-  font: 800 22px/1.06 var(--foco-font-display-family);
+  font: 800 22px/1.2 var(--foco-font-display-family);
   letter-spacing: 0.12em;
   text-indent: 0.12em;
+  overflow: visible;
+  padding: 0.06em 0 0.12em;
   background: var(--foco-text-gradient-hero);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   opacity: 0;
   transform: translateY(6px);
 }
@@ -389,13 +394,17 @@ body[data-variant='a'] .foco-update-modal__logo {
 
 body[data-variant='a'] .foco-update-modal__title {
   margin: 0;
-  font: 800 20px/1.08 var(--foco-font-display-family);
+  font: 800 20px/1.2 var(--foco-font-display-family);
   letter-spacing: var(--foco-tracking-title);
+  overflow: visible;
+  padding: 0.04em 0 0.1em;
   background: var(--foco-text-gradient-brand);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 body[data-variant='a'] .foco-update-modal__copy {

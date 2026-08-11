@@ -15,7 +15,7 @@ export const VARIANTS = {
     name: 'Variant B',
     path: '/variant-b/',
     stylesheet: '/variants/variant-b/variant.css',
-    description: 'Soft contrast foundation',
+    description: 'Lumen — premium light/dark hybrid productivity UI',
   },
   c: {
     id: 'c',

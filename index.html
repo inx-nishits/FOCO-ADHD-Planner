@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
     />
     <meta name="theme-color" content="#ffffff" />
     <meta name="color-scheme" content="light" />
@@ -81,6 +81,7 @@
     </div>
 
     <!-- Variant control only — injected when developmentPreview is true -->
-    <script type="module" src="/js/app.js"></script>
+    <!-- Cache-bust app bootstrap to avoid stale SW/module behavior while iterating variants. -->
+    <script type="module" src="/js/app.js?v=70"></script>
   </body>
 </html>

@@ -464,15 +464,20 @@ body[data-variant='a'] .foco-onboarding__eyebrow span {
 
 body[data-variant='a'] .foco-onboarding__title {
   margin: 0;
-  font: 800 clamp(1.875rem, 8.2vw, 2.125rem)/1.02 var(--foco-font-display-family);
+  /* Loose leading + pad — background-clip:text + filter otherwise crop descenders */
+  font: 800 clamp(1.875rem, 8.2vw, 2.125rem)/1.25 var(--foco-font-display-family);
   letter-spacing: var(--foco-tracking-display);
   text-wrap: balance;
+  overflow: visible;
+  padding: 0.08em 0 0.2em;
   background: var(--foco-text-gradient-hero);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  filter: drop-shadow(0 0 24px rgba(196, 181, 253, 0.22));
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  filter: none;
 }
 
 body[data-variant='a'] .foco-onboarding__lead {
@@ -530,13 +535,17 @@ body[data-variant='a'] .foco-onboarding__point-text {
 
 body[data-variant='a'] .foco-onboarding__hint {
   margin: 6px 0 0;
-  font: 600 12px/1.35 var(--foco-font);
+  font: 600 12px/1.45 var(--foco-font);
   letter-spacing: 0.02em;
+  overflow: visible;
+  padding: 0.08em 0 0.18em;
   background: var(--foco-text-gradient-brand);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 body[data-variant='a'] .foco-onboarding__line {
