@@ -150,6 +150,18 @@ html[data-device-frame='off'][data-variant='d'] .auth-stack-footer {
   padding-bottom: 0;
 }
 
+html[data-device-frame='off'][data-variant='d'] #auth-create .auth-create-footer {
+  padding-bottom: 0;
+}
+
+html[data-device-frame='off'][data-variant='d'] #home-screen.view {
+  overflow: hidden;
+}
+
+html[data-device-frame='off'][data-variant='d'] .bottom-nav-bar {
+  padding-bottom: 0;
+}
+
 html[data-device-frame='off'][data-variant='d'] .dev-preview {
   bottom: max(10px, calc(env(safe-area-inset-bottom, 0px) + 76px));
 }
