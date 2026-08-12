@@ -519,6 +519,9 @@ html[data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home
        .view.active already provides display:flex; flex-direction:column. */
     overflow: visible;
     height: 100%;
+    min-height: 100%;
+    flex: 1 1 auto;
+    z-index: 1;
 }
 
 
@@ -701,7 +704,7 @@ html[data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home
     background-image: none;
 }
 
-#home-screen {
+#home-screen.view.active {
     background-color: transparent !important;
     background-image: none !important;
     padding-bottom: 0 !important;
@@ -712,6 +715,11 @@ html[data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+}
+
+/* Prevent ID-level layout rules from overriding .view { display: none } */
+html[data-variant='d'] .app-content > .view:not(.active) {
+    display: none !important;
 }
 
 .auth-subview {
