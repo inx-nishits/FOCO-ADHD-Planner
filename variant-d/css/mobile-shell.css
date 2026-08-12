@@ -137,6 +137,15 @@ html[data-device-frame='off'][data-variant='d'] .view {
   overscroll-behavior: contain;
 }
 
+/* Onboarding — shell already pads safe areas; avoid double inset on skip/footer */
+html[data-device-frame='off'][data-variant='d'] #onboarding-screen.view {
+  padding: 0;
+}
+
+html[data-device-frame='off'][data-variant='d'] #onboarding-screen .onboarding-footer {
+  padding-bottom: 0;
+}
+
 html[data-device-frame='off'][data-variant='d'] .dev-preview {
   bottom: max(10px, calc(env(safe-area-inset-bottom, 0px) + 76px));
 }

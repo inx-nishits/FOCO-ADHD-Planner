@@ -93,12 +93,8 @@ html[data-device-frame='on'][data-variant='d'] #onboarding-screen.view {
   padding: 0;
 }
 
-html[data-device-frame='on'][data-variant='d'] .onboarding-step {
-  padding-top: 18px;
-}
-
-html[data-device-frame='on'][data-variant='d'] #btn-ob-skip {
-  top: 18px;
+html[data-device-frame='on'][data-variant='d'] #onboarding-screen .onboarding-footer {
+  padding-bottom: 0;
 }
 
 html[data-device-frame='on'][data-variant='d'] #auth-screen.view.active {
