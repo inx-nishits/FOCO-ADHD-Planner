@@ -73,6 +73,62 @@ html[data-device-frame='on'][data-variant='d'] .ios-frame > .app-content {
   border-radius: 0;
 }
 
+/*
+ * Desktop frame simulates safe areas on .app-content — drop duplicate vertical
+ * inset on .view (mobile/PWA keeps its own rules in mobile-shell.css).
+ */
+html[data-device-frame='on'][data-variant='d'] .view {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: var(--space-screen);
+  padding-right: var(--space-screen);
+  box-sizing: border-box;
+}
+
+html[data-device-frame='on'][data-variant='d'] #splash-screen.view {
+  padding: var(--space-screen);
+}
+
+html[data-device-frame='on'][data-variant='d'] #onboarding-screen.view {
+  padding: 0;
+}
+
+html[data-device-frame='on'][data-variant='d'] .onboarding-step {
+  padding-top: 18px;
+}
+
+html[data-device-frame='on'][data-variant='d'] #btn-ob-skip {
+  top: 18px;
+}
+
+html[data-device-frame='on'][data-variant='d'] #auth-screen.view.active {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+html[data-device-frame='on'][data-variant='d'] #auth-screen .auth-subview {
+  padding-bottom: 0;
+}
+
+html[data-device-frame='on'][data-variant='d'] #auth-screen .auth-subview.active {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+html[data-device-frame='on'][data-variant='d'] #auth-verify.active,
+html[data-device-frame='on'][data-variant='d'] #auth-forgot.active,
+html[data-device-frame='on'][data-variant='d'] #auth-profile.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+html[data-device-frame='on'][data-variant='d'] #auth-screen:has(#auth-create.active) {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 /* Splash is purple — sync the safe-area padding area to match */
 html[data-device-frame='on'][data-variant='d']:has(#splash-screen.active) .ios-frame,
 html[data-device-frame='on'][data-variant='d']:has(#splash-screen.active) .ios-frame > .app-content {
