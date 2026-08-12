@@ -722,6 +722,117 @@ html[data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home
     margin-bottom: 24px;
 }
 
+/* Create Account — full-height layout, no scroll (Variant D only) */
+#auth-screen:has(#auth-create.active) {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    overflow: hidden;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#auth-screen:has(#auth-create.active).view.active {
+    display: flex;
+    flex-direction: column;
+}
+
+#auth-create.auth-subview {
+    padding-bottom: 0;
+    overflow: hidden;
+}
+
+#auth-create.auth-subview.active {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    gap: 0;
+}
+
+html[data-variant='d'] .app-content:has(#auth-create.active) {
+    overflow: hidden;
+}
+
+#auth-create .auth-create-top {
+    flex-shrink: 0;
+}
+
+#auth-create .btn-back {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 12px !important;
+}
+
+#auth-create .auth-header {
+    margin-bottom: 0;
+}
+
+#auth-create .auth-header .text-display {
+    font-size: 32px;
+    line-height: 1.15;
+}
+
+#auth-create .auth-header .text-body {
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+#auth-create .auth-create-fields {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 16px 0;
+}
+
+#auth-create .auth-name-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+#auth-create .auth-name-row .input-group {
+    margin-bottom: 0;
+}
+
+#auth-create .auth-create-fields .input-group {
+    gap: 6px;
+    margin-bottom: 0;
+}
+
+#auth-create .auth-create-footer {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: max(4px, env(safe-area-inset-bottom, 0px));
+}
+
+#auth-create .auth-create-submit {
+    min-height: 50px;
+    margin: 0 !important;
+}
+
+#auth-create .auth-create-login {
+    margin: 0 !important;
+}
+
+#auth-create .divider {
+    margin: 4px 0;
+}
+
+#auth-create .auth-create-social {
+    display: flex;
+    gap: 12px;
+}
+
+#auth-create .auth-create-social .btn {
+    min-height: 48px;
+}
+
 .btn-back {
     width: 48px;
     height: 48px;
