@@ -64,11 +64,19 @@ html[data-device-frame='on'][data-variant='d'] .ios-frame::after {
 }
 
 html[data-device-frame='on'][data-variant='d'] .ios-frame > .app-content {
+  /* White default so safe-area padding area matches onboarding/auth/home screens */
+  background-color: #ffffff;
   padding-top: var(--safe-top) !important;
   padding-right: var(--safe-right);
   padding-bottom: var(--safe-bottom);
   padding-left: var(--safe-left);
   border-radius: 0;
+}
+
+/* Splash is purple — sync the safe-area padding area to match */
+html[data-device-frame='on'][data-variant='d']:has(#splash-screen.active) .ios-frame,
+html[data-device-frame='on'][data-variant='d']:has(#splash-screen.active) .ios-frame > .app-content {
+  background-color: #6c4cf1 !important;
 }
 
 /* Mobile/PWA viewport lock lives in mobile-shell.css */

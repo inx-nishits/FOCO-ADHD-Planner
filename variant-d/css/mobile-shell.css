@@ -122,6 +122,8 @@ html[data-device-frame='off'][data-variant='d'] .ios-frame > .app-content {
   overflow-y: auto;
   position: relative;
   border-radius: 0;
+  /* White default so safe-area top matches onboarding/auth/home screens */
+  background-color: #ffffff;
   padding-top: env(safe-area-inset-top, 0px);
   padding-right: env(safe-area-inset-right, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
