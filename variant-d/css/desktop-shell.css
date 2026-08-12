@@ -77,6 +77,14 @@ html[data-device-frame='on'][data-variant='d'] .ios-frame > .app-content {
 html[data-device-frame='on'][data-variant='d']:has(#splash-screen.active) .ios-frame,
 html[data-device-frame='on'][data-variant='d']:has(#splash-screen.active) .ios-frame > .app-content {
   background-color: #6c4cf1 !important;
+  background-image: none !important;
+}
+
+/* Onboarding / auth / home — extend gradient into safe-area padding */
+html[data-device-frame='on'][data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home-screen.active) .ios-frame,
+html[data-device-frame='on'][data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home-screen.active) .ios-frame > .app-content {
+  background-color: var(--vd-surface-fill, #ffffff);
+  background-image: var(--vd-surface-gradient);
 }
 
 /* Mobile/PWA viewport lock lives in mobile-shell.css */

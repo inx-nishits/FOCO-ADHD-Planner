@@ -151,6 +151,19 @@ html[data-device-frame='off'][data-variant='d']:has(#splash-screen.active) .ios-
 html[data-device-frame='off'][data-variant='d']:has(#splash-screen.active) .ios-frame > .app-content {
   background: #6c4cf1;
   background-color: #6c4cf1;
+  background-image: none;
+}
+
+/* Onboarding / auth / home — extend gradient into safe-area padding on real devices */
+html[data-device-frame='off'][data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home-screen.active),
+html[data-device-frame='off'][data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home-screen.active) body,
+html[data-device-frame='off'][data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home-screen.active) .app-stage,
+html[data-device-frame='off'][data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home-screen.active) .device-frame__screen,
+html[data-device-frame='off'][data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home-screen.active) .app-shell,
+html[data-device-frame='off'][data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home-screen.active) .ios-frame,
+html[data-device-frame='off'][data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home-screen.active) .ios-frame > .app-content {
+  background-color: var(--vd-surface-fill, #ffffff);
+  background-image: var(--vd-surface-gradient);
 }
 
 @media (max-width: 820px) and (pointer: coarse) {
