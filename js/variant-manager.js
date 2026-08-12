@@ -148,7 +148,13 @@ export function navigateToVariant(id, { replace = false, syncFromPopstate = fals
   const url = new URL(window.location.href);
   url.pathname = variant.path;
   url.searchParams.delete('variant');
-  url.hash = `${APP_CONFIG.hashPrefix}splash`;
+
+  // Standalone variants ship their own HTML/JS — don't force foundation hash routes
+  if (variant.standalone) {
+    url.hash = '';
+  } else {
+    url.hash = `${APP_CONFIG.hashPrefix}splash`;
+  }
 
   const href = `${url.pathname}${url.search}${url.hash}`;
   if (replace) {

@@ -12,9 +12,10 @@ const path = require('path');
 const root = path.resolve(__dirname, '..');
 const source = path.join(root, 'index.html');
 /**
- * Keep in sync when adding variants (also update js/variants.js + hosting rewrites).
+ * Keep in sync when adding shared-shell variants (also update js/variants.js + hosting rewrites).
+ * Variant C is a standalone app — do not overwrite its index.html.
  */
-const variantFolders = ['variant-a', 'variant-b', 'variant-c'];
+const variantFolders = ['variant-a', 'variant-b'];
 
 const targets = [
   ...variantFolders.map((folder) => path.join(root, folder, 'index.html')),

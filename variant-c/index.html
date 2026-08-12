@@ -1,86 +1,1782 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
-    />
-    <meta name="theme-color" content="#ffffff" />
-    <meta name="color-scheme" content="light" />
-    <meta name="description" content="Native iOS-like PWA foundation" />
+<html lang="en" data-variant="c">
 
-    <!-- iOS / PWA -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="App" />
-    <meta name="format-detection" content="telephone=no" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>FOCO · Variant C</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/device-frame.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/preview.css">
+  <link rel="stylesheet" href="css/design-system.css?v=2">
+  <link rel="stylesheet" href="css/animations.css?v=2">
+  <link rel="stylesheet" href="css/desktop-shell.css?v=1">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script type="module" src="js/shell.js"></script>
+  <script src="js/app.js" defer></script>
+</head>
 
-    <title>App Foundation</title>
-
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="icon" href="/assets/icons/favicon.png" type="image/png" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
-
-    <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/tokens.css" />
-    <link rel="stylesheet" href="/css/app.css" />
-    <link rel="stylesheet" href="/css/device-frame.css" />
-    <link rel="stylesheet" href="/css/responsive.css" />
-    <link rel="stylesheet" href="/css/preview.css" />
-    <link rel="stylesheet" href="/css/animations.css" />
-    <link rel="stylesheet" href="/css/variants.css" />
-  </head>
-  <body>
-    <div class="app-stage">
-      <!--
-        Desktop presentation frame.
-        Hardware layer (chassis, buttons, Dynamic Island) is separate from the app viewport.
-      -->
-      <div class="device-frame-slot">
+<body data-variant="c">
+  <div class="app-stage">
+    <div class="device-frame-slot">
       <div class="device-frame" role="presentation">
-        <!-- Physical side buttons (outside the screen) -->
         <div class="device-frame__sides" aria-hidden="true">
           <span class="device-frame__btn device-frame__btn--action"></span>
           <span class="device-frame__btn device-frame__btn--vol-up"></span>
           <span class="device-frame__btn device-frame__btn--vol-down"></span>
           <span class="device-frame__btn device-frame__btn--power"></span>
         </div>
-
         <div class="device-frame__chassis">
           <div class="device-frame__bezel">
-            <!-- App viewport layer -->
             <div class="device-frame__screen">
               <div class="app-shell">
-                <main id="app" role="main">
-                  <section
-                    id="screen"
-                    class="app-screen"
-                    aria-label="Application"
-                  ></section>
-                </main>
+  <div class="app-frame">
+    <div class="app-content">
+      <!-- Ambient Background Glow -->
+      <div class="ambient-glow"></div>
+
+      <!-- SPLASH SCREEN -->
+      <div id="view-splash" class="app-view flex-col flex-center"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; z-index: 50; overflow: hidden; justify-content: center; align-items: center;">
+
+        <!-- Background Particles -->
+        <div class="particles-container">
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+        </div>
+
+        <div class="flex-col flex-center text-center"
+          style="z-index: 2; width: 100%; display: flex; align-items: center; justify-content: center;">
+          <img src="https://www.tryfoco.com/wp-content/themes/foco-theme/assets/images/foco_state_1_presence.png"
+            alt="FOCO Mascot" class="mascot-float"
+            style="width: 240px; height: 240px; object-fit: contain; margin-bottom: 24px; filter: drop-shadow(0 0 24px rgba(124, 58, 237, 0.4)); display: block; margin-left: auto; margin-right: auto;">
+          <h1 class="h1"
+            style="color: var(--text-main); letter-spacing: -0.5px; margin: 0; text-align: center; width: 100%;">FOCO
+          </h1>
+          <p class="body-medium text-muted" style="margin: 8px 0 0 0; text-align: center; width: 100%;">Stay Focused.
+            Get Things Done.</p>
+        </div>
+      </div>
+
+      <!-- ONBOARDING FLOW -->
+      <div id="view-onboarding-1" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: var(--space-4) var(--space-3); display: none; ">
+        <div class="flex-row" style="justify-content: flex-end;">
+          <button class="btn btn-tertiary" style="padding: 0; height: auto;"
+            onclick="navigateTo('view-auth')">Skip</button>
+        </div>
+        <div
+          style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
+          <div class="flex-center animate-pop" style="padding-bottom: 32px; width: 100%;">
+            <img src="assets/onboarding_1.png" alt="Illustration"
+              style="width: 280px; height: 280px; object-fit: contain; filter: drop-shadow(0 0 24px rgba(124, 58, 237, 0.3)); border-radius: 24px;">
+          </div>
+          <div class="stagger-1 text-center mb-4 flex-col flex-center">
+            <h2 class="h2 mb-0">Welcome to FOCO</h2>
+            <p class="body-main text-muted mb-4"
+              style="text-align: center; margin: 0 auto 16px auto; max-width: 320px;">
+              Improve focus, organize your daily tasks, and reduce overwhelm.</p>
+            <div class="flex-row flex-center" style="gap: 8px;">
+              <div style="width: 24px; height: 4px; background: var(--primary); border-radius: 2px;"></div>
+              <div style="width: 8px; height: 4px; background: var(--secondary); border-radius: 2px;"></div>
+              <div style="width: 8px; height: 4px; background: var(--secondary); border-radius: 2px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-between mt-auto" style="width: 100%;">
+          <div></div> <!-- Empty left slot for alignment -->
+          <button class="btn btn-primary stagger-2" style="width: auto; padding: 0 32px;"
+            onclick="navigateTo('view-onboarding-2')">Next</button>
+        </div>
+      </div>
+
+      <div id="view-onboarding-2" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: var(--space-4) var(--space-3); display: none; ">
+        <div class="flex-row" style="justify-content: flex-end;">
+          <button class="btn btn-tertiary" style="padding: 0; height: auto;"
+            onclick="navigateTo('view-auth')">Skip</button>
+        </div>
+        <div
+          style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
+          <div class="flex-center animate-pop" style="padding-bottom: 32px; width: 100%;">
+            <img src="assets/onboarding_5.png" alt="Illustration"
+              style="width: 280px; height: 280px; object-fit: contain; filter: drop-shadow(0 0 24px rgba(16, 185, 129, 0.2)); border-radius: 24px;">
+          </div>
+          <div class="stagger-1 text-center mb-4 flex-col flex-center">
+            <h2 class="h2 mb-0">Feature Walkthrough</h2>
+            <p class="body-main text-muted mb-4"
+              style="text-align: center; margin: 0 auto 16px auto; max-width: 320px;">
+              Master your day with the Daily Planner, Focus Mode, AI Productivity Assistant, and Task Management.</p>
+            <div class="flex-row flex-center" style="gap: 8px;">
+              <div style="width: 8px; height: 4px; background: var(--secondary); border-radius: 2px;"></div>
+              <div style="width: 24px; height: 4px; background: var(--primary); border-radius: 2px;"></div>
+              <div style="width: 8px; height: 4px; background: var(--secondary); border-radius: 2px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-between mt-auto" style="width: 100%;">
+          <button class="btn btn-tertiary text-muted" style="padding: 0; height: auto;"
+            onclick="navigateTo('view-onboarding-1')">Previous</button>
+          <button class="btn btn-primary stagger-2" style="width: auto; padding: 0 32px;"
+            onclick="navigateTo('view-onboarding-3')">Next</button>
+        </div>
+      </div>
+
+      <div id="view-onboarding-3" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: var(--space-4) var(--space-3); display: none; ">
+        <div class="flex-row" style="justify-content: flex-end;">
+          <button class="btn btn-tertiary" style="padding: 0; height: auto;"
+            onclick="navigateTo('view-auth')">Skip</button>
+        </div>
+        <div
+          style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
+          <div class="flex-center animate-pop" style="padding-bottom: 32px; width: 100%;">
+            <img src="assets/onboarding_6.png" alt="Illustration"
+              style="width: 280px; height: 280px; object-fit: contain; filter: drop-shadow(0 0 24px rgba(124, 58, 237, 0.3)); border-radius: 24px;">
+          </div>
+          <div class="stagger-1 text-center mb-4 flex-col flex-center">
+            <h2 class="h2 mb-0">Personalized Experience</h2>
+            <p class="body-main text-muted mb-4"
+              style="text-align: center; margin: 0 auto 16px auto; max-width: 320px;">
+              Adapts to your unique productivity needs and encourages building better focus habits over time.</p>
+            <div class="flex-row flex-center" style="gap: 8px;">
+              <div style="width: 8px; height: 4px; background: var(--secondary); border-radius: 2px;"></div>
+              <div style="width: 8px; height: 4px; background: var(--secondary); border-radius: 2px;"></div>
+              <div style="width: 24px; height: 4px; background: var(--primary); border-radius: 2px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-between mt-auto" style="width: 100%;">
+          <button class="btn btn-tertiary text-muted" style="padding: 0; height: auto;"
+            onclick="navigateTo('view-onboarding-2')">Previous</button>
+          <button class="btn btn-primary stagger-2" style="width: auto; padding: 0 32px;"
+            onclick="navigateTo('view-auth')">Get Started</button>
+        </div>
+      </div>
+
+      <!-- AUTHENTICATION FLOW -->
+
+      <!-- Auth Landing View -->
+      <div id="view-auth" class="app-view flex-col flex-center"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: var(--space-4) var(--space-3); display: none; ">
+
+        <style>
+          @keyframes pulseGlow {
+            0% {
+              transform: scale(1);
+              opacity: 0.4;
+            }
+
+            50% {
+              transform: scale(1.15);
+              opacity: 0.8;
+            }
+
+            100% {
+              transform: scale(1);
+              opacity: 0.4;
+            }
+          }
+
+          @keyframes floatMascot {
+
+            0%,
+            100% {
+              transform: translateY(0px);
+            }
+
+            50% {
+              transform: translateY(-12px);
+            }
+          }
+
+          @keyframes floatIcon1 {
+
+            0%,
+            100% {
+              transform: translateY(0px);
+            }
+
+            50% {
+              transform: translateY(-10px);
+            }
+          }
+
+          @keyframes floatIcon2 {
+
+            0%,
+            100% {
+              transform: translateY(0px);
+            }
+
+            50% {
+              transform: translateY(10px);
+            }
+          }
+
+          @keyframes floatIcon3 {
+
+            0%,
+            100% {
+              transform: translateY(0px);
+            }
+
+            50% {
+              transform: translateY(-8px);
+            }
+          }
+
+          @keyframes twinkle {
+
+            0%,
+            100% {
+              opacity: 0.2;
+              transform: scale(0.8);
+            }
+
+            50% {
+              opacity: 1;
+              transform: scale(1.2);
+            }
+          }
+
+          .star {
+            position: absolute;
+            background: #FFF;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #FFF, 0 0 16px #A78BFA;
+            z-index: 1;
+          }
+        </style>
+        <div class="stagger-1 flex-col flex-center text-center" style="margin-bottom: 32px; position: relative;">
+
+          <div
+            style="position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; margin-bottom: 32px; margin-top: 24px;">
+
+            <!-- Twinkling AI Stars -->
+            <i class="ph-fill ph-sparkle"
+              style="position: absolute; color: #A78BFA; font-size: 24px; top: 10px; left: 10px; animation: twinkle 3s infinite 0.5s; z-index: 1; filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.6));"></i>
+            <i class="ph-fill ph-sparkle"
+              style="position: absolute; color: #A78BFA; font-size: 16px; top: -20px; left: 80px; animation: twinkle 4s infinite 1s; z-index: 1; filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.6));"></i>
+            <div class="star"
+              style="width: 4px; height: 4px; top: 30px; right: -20px; animation: twinkle 3.5s infinite 0.2s;"></div>
+            <i class="ph-fill ph-sparkle"
+              style="position: absolute; color: #A78BFA; font-size: 20px; bottom: 40px; right: -40px; animation: twinkle 4.5s infinite 1.5s; z-index: 1; filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.6));"></i>
+            <div class="star"
+              style="width: 3px; height: 3px; bottom: -10px; left: 20px; animation: twinkle 3s infinite 0.8s;"></div>
+            <i class="ph-fill ph-sparkle"
+              style="position: absolute; color: #A78BFA; font-size: 14px; top: 120px; left: -50px; animation: twinkle 4s infinite 2s; z-index: 1; filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.6));"></i>
+            <div class="star"
+              style="width: 3px; height: 3px; top: 160px; right: 50px; animation: twinkle 3.2s infinite 1.1s;"></div>
+
+            <!-- Huge Mascot Glow -->
+            <div
+              style="position: absolute; width: 220px; height: 220px; background: rgba(124, 58, 237, 0.6); filter: blur(60px); border-radius: 50%; top: 10px; animation: pulseGlow 4s ease-in-out infinite; z-index: 1;">
+            </div>
+
+            <!-- Mascot -->
+            <img src="https://www.tryfoco.com/wp-content/themes/foco-theme/assets/images/foco_state_1_presence.png"
+              alt="FOCO"
+              style="width: 240px; height: 240px; object-fit: contain; position: relative; z-index: 2; animation: floatMascot 6s ease-in-out infinite;">
+          </div>
+
+          <div style="padding: 0 16px; display: flex; flex-direction: column; align-items: center;">
+            <h2 class="h1 mb-0"
+              style="font-weight: 700; letter-spacing: -0.5px; font-size: 36px; display: flex; align-items: center; justify-content: center; gap: 4px;">
+              Get <span style="color: #A78BFA;">Started</span><i class="ph-fill ph-sparkle"
+                style="color: #A78BFA; font-size: 24px; position: relative; top: -12px;"></i></h2>
+            <p class="body-main text-muted"
+              style="font-size: 15px; opacity: 0.8; max-width: 280px; margin: 8px auto 0 auto; text-align: center;">Join
+              FOCO to master your productivity</p>
+          </div>
+        </div>
+
+        <div class="flex-col stagger-2" style="gap: 16px; width: 100%; padding: 0 8px;">
+          <button class="btn btn-primary flex-row flex-center"
+            style="width: 100%; font-weight: 600; font-size: 15px; gap: 12px; border: none;"
+            onclick="navigateTo('view-auth-signup')">
+            <i class="ph-fill ph-envelope-simple" style="font-size: 22px;"></i>
+            Continue with Email
+          </button>
+
+          <button class="btn flex-row flex-center"
+            style="width: 100%; font-weight: 600; height: 56px; border-radius: 28px; padding: 0 24px; background: transparent; border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; font-size: 15px; gap: 12px;"
+            onclick="navigateTo('view-auth-profile')">
+            <svg width="22" height="22" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#EA4335"
+                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.7 17.74 9.5 24 9.5z" />
+              <path fill="#4285F4"
+                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+              <path fill="#FBBC05"
+                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+              <path fill="#34A853"
+                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.2-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+            </svg>
+            Continue with Google
+          </button>
+
+          <button class="btn flex-row flex-center"
+            style="width: 100%; font-weight: 600; height: 56px; border-radius: 28px; padding: 0 24px; background: transparent; border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; font-size: 15px; gap: 12px;"
+            onclick="navigateTo('view-auth-profile')">
+            <svg width="22" height="22" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#ffffff"
+                d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.1-44.6-35.9-2.8-74.3 22.7-93.1 22.7-18.9 0-51.2-22.7-80.4-22.1-39.2.6-75.1 22.8-95.2 59.2-40.4 73.1-9.9 181.5 29.8 238.9 19.3 28 42.2 59.1 72.8 58.1 29.6-1.1 41.2-19.1 77.2-19.1 35.8 0 46.5 19.1 77.5 18.5 31.5-.6 51.5-29.2 70.6-57.1 22.4-32.8 31.7-64.6 32.1-66.2-.8-.3-76.7-29.4-77.1-103.5zM255.4 75.3c16.3-19.6 27.2-46.9 24.2-74.3-24.1 1-52.2 16.1-68.9 35.7-14.7 17.2-27.1 45.1-23.7 71.9 26.6 2.1 52-13.6 68.4-33.3z" />
+            </svg>
+            Continue with Apple
+          </button>
+        </div>
+
+        <div class="text-center stagger-3" style="width: 100%; margin-top: 32px;">
+          <p class="text-small" style="font-size: 14px; width: 100%; margin: 0; text-align: center;">
+            <span class="text-muted" style="opacity: 0.7;">Already have an account?</span>
+            <a href="#" onclick="navigateTo('view-auth-login')"
+              style="color: #A78BFA; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; margin-left: 4px; opacity: 1;">Log
+              In</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Login View -->
+      <div id="view-auth-login" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: var(--space-4) var(--space-3); display: none;">
+        <div class="mt-2 stagger-1">
+          <div
+            style="width: 36px; height: 36px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-bottom: 24px;"
+            onclick="navigateTo('view-auth')">
+            <i class="ph ph-arrow-left" style="font-size: 20px; color: #000;"></i>
+          </div>
+          <h2 class="h1 mb-0" style="font-weight: 700; letter-spacing: -0.5px;">Welcome <span
+              style="color: #A78BFA;">Back</span></h2>
+          <p class="body-main text-muted" style="font-size: 15px; margin-top: 8px;">Log in to continue your productivity
+            journey</p>
+        </div>
+
+        <div class="flex-col stagger-2" style="gap: 20px; flex: 1; margin-top: 24px;">
+          <div class="input-group" style="margin-bottom: 0;">
+            <label class="input-label">Email Address</label>
+            <div class="input-wrapper input-with-icon-left">
+              <i class="ph ph-envelope-simple input-icon-left"></i>
+              <input type="email" class="input-field" placeholder="hello@foco.app">
+            </div>
+          </div>
+          <div class="input-group" style="margin-bottom: 0;">
+            <label class="input-label">Password</label>
+            <div class="input-wrapper input-with-icon-left input-with-icon-right">
+              <i class="ph ph-lock-key input-icon-left"></i>
+              <input type="password" class="input-field" placeholder="••••••••">
+              <i class="ph ph-eye input-icon-right"></i>
+            </div>
+            <div style="text-align: right; margin-top: 8px;">
+              <span class="text-small text-primary" style="cursor: pointer; font-weight: 500;"
+                onclick="navigateTo('view-auth-forgot')">Forgot Password?</span>
+            </div>
+          </div>
+
+          <button class="btn btn-primary mt-2" style="font-size: 16px;" onclick="navigateTo('view-home')">
+            Log In
+          </button>
+        </div>
+      </div>
+
+      <!-- Sign Up View -->
+      <div id="view-auth-signup" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: var(--space-4) var(--space-3); display: none; overflow-y: auto;">
+        <div class="mt-2 stagger-1">
+          <div
+            style="width: 36px; height: 36px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-bottom: 24px;"
+            onclick="navigateTo('view-auth')">
+            <i class="ph ph-arrow-left" style="font-size: 20px; color: #000;"></i>
+          </div>
+          <h2 class="h1 mb-0" style="font-weight: 700; letter-spacing: -0.5px;">Create <span
+              style="color: #A78BFA;">Account</span></h2>
+          <p class="body-main text-muted" style="font-size: 15px; margin-top: 8px;">Join FOCO and start your
+            productivity journey</p>
+        </div>
+
+        <div class="flex-col stagger-2" style="gap: 20px; flex: 1; padding-bottom: var(--space-4); margin-top: 16px;">
+          <div class="flex-row" style="gap: var(--space-2);">
+            <div class="input-group" style="flex: 1; margin-bottom: 0;">
+              <label class="input-label">First Name</label>
+              <div class="input-wrapper input-with-icon-left">
+                <i class="ph ph-user input-icon-left"></i>
+                <input type="text" class="input-field" placeholder="Jane">
+              </div>
+            </div>
+            <div class="input-group" style="flex: 1; margin-bottom: 0;">
+              <label class="input-label">Last Name</label>
+              <div class="input-wrapper input-with-icon-left">
+                <i class="ph ph-user input-icon-left"></i>
+                <input type="text" class="input-field" placeholder="Doe">
+              </div>
+            </div>
+          </div>
+          <div class="input-group" style="margin-bottom: 0;">
+            <label class="input-label">Email Address</label>
+            <div class="input-wrapper input-with-icon-left">
+              <i class="ph ph-envelope-simple input-icon-left"></i>
+              <input type="email" class="input-field" placeholder="hello@foco.app">
+            </div>
+          </div>
+          <div class="input-group" style="margin-bottom: 0;">
+            <label class="input-label">Password</label>
+            <div class="input-wrapper input-with-icon-left input-with-icon-right">
+              <i class="ph ph-lock-key input-icon-left"></i>
+              <input type="password" class="input-field" placeholder="Create a strong password">
+              <i class="ph ph-eye input-icon-right"></i>
+            </div>
+          </div>
+          <div class="input-group" style="margin-bottom: 0;">
+            <label class="input-label">Confirm Password</label>
+            <div class="input-wrapper input-with-icon-left input-with-icon-right">
+              <i class="ph ph-lock-key input-icon-left"></i>
+              <input type="password" class="input-field" placeholder="Re-enter your password">
+              <i class="ph ph-eye input-icon-right"></i>
+            </div>
+          </div>
+
+          <button class="btn btn-primary mt-2" style="font-size: 16px;" onclick="navigateTo('view-auth-verification')">
+            Sign Up
+          </button>
+        </div>
+      </div>
+
+      <!-- Account Verification View -->
+      <div id="view-auth-verification" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: var(--space-4) var(--space-3); display: none;">
+        <div class="flex-col flex-center text-center"
+          style="flex: 1; justify-content: center; align-items: center; margin: auto; width: 100%;">
+          <style>
+            @keyframes emailFloatBounce {
+
+              0%,
+              100% {
+                transform: translateY(0) scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 12px rgba(124, 58, 237, 0.2));
+              }
+
+              50% {
+                transform: translateY(-16px) scale(1.05) rotate(2deg);
+                filter: drop-shadow(0 20px 28px rgba(167, 139, 250, 0.6));
+              }
+            }
+          </style>
+          <img src="assets/Image1.png" alt="Email"
+            style="width: 240px; height: 240px; object-fit: contain; margin-bottom: 24px; display: block; animation: emailFloatBounce 5s ease-in-out infinite; position: relative; z-index: 2;">
+          <h2 class="h1 mb-0" style="font-weight: 700; letter-spacing: -0.5px; text-align: center;">Check Your <span
+              style="color: #A78BFA;">Inbox</span></h2>
+          <p class="body-main text-muted mb-4"
+            style="text-align: center; max-width: 300px; margin: 8px auto 32px auto;">An account verification link has
+            been sent to the email address you entered.</p>
+          <button class="btn btn-primary" style="width: 100%; max-width: 300px;"
+            onclick="navigateTo('view-auth-login')">Go to Login</button>
+
+          <div class="text-center" style="width: 100%;">
+            <p class="text-small" style="font-size: 14px; width: 100%; margin: 0; text-align: center;">
+              <span class="text-muted" style="opacity: 0.7;">Didn't receive it?</span>
+              <a href="#"
+                style="color: #A78BFA; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; margin-left: 4px; opacity: 1;">Resend</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Completion View -->
+      <div id="view-auth-profile" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: var(--space-4) var(--space-3); display: none;">
+        <div class="mt-2 stagger-1">
+          <div
+            style="width: 36px; height: 36px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-bottom: 24px;"
+            onclick="navigateTo('view-auth')">
+            <i class="ph ph-arrow-left" style="font-size: 20px; color: #000;"></i>
+          </div>
+          <h2 class="h1 mb-0" style="font-weight: 700; letter-spacing: -0.5px;">Complete <span
+              style="color: #A78BFA;">Profile</span></h2>
+          <p class="body-main text-muted" style="font-size: 15px; margin-top: 8px;">Almost there! We just need a few
+            more details to finish setting up your account.</p>
+        </div>
+
+        <div class="flex-col stagger-2" style="gap: 20px; flex: 1; margin-top: 24px;">
+          <div class="input-group" style="margin-bottom: 0;">
+            <label class="input-label">Phone Number (Optional)</label>
+            <div class="input-wrapper input-with-icon-left">
+              <i class="ph ph-phone input-icon-left"></i>
+              <input type="tel" class="input-field" placeholder="+1 (555) 000-0000">
+            </div>
+          </div>
+          <div class="input-group" style="margin-bottom: 0;">
+            <label class="input-label">How did you hear about us?</label>
+            <div class="input-wrapper input-with-icon-left">
+              <i class="ph ph-megaphone input-icon-left"></i>
+              <input type="text" class="input-field" placeholder="e.g. Social media, friend">
+            </div>
+          </div>
+
+          <button class="btn btn-primary mt-2" style="font-size: 16px;" onclick="navigateTo('view-home')">
+            Save & Continue
+          </button>
+        </div>
+      </div>
+
+      <!-- Forgot Password View -->
+      <div id="view-auth-forgot" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: var(--space-4) var(--space-3); display: none;">
+        <div class="mt-2 stagger-1">
+          <div
+            style="width: 36px; height: 36px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-bottom: 24px;"
+            onclick="navigateTo('view-auth-login')">
+            <i class="ph ph-arrow-left" style="font-size: 20px; color: #000;"></i>
+          </div>
+          <h2 class="h1 mb-0" style="font-weight: 700; letter-spacing: -0.5px;">Reset <span
+              style="color: #A78BFA;">Password</span></h2>
+          <p class="body-main text-muted" style="font-size: 15px; margin-top: 8px;">Enter your email and we'll send you
+            a link to reset your password.</p>
+        </div>
+
+        <div class="flex-col stagger-2" style="gap: 20px; flex: 1; margin-top: 24px;">
+          <div class="input-group" style="margin-bottom: 0;">
+            <label class="input-label">Email Address</label>
+            <div class="input-wrapper input-with-icon-left">
+              <i class="ph ph-envelope-simple input-icon-left"></i>
+              <input type="email" class="input-field" placeholder="hello@foco.app">
+            </div>
+          </div>
+
+          <button class="btn btn-primary mt-2" style="font-size: 16px;" onclick="navigateTo('view-auth-login')">
+            Send Reset Link
+          </button>
+        </div>
+      </div>
+
+      <!-- CORE APP: Home Screen -->
+      <div id="view-home" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: 0; display: none; overflow: hidden;">
+        <!-- Clean Header -->
+        <div class="flex-between"
+          style="padding: 56px 16px 16px 16px; position: absolute; width: 100%; top: 0; left: 0; z-index: 50; background: rgba(12, 10, 16, 0.5); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+          <div class="flex-row align-center" style="gap: 12px;">
+            <div
+              style="width: 44px; height: 44px; border-radius: 50%; background: #9B5CFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: #fff; box-shadow: 0 4px 12px rgba(155,92,255,0.4);">
+              JD</div>
+            <div class="flex-col" style="gap: 2px;">
+              <h2 class="h2"
+                style="font-size: 16px; font-weight: 700; letter-spacing: -0.3px; margin: 0; line-height: 1.2;">Mon, Aug
+                10</h2>
+              <p class="text-caption text-muted"
+                style="font-weight: 500; font-size: 12px; margin: 0; line-height: 1.4; padding-right: 4px;">Good
+                morning, Jane 👋</p>
+            </div>
+          </div>
+          <div class="flex-row" style="gap: 12px;">
+            <button class="btn btn-icon"
+              style="width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+              <i class="ph ph-calendar-blank" style="font-size: 20px;"></i>
+            </button>
+            <button class="btn btn-icon"
+              style="width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: relative;">
+              <i class="ph ph-bell" style="font-size: 20px;"></i>
+              <div
+                style="position: absolute; top: 10px; right: 10px; width: 6px; height: 6px; background: #9B5CFF; border-radius: 50%; box-shadow: 0 0 6px #9B5CFF;">
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Scrollable Content -->
+        <div class="hide-scrollbar" style="flex: 1; overflow-y: auto; padding: 124px 16px 8px 16px;">
+
+          <!-- Today's Progress Widget -->
+          <div class="mb-4 premium-card stagger-1" style="padding: 12px;">
+            <div class="flex-between align-center mb-4">
+              <h3 class="h6 mb-0" style="font-size: 16px; font-weight: 600; color: #fff;">Today's Progress</h3>
+              <div class="text-caption flex-row align-center"
+                style="cursor: pointer; color: #a374ff; font-weight: 500; font-size: 13px; gap: 2px;">
+                View Stats <i class="ph-bold ph-caret-right"></i>
+              </div>
+            </div>
+            <div class="flex-row" style="align-items: center; justify-content: space-between; gap: 16px;">
+
+              <!-- Left: Circular Progress -->
+              <div class="circular-progress-container flex-center"
+                style="position: relative; width: 130px; height: 130px; flex-shrink: 0;">
+                <svg width="130" height="130" viewBox="0 0 130 130"
+                  style="position: absolute; left: 0; top: 0; z-index: 1;">
+                  <!-- Inner Background Fill -->
+                  <circle cx="65" cy="65" r="48" fill="rgba(155,92,255,0.05)" />
+                  <!-- Outer Ticks (Rotated to start perfectly at top) -->
+                  <circle cx="65" cy="65" r="57" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"
+                    stroke-dasharray="2 7" transform="rotate(-90 65 65)" />
+                  <!-- Track Background -->
+                  <circle cx="65" cy="65" r="48" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="8" />
+                  <!-- Progress Ring (38% of 2 * PI * 48 = 301.59 is 114.6. Offset = 301.59 - 114.6 = 187) -->
+                  <circle cx="65" cy="65" r="48" fill="none" stroke="url(#progress-gradient)" stroke-width="8"
+                    stroke-dasharray="301.59" stroke-dashoffset="186.99" stroke-linecap="round"
+                    transform="rotate(-90 65 65)" style="filter: drop-shadow(0 0 10px rgba(155,92,255,0.6));" />
+                  <defs>
+                    <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#9B5CFF" />
+                      <stop offset="100%" stop-color="#7C3AED" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+
+                <div class="flex-col flex-center"
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
+                  <span
+                    style="font-size: 26px; font-weight: 700; color: #fff; line-height: 1.1; letter-spacing: -0.5px; margin-top: 2px;">38%</span>
+                  <span style="font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 2px;">Complete</span>
+                </div>
+
+                <!-- Badge mathematically positioned exactly at the tip of the 38% arc -->
+                <div
+                  style="position: absolute; top: 88px; left: 86px; width: 24px; height: 24px; background: #9B5CFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 12px rgba(155,92,255,0.8); z-index: 3;">
+                  <i class="ph-fill ph-lightning" style="font-size: 12px; color: #fff;"></i>
+                </div>
               </div>
 
-              <!-- Device hardware overlay (display glass layer — above app, not app content) -->
+              <!-- Right: Stats Rows -->
+              <div class="flex-col" style="flex: 1; justify-content: space-between; gap: 6px;">
+                <div class="flex-between align-center"
+                  style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 12px; border: 1px solid rgba(255,255,255,0.02);">
+                  <div class="flex-row align-center" style="gap: 14px;">
+                    <i class="ph-bold ph-check-square-offset" style="color: #9B5CFF; font-size: 18px;"></i>
+                    <div style="font-size: 15px; font-weight: 600; color: #fff;">3<span
+                        style="font-weight: 500; font-size: 14px; color: rgba(255,255,255,0.5);"> / 8</span></div>
+                  </div>
+                  <span style="font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 500;">Tasks Done</span>
+                </div>
+
+                <div class="flex-between align-center"
+                  style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 12px; border: 1px solid rgba(255,255,255,0.02);">
+                  <div class="flex-row align-center" style="gap: 14px;">
+                    <i class="ph-bold ph-clock" style="color: #9B5CFF; font-size: 18px;"></i>
+                    <div style="font-size: 15px; font-weight: 600; color: #fff;">2h 15m</div>
+                  </div>
+                  <span style="font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 500;">Focus Time</span>
+                </div>
+
+                <div class="flex-between align-center"
+                  style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 12px; border: 1px solid rgba(255,255,255,0.02);">
+                  <div class="flex-row align-center" style="gap: 14px;">
+                    <i class="ph-fill ph-fire" style="color: #F97316; font-size: 18px;"></i>
+                    <div style="font-size: 15px; font-weight: 600; color: #fff;">2</div>
+                  </div>
+                  <span style="font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 500;">Day Streak</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- "Up Next" (Focus Hero Widget) -->
+          <div class="mb-4 premium-card flex-col stagger-2"
+            style="padding: 12px; position: relative; overflow: hidden;">
+
+            <!-- Header Row -->
+            <div class="flex-row align-center" style="justify-content: space-between; z-index: 2; position: relative;">
+              <div class="flex-row align-center"
+                style="gap: 6px; font-size: 13px; text-transform: uppercase; font-weight: 700; color: #a374ff; letter-spacing: 0.5px;">
+                <i class="ph-fill ph-lightning"></i> FOCUS NOW
+              </div>
+              <div
+                style="background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 100px; font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.9); display: flex; align-items: center; gap: 4px; border: 1px solid rgba(255,255,255,0.05); white-space: nowrap;">
+                <i class="ph-fill ph-star" style="color: #fbbf24;"></i> Recommended
+              </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="flex-col" style="z-index: 2; position: relative; max-width: 65%;">
+              <h3 class="h2"
+                style="font-size: 32px; font-weight: 700; color: #fff; margin-top: 0; margin-bottom: 6px; letter-spacing: -0.5px; white-space: nowrap;">
+                Deep Work</h3>
+
+              <div class="flex-row align-center"
+                style="font-size: 16px; color: #9ca3af; font-weight: 500; gap: 8px; white-space: nowrap;">
+                <span>Focus <span style="color: #7c3aed; font-size: 18px;">•</span> 90 min</span>
+              </div>
+
+              <p style="color: #9ca3af; font-size: 13px; margin-top: 0; font-weight: 500; white-space: nowrap;">
+                Your next scheduled task</p>
+
+              <!-- Avatars & People -->
+              <div class="flex-row align-center" style="gap: 12px;">
+                <div class="flex-row" style="position: relative; gap: 0;">
+                  <!-- A -->
+                  <div
+                    style="width: 32px; height: 32px; border-radius: 50%; background: #facc15; border: 2px solid #0c0817; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 600; font-size: 13px; z-index: 3;">
+                    A</div>
+                  <!-- B -->
+                  <div
+                    style="width: 32px; height: 32px; border-radius: 50%; background: #b5e4ca; border: 2px solid #0c0817; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 600; font-size: 13px; margin-left: -10px; z-index: 2;">
+                    B</div>
+                  <!-- C -->
+                  <div
+                    style="width: 32px; height: 32px; border-radius: 50%; background: #5724bc; border: 2px solid #0c0817; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 600; font-size: 13px; margin-left: -10px; z-index: 1;">
+                    C</div>
+                </div>
+                <div class="flex-col" style="gap: 0px;">
+                  <span style="font-size: 12px; color: #fff; font-weight: 600; white-space: nowrap;">12K+ <span
+                      style="font-weight: 400; color: #9ca3af;">people</span></span>
+                  <span style="font-size: 12px; color: #9ca3af; font-weight: 400; white-space: nowrap;">focusing
+                    now</span>
+                </div>
+              </div>
+
+              <!-- Action Button -->
+              <button class="btn btn-primary"
+                style="height: 44px; border-radius: 12px; font-size: 15px; font-weight: 600; width: 100%; max-width: 200px; cursor: pointer;">
+                Start Focus
+              </button>
+            </div>
+
+            <!-- Mascot Decoration -->
+            <div
+              style="position: absolute; right: -10px; top: 50%; margin-top: -80px; width: 160px; height: 160px; z-index: 1;">
+              <!-- Ellipse line -->
+              <div
+                style="position: absolute; bottom: 20px; left: 50%; margin-left: -55px; width: 110px; height: 25px; border: 2px solid #a855f7; border-radius: 50%; box-shadow: 0 0 15px #a855f7, inset 0 0 10px #a855f7; opacity: 0.9;">
+              </div>
+
+              <img src="https://www.tryfoco.com/wp-content/themes/foco-theme/assets/images/foco_state_1_presence.png"
+                alt="FOCO Mascot" class="mascot-float"
+                style="position: absolute; bottom: 25px; left: 50%; margin-left: -60px; width: 120px; height: 120px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(0,0,0,0.8));">
+
+              <!-- Minimal Sparkles -->
+              <i class="ph-fill ph-sparkle"
+                style="position: absolute; right: 20px; top: 20px; color: #b18ef9; font-size: 20px; animation: twinkle 3s infinite;"></i>
+              <i class="ph-fill ph-sparkle"
+                style="position: absolute; left: 10px; top: 60px; color: #b18ef9; font-size: 14px; animation: twinkle 4s infinite 1s;"></i>
+              <div
+                style="position: absolute; right: 50px; top: 10px; width: 3px; height: 3px; border-radius: 50%; background: #b18ef9; box-shadow: 0 0 4px #b18ef9;">
+              </div>
+              <div
+                style="position: absolute; right: 10px; top: 50px; width: 2px; height: 2px; border-radius: 50%; background: #b18ef9; box-shadow: 0 0 4px #b18ef9;">
+              </div>
+              <div
+                style="position: absolute; left: 20px; top: 30px; width: 3px; height: 3px; border-radius: 50%; background: #b18ef9; box-shadow: 0 0 4px #b18ef9;">
+              </div>
+              <div
+                style="position: absolute; left: 5px; top: 90px; width: 2px; height: 2px; border-radius: 50%; background: #b18ef9; box-shadow: 0 0 4px #b18ef9;">
+              </div>
+            </div>
+          </div>
+
+          <!-- FOCO AI Assistant -->
+          <div class="mb-4 premium-card flex-col stagger-3"
+            style="padding: 12px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);">
+
+            <div class="flex-row align-center"
+              style="gap: 6px; font-size: 11px; text-transform: uppercase; font-weight: 700; color: #A78BFA; letter-spacing: 1px; z-index: 2; position: relative;">
+              <i class="ph-fill ph-sparkle"></i> FOCO AI ASSISTANT
+            </div>
+
+            <h3 class="h3"
+              style="font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -0.5px; z-index: 2; position: relative; margin-top: 0; margin-bottom: 0;">
+              How can I help today?</h3>
+            <p class="text-caption"
+              style="color: rgba(255,255,255,0.6); z-index: 2; position: relative; font-size: 13px; margin-top: 2px; margin-bottom: 12px;">
+              Plan, prioritize or
+              simplify.</p>
+
+            <div class="animate-breathe" style="position: absolute; right: 8px; top: 8px; z-index: 1;">
+              <img src="assets/Image2.png" alt="FOCO AI Mascot"
+                style="width: 100px; height: 100px; object-fit: contain; filter: drop-shadow(0 0 20px rgba(155,92,255,0.5));">
+              <i class="ph-fill ph-sparkle"
+                style="position: absolute; top: 30px; left: -5px; color: #A78BFA; font-size: 10px; animation: twinkle 3s infinite;"></i>
+              <i class="ph-fill ph-sparkle"
+                style="position: absolute; top: 15px; right: 10px; color: #A78BFA; font-size: 12px; animation: twinkle 4s infinite 1s;"></i>
+            </div>
+
+            <!-- Buttons Grid -->
+            <div class="flex-col" style="gap: 10px; z-index: 2; position: relative;">
+              <div class="flex-row" style="gap: 10px; align-items: stretch;">
+                <!-- Plan my day -->
+                <div class="ai-action-btn flex-row align-center"
+                  style="flex: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.04); border-radius: 16px; padding: 12px; gap: 12px; cursor: pointer;">
+                  <div
+                    style="width: 36px; height: 36px; border-radius: 50%; background: rgba(155,92,255,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <i class="ph-bold ph-brain" style="color: #A78BFA; font-size: 20px;"></i>
+                  </div>
+                  <div class="flex-col" style="gap: 2px;">
+                    <span style="font-size: 13px; font-weight: 600; color: #fff;">Plan my day</span>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.5);">Create a smart plan</span>
+                  </div>
+                </div>
+
+                <!-- Prioritize tasks -->
+                <div class="ai-action-btn flex-row align-center"
+                  style="flex: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.04); border-radius: 16px; padding: 12px; gap: 12px; cursor: pointer;">
+                  <div
+                    style="width: 36px; height: 36px; border-radius: 50%; background: rgba(155,92,255,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <i class="ph-bold ph-list-numbers" style="color: #A78BFA; font-size: 20px;"></i>
+                  </div>
+                  <div class="flex-col" style="gap: 2px;">
+                    <span style="font-size: 13px; font-weight: 600; color: #fff;">Prioritize tasks</span>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.5);">Focus on what matters</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Break down a task -->
+              <div class="ai-action-btn flex-between align-center"
+                style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.04); border-radius: 16px; padding: 12px 16px; cursor: pointer;">
+                <div class="flex-row align-center" style="gap: 16px;">
+                  <i class="ph-bold ph-magic-wand" style="color: #A78BFA; font-size: 22px;"></i>
+                  <div class="flex-col" style="gap: 2px;">
+                    <span style="font-size: 13px; font-weight: 600; color: #fff;">Break down a task</span>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.5);">Get clear steps instantly</span>
+                  </div>
+                </div>
+                <i class="ph-bold ph-arrow-right" style="color: #A78BFA; font-size: 16px;"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Today's Plan -->
+          <div class="premium-card flex-col mb-4" style="padding: 12px; position: relative;">
+            <div class="flex-between align-center">
+              <h4 class="h4" style="font-size: 20px; font-weight: 600; color: #fff; margin: 0;">Today's Plan</h4>
+              <div class="text-caption flex-row align-center"
+                style="cursor: pointer; color: #a374ff; font-weight: 500; font-size: 13px; gap: 2px;">
+                View Full Plan <i class="ph-bold ph-caret-right"></i>
+              </div>
+            </div>
+
+            <!-- Filter Chips -->
+            <div class="flex-row align-center hide-scrollbar" style="gap: 12px; overflow-x: auto; padding-bottom: 4px;">
+              <div
+                style="background: #5724bc; color: #fff; padding: 6px 20px; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer;">
+                All</div>
+              <div
+                style="background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.6); padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 500; cursor: pointer;">
+                Work</div>
+              <div
+                style="background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.6); padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 500; cursor: pointer;">
+                Focus</div>
+              <div
+                style="background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.6); padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 500; cursor: pointer;">
+                Meeting</div>
+            </div>
+
+            <!-- Tasks Area -->
+            <div>
+              <h5 class="text-caption"
+                style="font-size: 11px; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.5); margin: 0 0 12px 0;">
+                ANYTIME</h5>
+
+              <!-- Anytime Card -->
+              <div class="flex-row align-center"
+                style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 16px; margin-bottom: 24px;">
+                <div
+                  style="width: 20px; height: 20px; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 6px; flex-shrink: 0;">
+                </div>
+                <div style="flex: 1; padding-left: 12px;">
+                  <div style="font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px;">Review Design System
+                  </div>
+                  <div class="flex-row align-center"
+                    style="gap: 6px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.5);">
+                    <div style="width: 6px; height: 6px; background: #a374ff; border-radius: 50%;"></div>
+                    <span style="color: #a374ff;">Work</span> • 45 min
+                  </div>
+                </div>
+                <i class="ph ph-flag" style="font-size: 20px; color: rgba(255,255,255,0.5); align-self: center;"></i>
+              </div>
+
+              <!-- Timeline Header -->
+              <div class="flex-row align-center" style="gap: 16px; margin-bottom: 20px;">
+                <h5 class="text-caption"
+                  style="font-size: 11px; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.5); margin: 0;">
+                  TIMELINE</h5>
+                <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.05);"></div>
+              </div>
+
+              <div style="position: relative; margin-left: 0;">
+
+                <!-- 10:00 Task -->
+                <div class="flex-row align-start" style="position: relative; margin-bottom: 24px;">
+                  <div
+                    style="font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.7); width: 48px; padding-top: 2px;">
+                    10:00</div>
+                  <div
+                    style="position: relative; z-index: 2; width: 24px; height: 24px; margin-left: 0; margin-top: 0; background: #7C3AED; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 12px rgba(124,58,237,0.4);">
+                    <i class="ph-bold ph-check" style="font-size: 12px; color: #fff;"></i>
+                    <!-- Vertical Timeline Dashed Line -->
+                    <div
+                      style="position: absolute; left: 11px; top: 28px; height: 22px; width: 0; border-left: 1px dashed rgba(255,255,255,0.3); z-index: -1;">
+                    </div>
+                  </div>
+                  <div style="flex: 1; padding-left: 16px;">
+                    <div style="font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px;">Team Sync</div>
+                    <div class="flex-row align-center"
+                      style="gap: 0; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.5);">
+                      Meeting • 30 min <i class="ph-fill ph-users" style="margin-left: 10px; margin-right: 4px;"></i> 3
+                    </div>
+                  </div>
+                  <i class="ph ph-flag" style="font-size: 20px; color: rgba(255,255,255,0.5); align-self: center;"></i>
+                </div>
+
+                <!-- 13:00 Task -->
+                <div class="flex-row align-start" style="position: relative; margin-bottom: 24px;">
+                  <div style="font-size: 13px; font-weight: 500; color: #fff; width: 48px; padding-top: 2px;">13:00
+                  </div>
+                  <div
+                    style="position: relative; z-index: 2; width: 24px; height: 24px; margin-left: 0; margin-top: 0; border: 2px solid #7C3AED; border-radius: 50%; background: #130f1d; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 12px rgba(124,58,237,0.4);">
+                    <div style="width: 8px; height: 8px; background: #fff; border-radius: 2px;"></div>
+                  </div>
+                  <div style="flex: 1; padding-left: 16px;">
+                    <div style="font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px;">Deep Work</div>
+                    <div class="flex-row align-center"
+                      style="gap: 6px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.5);">
+                      <span style="color: #a374ff;">Focus</span> • 90 min
+                    </div>
+                  </div>
+                  <i class="ph ph-flag" style="font-size: 20px; color: rgba(255,255,255,0.5); align-self: center;"></i>
+                </div>
+
+                <!-- Suggestion Card -->
+                <div class="flex-row align-center"
+                  style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 12px 16px; margin-left: 0;">
+                  <div
+                    style="width: 36px; height: 36px; border-radius: 50%; background: rgba(124,58,237,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-right: 12px;">
+                    <i class="ph-fill ph-sparkle" style="color: #fff; font-size: 18px;"></i>
+                  </div>
+                  <div class="flex-col">
+                    <span style="font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 2px;">Take a focused
+                      break after Deep Work.</span>
+                    <span style="font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.5);">Your productivity
+                      will thank you.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height: 120px;"></div>
+        </div>
+
+
+
+        <!-- Floating Dock Navigation -->
+        <div class="flex-between align-center"
+          style="position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 350px; padding: 8px; height: 72px; background: rgba(18, 14, 28, 0.75); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 36px; z-index: 110; box-shadow: 0 24px 48px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);">
+
+          <!-- Tab 1: Phone (Active) -->
+          <div class="flex-center"
+            style="cursor: pointer; width: 56px; height: 56px; background: rgba(163, 116, 255, 0.15); border-radius: 28px; transition: transform 0.2s;"
+            onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <i class="ph-fill ph-phone" style="font-size: 24px; color: #a374ff;"></i>
+          </div>
+
+          <!-- Tab 2: Chat -->
+          <div class="flex-center text-muted"
+            style="cursor: pointer; width: 56px; height: 56px; border-radius: 28px; transition: all 0.2s ease;"
+            onmouseover="this.style.color='#fff'; this.style.background='rgba(255,255,255,0.06)'"
+            onmouseout="this.style.color='var(--text-muted)'; this.style.background='transparent'">
+            <i class="ph ph-chats" style="font-size: 24px;"></i>
+          </div>
+
+          <!-- Central FAB -->
+          <div class="flex-center"
+            style="cursor: pointer; width: 56px; height: 56px; background: linear-gradient(135deg, #a374ff 0%, #632de9 100%); border-radius: 28px; box-shadow: 0 8px 20px rgba(99, 45, 233, 0.4), inset 0 2px 4px rgba(255,255,255,0.2); transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);"
+            onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <i class="ph ph-plus" style="font-size: 28px; color: #fff;"></i>
+          </div>
+
+          <!-- Tab 3: Profile -->
+          <div class="flex-center text-muted"
+            style="cursor: pointer; width: 56px; height: 56px; border-radius: 28px; transition: all 0.2s ease;"
+            onmouseover="this.style.color='#fff'; this.style.background='rgba(255,255,255,0.06)'"
+            onmouseout="this.style.color='var(--text-muted)'; this.style.background='transparent'">
+            <i class="ph ph-user" style="font-size: 24px;"></i>
+          </div>
+
+          <!-- Tab 4: Settings -->
+          <div class="flex-center text-muted"
+            style="cursor: pointer; width: 56px; height: 56px; border-radius: 28px; transition: all 0.2s ease;"
+            onmouseover="this.style.color='#fff'; this.style.background='rgba(255,255,255,0.06)'"
+            onmouseout="this.style.color='var(--text-muted)'; this.style.background='transparent'">
+            <i class="ph ph-hexagon" style="font-size: 24px;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-planner" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: 0; display: none; overflow: hidden;">
+        <!-- Clean Header -->
+        <div class="flex-between"
+          style="padding: 56px 16px 16px 16px; position: absolute; width: 100%; top: 0; left: 0; z-index: 50; background: rgba(12, 10, 16, 0.5); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+          <div class="flex-row align-center" style="gap: 12px;">
+            <div
+              style="width: 44px; height: 44px; border-radius: 50%; background: #9B5CFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: #fff; box-shadow: 0 4px 12px rgba(155,92,255,0.4);">
+              JD</div>
+            <div class="flex-col" style="gap: 2px;">
+              <h2 class="h2"
+                style="font-size: 16px; font-weight: 700; letter-spacing: -0.3px; margin: 0; line-height: 1.2;">Mon, Aug
+                10</h2>
+              <p class="text-caption text-muted"
+                style="font-weight: 500; font-size: 12px; margin: 0; line-height: 1.4; padding-right: 4px;">Good
+                morning, Jane 👋</p>
+            </div>
+          </div>
+          <div class="flex-row" style="gap: 12px;">
+            <button class="btn btn-icon"
+              style="width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+              <i class="ph ph-calendar-blank" style="font-size: 20px;"></i>
+            </button>
+            <button class="btn btn-icon"
+              style="width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: relative;">
+              <i class="ph ph-bell" style="font-size: 20px;"></i>
+              <div
+                style="position: absolute; top: 10px; right: 10px; width: 6px; height: 6px; background: #9B5CFF; border-radius: 50%; box-shadow: 0 0 6px #9B5CFF;">
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Scrollable Content -->
+        <div class="hide-scrollbar" style="flex: 1; overflow-y: auto; padding: 124px 16px 8px 16px;">
+
+          <!-- Today's Progress Widget -->
+          <div class="mb-4 premium-card" style="padding: 12px;">
+            <div class="flex-between align-center mb-4">
+              <h3 class="h6 mb-0" style="font-size: 16px; font-weight: 600; color: #fff;">Today's Progress</h3>
+              <div class="text-caption flex-row align-center"
+                style="cursor: pointer; color: #a374ff; font-weight: 500; font-size: 13px; gap: 2px;">
+                View Stats <i class="ph-bold ph-caret-right"></i>
+              </div>
+            </div>
+            <div class="flex-row" style="align-items: center; justify-content: space-between; gap: 16px;">
+
+              <!-- Left: Circular Progress -->
+              <div class="circular-progress-container flex-center"
+                style="position: relative; width: 120px; height: 120px; flex-shrink: 0; ">
+                <svg width="120" height="120" viewBox="0 0 120 120" style="position: absolute; left: 4px; z-index: 1;">
+                  <circle cx="60" cy="60" r="56" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"
+                    stroke-dasharray="2 8" />
+                  <circle cx="60" cy="60" r="44" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8" />
+                  <circle cx="60" cy="60" r="44" fill="none" stroke="url(#progress-gradient)" stroke-width="8"
+                    stroke-dasharray="276" stroke-dashoffset="171" stroke-linecap="round" transform="rotate(-90 60 60)"
+                    style="filter: drop-shadow(0 0 8px rgba(155,92,255,0.6));" />
+                  <defs>
+                    <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#7C3AED" />
+                      <stop offset="100%" stop-color="#C084FC" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div class="flex-col flex-center"
+                  style="position: absolute; top: 0; left: 4px; width: 120px; height: 100%; z-index: 2;">
+                  <span
+                    style="font-size: 28px; font-weight: 700; color: #fff; line-height: 1; letter-spacing: -0.5px;">38%</span>
+                  <span style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Complete</span>
+                </div>
+                <div
+                  style="position: absolute; bottom: 12px; right: 2px; width: 28px; height: 28px; background: #9B5CFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(155,92,255,0.6); z-index: 3;">
+                  <i class="ph-fill ph-lightning" style="font-size: 14px; color: #fff;"></i>
+                </div>
+              </div>
+
+              <!-- Right: Stats Rows -->
+              <div class="flex-col" style="flex: 1; justify-content: space-between; gap: 8px;">
+                <div class="flex-between align-center"
+                  style="background: rgba(255,255,255,0.04); border-radius: 12px; padding: 10px 14px;">
+                  <div class="flex-row align-center" style="gap: 12px;">
+                    <i class="ph-bold ph-check-square-offset" style="color: #9B5CFF; font-size: 18px;"></i>
+                    <div style="font-size: 15px; font-weight: 700; color: #fff;">3<span
+                        style="font-weight: 500; font-size: 13px; color: rgba(255,255,255,0.5);"> / 8</span></div>
+                  </div>
+                  <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">Tasks Done</span>
+                </div>
+
+                <div class="flex-between align-center"
+                  style="background: rgba(255,255,255,0.04); border-radius: 12px; padding: 10px 14px;">
+                  <div class="flex-row align-center" style="gap: 12px;">
+                    <i class="ph-bold ph-clock" style="color: #9B5CFF; font-size: 18px;"></i>
+                    <div style="font-size: 15px; font-weight: 700; color: #fff;">2h 15m</div>
+                  </div>
+                  <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">Focus Time</span>
+                </div>
+
+                <div class="flex-between align-center"
+                  style="background: rgba(255,255,255,0.04); border-radius: 12px; padding: 10px 14px;">
+                  <div class="flex-row align-center" style="gap: 12px;">
+                    <i class="ph-fill ph-fire" style="color: #F97316; font-size: 18px;"></i>
+                    <div style="font-size: 15px; font-weight: 700; color: #fff;">2</div>
+                  </div>
+                  <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">Day Streak</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- "Up Next" (Focus Hero Widget) -->
+          <div class="mb-4 premium-card hero-card flex-col"
+            style="padding: 24px; position: relative; overflow: hidden; min-height: 220px;"
+            onclick="navigateTo('view-focus')">
+            <!-- Background Glow -->
+            <div
+              style="position: absolute; right: -20px; top: 20px; width: 160px; height: 160px; background: radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, rgba(0,0,0,0) 70%); pointer-events: none;">
+            </div>
+
+            <div class="flex-between align-center mb-4" style="z-index: 2;">
+              <div class="flex-row align-center"
+                style="gap: 6px; font-size: 11px; text-transform: uppercase; font-weight: 700; color: #A78BFA; letter-spacing: 1px;">
+                <i class="ph-fill ph-lightning"></i> FOCUS NOW
+              </div>
+              <div
+                style="background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.1); font-size: 10px; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 4px;">
+                <span>🌟</span> Recommended
+              </div>
+            </div>
+
+            <div style="z-index: 2; margin-top: 4px;">
+              <h3 class="h3"
+                style="font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 8px; letter-spacing: -0.5px;">Deep
+                Work</h3>
+              <div class="task-meta flex-row align-center"
+                style="font-size: 14px; color: var(--text-muted); font-weight: 500; gap: 8px; margin-bottom: 8px;">
+                <span>Focus • 90 min</span>
+              </div>
+              <p class="text-caption" style="color: rgba(255,255,255,0.5); margin-bottom: 24px;">Your next scheduled
+                task</p>
+
+              <div class="flex-between align-end">
+                <div class="flex-row align-center" style="gap: 8px;">
+                  <div class="avatar-group flex-row" style="margin-left: 8px;">
+                    <img src="https://ui-avatars.com/api/?name=A&background=random"
+                      style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #1A1423; margin-left: -8px;">
+                    <img src="https://ui-avatars.com/api/?name=B&background=random"
+                      style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #1A1423; margin-left: -8px;">
+                    <img src="https://ui-avatars.com/api/?name=C&background=random"
+                      style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #1A1423; margin-left: -8px;">
+                  </div>
+                  <span style="font-size: 11px; color: rgba(255,255,255,0.4);"><strong
+                      style="color: #fff;">12K+</strong> people focusing now</span>
+                </div>
+
+                <button class="btn btn-primary"
+                  style="height: 48px; border-radius: 24px; padding: 0 24px; font-size: 15px; box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);">
+                  <i class="ph-fill ph-play" style="font-size: 18px;"></i> Start Focus
+                </button>
+              </div>
+            </div>
+
+            <!-- Mascot Decoration -->
+            <img src="https://www.tryfoco.com/wp-content/themes/foco-theme/assets/images/foco_state_1_presence.png"
+              alt="FOCO" class="mascot-float"
+              style="position: absolute; right: 16px; top: 40px; width: 100px; height: 100px; object-fit: contain; z-index: 1; filter: drop-shadow(0 0 16px rgba(155,92,255,0.6));">
+            <i class="ph-fill ph-sparkle"
+              style="position: absolute; right: 110px; top: 60px; color: #A78BFA; font-size: 12px; z-index: 1; animation: twinkle 3s infinite;"></i>
+            <i class="ph-fill ph-sparkle"
+              style="position: absolute; right: 20px; top: 120px; color: #A78BFA; font-size: 16px; z-index: 1; animation: twinkle 4s infinite 1s;"></i>
+          </div>
+
+          <!-- FOCO AI Assistant -->
+          <div class="mb-4 premium-card flex-col" style="padding: 20px;">
+            <div class="flex-between align-start mb-2">
+              <div class="flex-row align-center"
+                style="gap: 6px; font-size: 11px; text-transform: uppercase; font-weight: 700; color: #A78BFA; letter-spacing: 1px;">
+                <i class="ph-fill ph-magic-wand"></i> FOCO AI ASSISTANT
+              </div>
+              <div
+                style="width: 36px; height: 36px; border-radius: 50%; background: rgba(155,92,255,0.15); border: 1px solid rgba(155,92,255,0.3); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 12px rgba(155,92,255,0.2);">
+                <img src="https://www.tryfoco.com/wp-content/themes/foco-theme/assets/images/foco_state_1_presence.png"
+                  style="width: 24px; height: 24px; object-fit: contain;">
+              </div>
+            </div>
+            <h3 class="h4" style="font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px;">How can I help
+              you today?</h3>
+            <p class="text-caption" style="color: var(--text-muted); margin-bottom: 20px;">Plan your day, prioritize
+              tasks or break down goals.</p>
+
+            <div class="flex-row" style="gap: 8px; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px;">
+              <div class="ai-action-btn flex-row align-center"
+                style="flex: 1; min-width: 100px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 12px; gap: 8px; cursor: pointer;">
+                <i class="ph-bold ph-brain" style="color: #A78BFA; font-size: 20px;"></i>
+                <div class="flex-col" style="gap: 2px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #fff;">Plan</span>
+                  <span style="font-size: 10px; color: var(--text-muted);">my day</span>
+                </div>
+              </div>
+
+              <div class="ai-action-btn flex-row align-center"
+                style="flex: 1; min-width: 100px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 12px; gap: 8px; cursor: pointer;">
+                <i class="ph-bold ph-list-numbers" style="color: #A78BFA; font-size: 20px;"></i>
+                <div class="flex-col" style="gap: 2px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #fff;">Prioritize</span>
+                  <span style="font-size: 10px; color: var(--text-muted);">tasks</span>
+                </div>
+              </div>
+
+              <div class="ai-action-btn flex-row align-center"
+                style="flex: 1; min-width: 110px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 12px; gap: 8px; cursor: pointer;">
+                <i class="ph-bold ph-magic-wand" style="color: #A78BFA; font-size: 20px;"></i>
+                <div class="flex-col" style="gap: 2px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #fff;">Break down</span>
+                  <span style="font-size: 10px; color: var(--text-muted);">a task</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Today's Plan -->
+          <div class="premium-card flex-col mb-4" style="padding: 24px;">
+            <div class="flex-between align-center mb-6">
+              <h4 class="h4" style="font-size: 18px; font-weight: 600;">Today's Plan</h4>
+              <div class="text-caption text-muted flex-row align-center" style="cursor: pointer;">
+                View Full Plan <i class="ph-bold ph-caret-right"></i>
+              </div>
+            </div>
+
+            <!-- Tasks Area -->
+            <div>
+              <h5 class="text-caption text-muted mb-4"
+                style="font-size: 11px; font-weight: 700; letter-spacing: 1px; opacity: 0.6;">ANYTIME</h5>
+              <div class="flex-row align-center mb-6">
+                <div class="custom-checkbox"
+                  style="width: 24px; height: 24px; border: 2px solid rgba(255,255,255,0.2); background: transparent; border-radius: 8px;">
+                  <i class="ph-bold ph-check" style="font-size: 12px;"></i>
+                </div>
+                <div style="flex: 1; padding-left: 16px;">
+                  <div style="font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 2px;">Review Design System
+                  </div>
+                  <div class="flex-row align-center"
+                    style="gap: 6px; font-size: 12px; font-weight: 500; color: var(--text-muted);">
+                    <div style="width: 6px; height: 6px; background: #7C3AED; border-radius: 50%;"></div>
+                    <span style="color: #A78BFA;">Work</span> • 45 min
+                  </div>
+                </div>
+                <i class="ph ph-flag text-muted" style="font-size: 20px;"></i>
+              </div>
+
+              <h5 class="text-caption text-muted mb-4"
+                style="font-size: 11px; font-weight: 700; letter-spacing: 1px; opacity: 0.6;">TIMELINE</h5>
+
+              <div style="position: relative; margin-left: 12px;">
+                <!-- Vertical Timeline Line -->
+                <div
+                  style="position: absolute; left: 33px; top: 20px; bottom: 20px; width: 1px; background: rgba(155,92,255,0.3);">
+                </div>
+
+                <div class="flex-row align-start mb-6" style="position: relative;">
+                  <div
+                    style="font-size: 13px; font-weight: 500; color: var(--text-muted); width: 44px; padding-top: 2px;">
+                    10:00</div>
+                  <div class="custom-checkbox checked"
+                    style="position: relative; z-index: 2; width: 24px; height: 24px; margin-left: 8px; margin-top: 0; background: rgba(255,255,255,0.1); border: none; border-radius: 8px;">
+                    <i class="ph-bold ph-check" style="font-size: 12px;"></i>
+                  </div>
+                  <div style="flex: 1; padding-left: 16px; opacity: 0.5; text-decoration: line-through;">
+                    <div style="font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 2px;">Team Sync</div>
+                    <div class="flex-row align-center"
+                      style="gap: 6px; font-size: 12px; font-weight: 500; color: var(--text-muted);">
+                      Meeting • 30 min <i class="ph-fill ph-users" style="margin-left: 4px;"></i> 3
+                    </div>
+                  </div>
+                  <i class="ph ph-flag text-muted" style="font-size: 20px; opacity: 0.5;"></i>
+                </div>
+
+                <div class="flex-row align-start" style="position: relative;">
+                  <div style="font-size: 13px; font-weight: 700; color: #fff; width: 44px; padding-top: 2px;">13:00
+                  </div>
+                  <div
+                    style="position: relative; z-index: 2; width: 24px; height: 24px; margin-left: 8px; margin-top: 0; border: 2px solid #9B5CFF; border-radius: 8px; background: rgba(155,92,255,0.1); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 12px rgba(155,92,255,0.4);">
+                    <div style="width: 8px; height: 8px; background: #9B5CFF; border-radius: 2px;"></div>
+                  </div>
+                  <div style="flex: 1; padding-left: 16px;">
+                    <div style="font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 2px;">Deep Work</div>
+                    <div class="flex-row align-center"
+                      style="gap: 6px; font-size: 12px; font-weight: 500; color: var(--text-muted);">
+                      <span style="color: #A78BFA;">Focus</span> • 90 min
+                    </div>
+                  </div>
+                  <i class="ph ph-flag text-muted" style="font-size: 20px;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height: 120px;"></div>
+        </div>
+
+
+
+        <!-- Floating Dock Navigation -->
+        <div class="flex-between"
+          style="position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 380px; padding: 0 24px; height: 72px; background: #1C1924; border-radius: 36px; z-index: 110; box-shadow: 0 24px 48px rgba(0,0,0,0.5);">
+
+          <!-- Tab 1: Phone -->
+          <div class="flex-col flex-center "
+            style="cursor: pointer; transition: color 0.2s; width: 48px; height: 48px; position: relative;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#fff'"
+            onclick="navigateTo('view-home')">
+            <i class="ph-fill ph-phone" style="font-size: 24px; color: #9B5CFF;"></i>
+            <div
+              style="width: 16px; height: 3px; background: #9B5CFF; border-radius: 4px; position: absolute; bottom: 6px;">
+            </div>
+          </div>
+
+          <!-- Tab 2: Chat -->
+          <div class="flex-col flex-center text-muted"
+            style="cursor: pointer; position: relative; width: 48px; height: 48px;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'"
+            onclick="navigateTo('view-chat')">
+            <i class="ph ph-chats" style="font-size: 24px; "></i>
+
+          </div>
+
+          <!-- Central FAB -->
+          <div style="width: 64px; height: 64px; position: relative; display: flex; justify-content: center;">
+            <div class="flex-center"
+              style="position: absolute; top: -36px; width: 64px; height: 64px; background: #7C3AED; border-radius: 50%; box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4); border: 8px solid #0c0a10; cursor: pointer; z-index: 120;"
+              onclick="navigateTo('view-planner')">
+              <i class="ph ph-plus" style="font-size: 28px; color: #fff;"></i>
+            </div>
+          </div>
+
+          <!-- Tab 3: Profile -->
+          <div class="flex-col flex-center text-muted"
+            style="cursor: pointer; transition: color 0.2s; width: 48px; height: 48px; position: relative;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'"
+            onclick="navigateTo('view-auth-profile')">
+            <i class="ph ph-user" style="font-size: 24px; "></i>
+
+          </div>
+
+          <!-- Tab 4: Settings -->
+          <div class="flex-col flex-center text-muted"
+            style="cursor: pointer; transition: color 0.2s; width: 48px; height: 48px; position: relative;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'"
+            onclick="navigateTo('view-settings')">
+            <i class="ph ph-hexagon" style="font-size: 24px; "></i>
+
+          </div>
+        </div>
+      </div>
+
+      <div id="view-focus" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: 0; display: none; overflow: hidden;">
+
+        <!-- Header -->
+        <div class="flex-between" style="padding: var(--space-4) var(--space-3) var(--space-2); z-index: 10;">
+          <button class="btn btn-icon" style="background: transparent; color: var(--text-main);"
+            onclick="navigateTo('view-home')">
+            <i class="ph ph-caret-down" style="font-size: 24px;"></i>
+          </button>
+          <div class="chip" style="">
+            <i class="ph ph-headphones text-primary"></i> Focus Mode
+          </div>
+          <button class="btn btn-icon" style="background: transparent; color: var(--text-main);">
+            <i class="ph ph-dots-three-circle" style="font-size: 24px;"></i>
+          </button>
+        </div>
+
+        <div class="flex-col flex-center" style="flex: 1; padding: var(--space-3); position: relative;">
+          <!-- Ambient Glow for Timer -->
+          <div
+            style="position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, transparent 60%); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; animation: ambientPulse 4s infinite;">
+          </div>
+
+          <!-- Circular Timer Placeholder -->
+          <div class="flex-center"
+            style="width: 280px; height: 280px; border-radius: 50%; border: 4px solid var(--surface); position: relative; z-index: 2;">
+            <div
+              style="position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px; border-radius: 50%; border: 4px solid var(--primary); clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0, 20% 0);">
+            </div>
+            <div class="flex-col flex-center">
+              <span
+                style="font-size: 64px; font-weight: 300; font-variant-numeric: tabular-nums; line-height: 1; margin-bottom: 8px;">25:00</span>
+              <span class="text-primary text-small"
+                style="font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">Deep Work</span>
+            </div>
+          </div>
+
+          <!-- Active Task Info -->
+          <div class="text-center mt-4 z-10" style="z-index: 2;">
+            <h3 class="h4">Deep Work Session</h3>
+            <p class="text-muted text-small mt-1">Complete phase 1 design components</p>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex-col" style="padding: var(--space-4) var(--space-3); padding-bottom: 64px; z-index: 10;">
+
+          <!-- Environment Selector -->
+          <div class="flex-row mb-4"
+            style="overflow-x: auto; padding-bottom: 8px; margin: 0 -24px; padding: 0 24px; gap: 12px; -webkit-overflow-scrolling: touch;">
+            <span class="chip active"><i class="ph ph-speaker-none"></i> Silence</span>
+            <span class="chip"><i class="ph ph-coffee"></i> Cafe</span>
+            <span class="chip"><i class="ph ph-cloud-rain"></i> Rainy</span>
+            <span class="chip"><i class="ph ph-vinyl-record"></i> Jazzy</span>
+            <span class="chip"><i class="ph ph-books"></i> Study</span>
+          </div>
+
+          <div class="flex-center" style="gap: var(--space-3);">
+            <button class="btn btn-secondary btn-icon" style="width: 56px; height: 56px; border-radius: 50%;">
+              <i class="ph ph-stop" style="font-size: 24px;"></i>
+            </button>
+            <button class="btn btn-primary btn-icon"
+              style="width: 72px; height: 72px; border-radius: 50%; box-shadow: var(--glow-active);">
+              <i class="ph-fill ph-pause" style="font-size: 32px;"></i>
+            </button>
+            <button class="btn btn-secondary btn-icon" style="width: 56px; height: 56px; border-radius: 50%;">
+              <i class="ph ph-check" style="font-size: 24px;"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CORE APP: AI Chat -->
+      <div id="view-chat" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: 0; display: none; overflow: hidden;">
+        <!-- Header -->
+        <div class="flex-between"
+          style="padding: var(--space-4) var(--space-3) var(--space-2); border-bottom: 1px solid var(--border);  z-index: 10;">
+          <div class="flex-row">
+            <div
+              style="width: 40px; height: 40px; border-radius: 50%; background: rgba(124, 58, 237, 0.2); display: flex; align-items: center; justify-content: center;">
+              <i class="ph-fill ph-robot text-primary" style="font-size: 24px;"></i>
+            </div>
+            <div>
+              <h2 class="h5">FOCO AI</h2>
+              <p class="text-caption text-success">Online</p>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-icon" style="border-radius: 50%;">
+            <i class="ph ph-dots-three" style="font-size: 20px;"></i>
+          </button>
+        </div>
+
+        <!-- Chat Area -->
+        <div
+          style="flex: 1; overflow-y: auto; padding: var(--space-3); display: flex; flex-direction: column; gap: var(--space-3);">
+
+          <div class="text-center text-caption text-muted mt-2 mb-2">Today 9:41 AM</div>
+
+          <!-- Bot Message -->
+          <div class="flex-row" style="align-items: flex-end; gap: var(--space-1);">
+            <div
+              style="width: 28px; height: 28px; border-radius: 50%; background: var(--surface); display: flex; align-items: center; justify-content: center;">
+              <i class="ph-fill ph-robot text-primary" style="font-size: 16px;"></i>
+            </div>
+            <div style=" padding: var(--space-2); border-radius: 16px 16px 16px 4px; max-width: 80%;">
+              <p class="body-main">Good morning! You have 3 tasks scheduled for today. Would you like me to prioritize
+                them for you?</p>
+            </div>
+          </div>
+
+          <!-- User Message -->
+          <div class="flex-row" style="align-items: flex-end; justify-content: flex-end; gap: var(--space-1);">
+            <div style=" padding: var(--space-2); border-radius: 16px 16px 4px 16px; max-width: 80%;">
+              <p class="body-main">Yes please, break down the 'Review Design System' task.</p>
+            </div>
+          </div>
+
+          <!-- Bot Message with Actions -->
+          <div class="flex-row" style="align-items: flex-end; gap: var(--space-1);">
+            <div
+              style="width: 28px; height: 28px; border-radius: 50%; background: var(--surface); display: flex; align-items: center; justify-content: center;">
+              <i class="ph-fill ph-robot text-primary" style="font-size: 16px;"></i>
+            </div>
+            <div style=" padding: var(--space-2); border-radius: 16px 16px 16px 4px; max-width: 80%;">
+              <p class="body-main mb-2">Done! I've added these subtasks to your planner:</p>
+              <div class="flex-col" style="gap: 8px;">
+                <div class="chip"
+                  style="background: var(--background); border-color: var(--border-light); justify-content: flex-start;">
+                  <i class="ph ph-check-circle text-primary"></i> Review Typography
+                </div>
+                <div class="chip"
+                  style="background: var(--background); border-color: var(--border-light); justify-content: flex-start;">
+                  <i class="ph ph-check-circle text-primary"></i> Review Colors
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Input Area -->
+        <div
+          style="padding: var(--space-2) var(--space-3); padding-bottom: 32px;  border-top: 1px solid var(--border);">
+          <div class="flex-row"
+            style=" border-radius: 24px; padding: 4px 4px 4px 16px; border: 1px solid var(--border);">
+            <input type="text" placeholder="Message FOCO..."
+              style="flex: 1; background: transparent; border: none; color: var(--text-main); font-family: var(--font-family); outline: none;">
+            <button class="btn btn-primary btn-icon"
+              style="border-radius: 50%; width: 40px; height: 40px; min-width: 40px;">
+              <i class="ph-fill ph-microphone"></i>
+            </button>
+          </div>
+        </div>
+
+
+        <!-- Floating Dock Navigation -->
+        <div class="flex-between"
+          style="position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 380px; padding: 0 24px; height: 72px; background: #1C1924; border-radius: 36px; z-index: 110; box-shadow: 0 24px 48px rgba(0,0,0,0.5);">
+
+          <!-- Tab 1: Phone -->
+          <div class="flex-col flex-center text-muted"
+            style="cursor: pointer; transition: color 0.2s; width: 48px; height: 48px; position: relative;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'"
+            onclick="navigateTo('view-home')">
+            <i class="ph ph-phone" style="font-size: 24px; "></i>
+
+          </div>
+
+          <!-- Tab 2: Chat -->
+          <div class="flex-col flex-center " style="cursor: pointer; position: relative; width: 48px; height: 48px;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#fff'"
+            onclick="navigateTo('view-chat')">
+            <i class="ph-fill ph-chats" style="font-size: 24px; color: #9B5CFF;"></i>
+            <div
+              style="width: 16px; height: 3px; background: #9B5CFF; border-radius: 4px; position: absolute; bottom: 6px;">
+            </div>
+          </div>
+
+          <!-- Central FAB -->
+          <div style="width: 64px; height: 64px; position: relative; display: flex; justify-content: center;">
+            <div class="flex-center"
+              style="position: absolute; top: -36px; width: 64px; height: 64px; background: #7C3AED; border-radius: 50%; box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4); border: 8px solid #0c0a10; cursor: pointer; z-index: 120;"
+              onclick="navigateTo('view-planner')">
+              <i class="ph ph-plus" style="font-size: 28px; color: #fff;"></i>
+            </div>
+          </div>
+
+          <!-- Tab 3: Profile -->
+          <div class="flex-col flex-center text-muted"
+            style="cursor: pointer; transition: color 0.2s; width: 48px; height: 48px; position: relative;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'"
+            onclick="navigateTo('view-auth-profile')">
+            <i class="ph ph-user" style="font-size: 24px; "></i>
+
+          </div>
+
+          <!-- Tab 4: Settings -->
+          <div class="flex-col flex-center text-muted"
+            style="cursor: pointer; transition: color 0.2s; width: 48px; height: 48px; position: relative;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'"
+            onclick="navigateTo('view-settings')">
+            <i class="ph ph-hexagon" style="font-size: 24px; "></i>
+
+          </div>
+        </div>
+      </div>
+
+      <div id="view-stats" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: 0; display: none; overflow: hidden;">
+        <!-- Header -->
+        <div class="flex-between"
+          style="padding: var(--space-4) var(--space-3) var(--space-2); border-bottom: 1px solid var(--border);">
+          <div class="flex-col" style="gap: 4px;">
+            <h2 class="h2">Statistics</h2>
+          </div>
+          <button class="btn btn-secondary btn-icon" style="border-radius: 50%;" onclick="navigateTo('view-settings')">
+            <i class="ph ph-gear" style="font-size: 20px;"></i>
+          </button>
+        </div>
+
+        <div style="flex: 1; overflow-y: auto; padding: var(--space-3); padding-bottom: 100px;">
+
+          <div class="flex-row mb-3" style="gap: var(--space-2);">
+            <div class="card" style="flex: 1; text-align: center;">
+              <i class="ph-fill ph-fire text-warning mb-1" style="font-size: 24px;"></i>
+              <h3 class="h3">12</h3>
+              <p class="text-caption text-muted">Day Streak</p>
+            </div>
+            <div class="card" style="flex: 1; text-align: center;">
+              <i class="ph-fill ph-check-circle text-success mb-1" style="font-size: 24px;"></i>
+              <h3 class="h3">48</h3>
+              <p class="text-caption text-muted">Tasks Done</p>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="flex-between mb-3">
+              <h3 class="h5">Focus Time</h3>
+              <span class="text-small text-muted">This Week</span>
+            </div>
+            <div class="flex-row"
+              style="align-items: flex-end; justify-content: space-between; height: 120px; padding: 0 8px; border-bottom: 1px solid var(--border);">
+              <!-- Simple CSS Bar Chart -->
+              <div style="width: 24px; height: 40%; background: var(--secondary); border-radius: 4px 4px 0 0;"></div>
+              <div style="width: 24px; height: 60%; background: var(--secondary); border-radius: 4px 4px 0 0;"></div>
+              <div style="width: 24px; height: 30%; background: var(--secondary); border-radius: 4px 4px 0 0;"></div>
+              <div
+                style="width: 24px; height: 90%; background: var(--primary); border-radius: 4px 4px 0 0; box-shadow: var(--glow-subtle);">
+              </div>
+              <div style="width: 24px; height: 50%; background: var(--secondary); border-radius: 4px 4px 0 0;"></div>
+              <div style="width: 24px; height: 70%; background: var(--secondary); border-radius: 4px 4px 0 0;"></div>
+              <div style="width: 24px; height: 20%; background: var(--secondary); border-radius: 4px 4px 0 0;"></div>
+            </div>
+            <div class="flex-row mt-2 text-caption text-muted" style="justify-content: space-between; padding: 0 8px;">
+              <span>M</span><span>T</span><span>W</span><span
+                class="text-primary">T</span><span>F</span><span>S</span><span>S</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="h5 mb-3">Category Insights</h3>
+            <div class="flex-col" style="gap: var(--space-2);">
+              <div class="flex-between">
+                <span class="body-main">
+                  <div class="chip"
+                    style="display: inline-block; width: 12px; height: 12px; padding: 0; background: var(--primary); margin-right: 8px;">
+                  </div>Work
+                </span>
+                <span class="text-small text-muted">18 hrs</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 65%;"></div>
+              </div>
+
+              <div class="flex-between mt-2">
+                <span class="body-main">
+                  <div class="chip"
+                    style="display: inline-block; width: 12px; height: 12px; padding: 0; background: var(--success); margin-right: 8px;">
+                  </div>Study
+                </span>
+                <span class="text-small text-muted">8 hrs</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 30%; background: var(--success);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Floating Dock Navigation -->
+        <div class="flex-between"
+          style="position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 380px; padding: 0 24px; height: 72px; background: #1C1924; border-radius: 36px; z-index: 110; box-shadow: 0 24px 48px rgba(0,0,0,0.5);">
+
+          <!-- Tab 1: Phone -->
+          <div class="flex-col flex-center text-muted"
+            style="cursor: pointer; transition: color 0.2s; width: 48px; height: 48px; position: relative;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'"
+            onclick="navigateTo('view-home')">
+            <i class="ph ph-phone" style="font-size: 24px; "></i>
+
+          </div>
+
+          <!-- Tab 2: Chat -->
+          <div class="flex-col flex-center text-muted"
+            style="cursor: pointer; position: relative; width: 48px; height: 48px;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'"
+            onclick="navigateTo('view-chat')">
+            <i class="ph ph-chats" style="font-size: 24px; "></i>
+
+          </div>
+
+          <!-- Central FAB -->
+          <div style="width: 64px; height: 64px; position: relative; display: flex; justify-content: center;">
+            <div class="flex-center"
+              style="position: absolute; top: -36px; width: 64px; height: 64px; background: #7C3AED; border-radius: 50%; box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4); border: 8px solid #0c0a10; cursor: pointer; z-index: 120;"
+              onclick="navigateTo('view-planner')">
+              <i class="ph ph-plus" style="font-size: 28px; color: #fff;"></i>
+            </div>
+          </div>
+
+          <!-- Tab 3: Profile -->
+          <div class="flex-col flex-center text-muted"
+            style="cursor: pointer; transition: color 0.2s; width: 48px; height: 48px; position: relative;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'"
+            onclick="navigateTo('view-auth-profile')">
+            <i class="ph ph-user" style="font-size: 24px; "></i>
+
+          </div>
+
+          <!-- Tab 4: Settings -->
+          <div class="flex-col flex-center "
+            style="cursor: pointer; transition: color 0.2s; width: 48px; height: 48px; position: relative;"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#fff'"
+            onclick="navigateTo('view-settings')">
+            <i class="ph-fill ph-hexagon" style="font-size: 24px; color: #9B5CFF;"></i>
+            <div
+              style="width: 16px; height: 3px; background: #9B5CFF; border-radius: 4px; position: absolute; bottom: 6px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-settings" class="app-view flex-col"
+        style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; padding: var(--space-4) var(--space-3); display: none; overflow-y: auto;">
+        <div class="mb-4 mt-2 flex-row">
+          <i class="ph ph-arrow-left text-muted" style="font-size: 24px; cursor: pointer;"
+            onclick="navigateTo('view-stats')"></i>
+          <h2 class="h2" style="margin-bottom: 0;">Settings</h2>
+        </div>
+
+        <div class="card mb-3"
+          style="background: var(--primary-gradient); color: #FFF; border: none; padding: var(--space-3);">
+          <div class="flex-between mb-2">
+            <h3 class="h4">FOCO Premium</h3>
+            <i class="ph-fill ph-crown" style="font-size: 24px; color: #FCD34D;"></i>
+          </div>
+          <p class="text-small" style="opacity: 0.9; margin-bottom: 16px;">Unlock unlimited AI chat, advanced analytics,
+            and custom environments.</p>
+          <button class="btn btn-secondary btn-small" style="width: 100%; color: var(--primary);">Manage
+            Subscription</button>
+        </div>
+
+        <h4 class="h6 text-muted mb-2">Account</h4>
+        <div class="card mb-4" style="padding: 0;">
+          <div class="flex-between p-3" style="border-bottom: 1px solid var(--border);"><span class="body-main">Profile
+              Details</span><i class="ph ph-caret-right text-muted"></i></div>
+          <div class="flex-between p-3" style="border-bottom: 1px solid var(--border);"><span class="body-main">Change
+              Password</span><i class="ph ph-caret-right text-muted"></i></div>
+          <div class="flex-between p-3"><span class="body-main text-error">Delete Account</span></div>
+        </div>
+
+        <h4 class="h6 text-muted mb-2">Preferences</h4>
+        <div class="card mb-4" style="padding: 0;">
+          <div class="flex-between p-3" style="border-bottom: 1px solid var(--border);">
+            <span class="body-main">Push Notifications</span>
+            <div class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></div>
+          </div>
+          <div class="flex-between p-3"><span class="body-main">Dark Mode</span>
+            <div class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></div>
+          </div>
+        </div>
+        <h4 class="h6 text-muted mb-2">About</h4>
+        <div class="card mb-4" style="padding: 0;">
+          <div class="flex-between p-3" style="border-bottom: 1px solid var(--border);">
+            <span class="body-main">App Version</span>
+            <span class="text-small text-muted">v1.2.0</span>
+          </div>
+          <div class="flex-between p-3" style="cursor: pointer;"
+            onclick="alert('Checking for updates... You are on the latest version.')">
+            <span class="body-main text-primary">Check for Updates</span>
+            <i class="ph ph-arrow-circle-up text-primary"></i>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary mb-4" onclick="navigateTo('view-splash')">Log Out</button>
+      </div>
+    </div>
+  </div>
+              </div>
               <div class="device-frame__hardware" aria-hidden="true">
                 <div class="device-frame__island">
                   <span class="device-frame__island-speaker"></span>
                   <span class="device-frame__island-camera"></span>
                 </div>
               </div>
-
-              <!-- Home indicator: inside screen safe area, not app content -->
               <div class="device-frame__home-indicator" aria-hidden="true"></div>
             </div>
           </div>
         </div>
       </div>
-      </div>
     </div>
+  </div>
+</body>
 
-    <!-- Variant control only — injected when developmentPreview is true -->
-    <script type="module" src="/js/app.js"></script>
-  </body>
 </html>

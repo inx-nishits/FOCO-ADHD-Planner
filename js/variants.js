@@ -22,7 +22,9 @@ export const VARIANTS = {
     name: 'Variant C',
     path: '/variant-c/',
     stylesheet: '/variants/variant-c/variant.css',
-    description: 'Warm neutral foundation',
+    description: 'Standalone FOCO UI kit',
+    /** Loads its own index.html / assets — not the shared A/B shell */
+    standalone: true,
   },
 };
 

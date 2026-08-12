@@ -4,11 +4,8 @@
     { "source": "/variant-a/", "destination": "/index.html" },
     { "source": "/variant-b", "destination": "/index.html" },
     { "source": "/variant-b/", "destination": "/index.html" },
-    { "source": "/variant-c", "destination": "/index.html" },
-    { "source": "/variant-c/", "destination": "/index.html" },
     { "source": "/variant-a/:path*", "destination": "/index.html" },
-    { "source": "/variant-b/:path*", "destination": "/index.html" },
-    { "source": "/variant-c/:path*", "destination": "/index.html" }
+    { "source": "/variant-b/:path*", "destination": "/index.html" }
   ],
   "headers": [
     {

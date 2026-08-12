@@ -1,0 +1,79 @@
+/**
+ * Variant C — desktop presentation shell.
+ * Reuses foundation iPhone frame + scale behaviour without changing C screen UI.
+ */
+
+body[data-variant='c'] {
+  --app-bg: #0c0814;
+  --stage-bg: #e8e8ed;
+  --app-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Framed desktop: stage + auto-scale phone (same behaviour as A/B) */
+html[data-device-frame='on'] body {
+  display: block;
+  height: 100%;
+  width: 100%;
+  min-height: 100dvh;
+  padding: 0 !important;
+  margin: 0;
+  overflow: hidden;
+  background: var(--stage-bg);
+}
+
+html[data-device-frame='on'] .app-stage {
+  min-height: 100dvh;
+  min-height: 100svh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(255, 255, 255, 0.7), transparent 60%),
+    var(--stage-bg);
+}
+
+html[data-device-frame='on'] .app-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--app-bg);
+  overflow: hidden;
+}
+
+/* Fill the shared screen — drop C's own desktop bezel/notch (frame provides those) */
+html[data-device-frame='on'] .app-frame {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-device-frame='on'] .app-frame::before {
+  content: none !important;
+  display: none !important;
+}
+
+html[data-device-frame='on'] .app-content {
+  padding-top: var(--safe-top) !important;
+  padding-right: var(--safe-right);
+  padding-bottom: var(--safe-bottom);
+  padding-left: var(--safe-left);
+}
+
+/* Real phone / PWA: keep C full-bleed; frame chrome is display:contents */
+html[data-device-frame='off'] .app-stage {
+  display: contents;
+}
+
+html[data-device-frame='off'] .app-shell {
+  display: contents;
+}

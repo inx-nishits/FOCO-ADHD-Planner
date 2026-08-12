@@ -1,0 +1,164 @@
+/* FOCO App Premium Animations */
+
+/* Ambient Glow Pulse */
+@keyframes ambientPulse {
+  0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+  50% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+}
+
+.ambient-glow {
+  animation: ambientPulse 4s ease-in-out infinite;
+}
+
+/* Mascot Float */
+@keyframes mascotFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+.mascot-float {
+  animation: mascotFloat 4s ease-in-out infinite;
+}
+
+/* SPA Transitions */
+.app-view {
+  opacity: 1;
+  /* Removed transition to prevent conflict with animation */
+}
+
+.view-exit {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.view-enter {
+  animation: viewEnter 0.1s ease-out forwards;
+}
+
+@keyframes viewFadeInUp {
+  0% { opacity: 0; transform: translateY(5px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes viewFadeOutDown {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(5px); }
+}
+
+/* Lightning fast Staggered Fade In */
+.stagger-1 { animation: viewFadeInUp 0.1s ease-out forwards; opacity: 0; }
+.stagger-2 { animation: viewFadeInUp 0.1s ease-out 0.05s forwards; opacity: 0; }
+.stagger-3 { animation: viewFadeInUp 0.1s ease-out 0.1s forwards; opacity: 0; }
+.stagger-4 { animation: viewFadeInUp 0.1s ease-out 0.15s forwards; opacity: 0; }
+
+/* Micro-interactions */
+@keyframes popIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-pop {
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Splash Screen Particles */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--primary-light);
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle 4s infinite ease-in-out;
+}
+
+/* Randomize particles slightly using nth-child */
+.particle:nth-child(1) { left: 10%; top: 20%; animation-duration: 3s; animation-delay: 0s; }
+.particle:nth-child(2) { left: 80%; top: 15%; animation-duration: 4.5s; animation-delay: 1s; width: 6px; height: 6px; }
+.particle:nth-child(3) { left: 30%; top: 60%; animation-duration: 3.5s; animation-delay: 2s; }
+.particle:nth-child(4) { left: 60%; top: 40%; animation-duration: 5s; animation-delay: 0.5s; width: 3px; height: 3px; }
+.particle:nth-child(5) { left: 50%; top: 80%; animation-duration: 4s; animation-delay: 3s; }
+.particle:nth-child(6) { left: 90%; top: 70%; animation-duration: 5.5s; animation-delay: 1.5s; width: 5px; height: 5px; }
+.particle:nth-child(7) { left: 15%; top: 40%; animation-duration: 3.8s; animation-delay: 0.8s; }
+.particle:nth-child(8) { left: 75%; top: 85%; animation-duration: 4.8s; animation-delay: 2.5s; }
+.particle:nth-child(9) { left: 45%; top: 10%; animation-duration: 3.2s; animation-delay: 0.2s; width: 6px; height: 6px; }
+.particle:nth-child(10) { left: 25%; top: 90%; animation-duration: 4.2s; animation-delay: 1.2s; }
+.particle:nth-child(11) { left: 65%; top: 25%; animation-duration: 5.2s; animation-delay: 3.5s; }
+.particle:nth-child(12) { left: 85%; top: 50%; animation-duration: 3.6s; animation-delay: 2.2s; }
+
+@keyframes twinkle {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.5); opacity: 0.8; box-shadow: 0 0 10px var(--primary-light); }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+/* --- New UI Enhancements --- */
+
+/* Breathing mascot */
+@keyframes breathingMascot {
+  0% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(155,92,255,0.2)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 20px rgba(155,92,255,0.5)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(155,92,255,0.2)); }
+}
+.animate-breathe {
+  animation: breathingMascot 4s ease-in-out infinite;
+}
+
+/* Subtle Glowing Mesh Background */
+@keyframes meshGradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.ai-mesh-bg {
+  background: linear-gradient(-45deg, rgba(124, 58, 237, 0.1), rgba(155, 92, 255, 0.15), rgba(30, 20, 50, 0.8));
+  background-size: 200% 200%;
+  animation: meshGradientMove 8s ease infinite;
+}
+
+/* AI Action Chip Hover */
+.ai-action-btn {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.ai-action-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: rgba(155, 92, 255, 0.1) !important;
+  border-color: rgba(155, 92, 255, 0.4) !important;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.2);
+}
+.ai-action-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Active Task Glow */
+@keyframes activeTaskGlow {
+  0% { box-shadow: 0 0 0 0 rgba(155, 92, 255, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(155, 92, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(155, 92, 255, 0); }
+}
+.active-task-plate {
+  background: rgba(155, 92, 255, 0.1);
+  border: 1px solid rgba(155, 92, 255, 0.2);
+  border-radius: 16px;
+  padding: 12px;
+  margin: -12px -12px -12px 4px;
+  animation: activeTaskGlow 3s infinite;
+}
+
+/* Stagger animations */
+.stagger-1 { animation: viewFadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+.stagger-2 { animation: viewFadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+.stagger-3 { animation: viewFadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; }
+.stagger-4 { animation: viewFadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
+

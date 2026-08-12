@@ -1,10 +1,8 @@
-# Netlify / compatible static hosts — SPA fallback for variant URLs
+# Netlify / compatible static hosts — SPA fallback for shared-shell variants only.
+# Variant C is a standalone app and must serve /variant-c/index.html as-is.
 /variant-a    /index.html   200
 /variant-a/   /index.html   200
 /variant-a/*  /index.html   200
 /variant-b    /index.html   200
 /variant-b/   /index.html   200
 /variant-b/*  /index.html   200
-/variant-c    /index.html   200
-/variant-c/   /index.html   200
-/variant-c/*  /index.html   200
