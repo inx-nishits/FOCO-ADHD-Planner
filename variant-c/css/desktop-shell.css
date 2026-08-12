@@ -69,11 +69,4 @@ html[data-device-frame='on'] .app-content {
   padding-left: var(--safe-left);
 }
 
-/* Real phone / PWA: keep C full-bleed; frame chrome is display:contents */
-html[data-device-frame='off'] .app-stage {
-  display: contents;
-}
-
-html[data-device-frame='off'] .app-shell {
-  display: contents;
-}
+/* Mobile/PWA viewport lock lives in mobile-shell.css */

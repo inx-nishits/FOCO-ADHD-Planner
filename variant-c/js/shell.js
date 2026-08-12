@@ -13,5 +13,28 @@ persistVariant('c');
 
 document.documentElement.dataset.standalone = String(isStandaloneDisplay());
 
+/** Sync dynamic viewport height for mobile Safari / PWA (Variant C only). */
+function syncViewportHeight() {
+  const height = window.visualViewport?.height ?? window.innerHeight;
+  document.documentElement.style.setProperty('--vc-vh', `${height}px`);
+}
+
+syncViewportHeight();
+window.addEventListener('resize', syncViewportHeight, { passive: true });
+window.visualViewport?.addEventListener('resize', syncViewportHeight, { passive: true });
+window.visualViewport?.addEventListener('scroll', syncViewportHeight, { passive: true });
+
+/** Block iOS Safari pinch-to-zoom on Variant C (mobile/PWA only). */
+function blockPinchZoom() {
+  if (document.documentElement.dataset.deviceFrame !== 'off') return;
+  const prevent = (event) => event.preventDefault();
+  document.addEventListener('gesturestart', prevent, { passive: false });
+  document.addEventListener('gesturechange', prevent, { passive: false });
+  document.addEventListener('gestureend', prevent, { passive: false });
+}
+
 initDevicePreview();
 initPreviewControls();
+blockPinchZoom();
+
+document.addEventListener('deviceframechange', syncViewportHeight);
