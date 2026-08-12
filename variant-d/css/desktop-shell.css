@@ -112,12 +112,8 @@ html[data-device-frame='on'][data-variant='d'] #auth-screen .auth-subview.active
   min-height: 0;
 }
 
-html[data-device-frame='on'][data-variant='d'] #auth-verify.active,
-html[data-device-frame='on'][data-variant='d'] #auth-forgot.active,
-html[data-device-frame='on'][data-variant='d'] #auth-profile.active {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+html[data-device-frame='on'][data-variant='d'] .auth-stack-footer {
+  padding-bottom: 0;
 }
 
 html[data-device-frame='on'][data-variant='d'] #auth-screen:has(#auth-create.active) {

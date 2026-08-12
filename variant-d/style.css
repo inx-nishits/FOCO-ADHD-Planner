@@ -725,18 +725,114 @@ html[data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home
     margin-bottom: 24px;
 }
 
+/* Auth stack — back + header pinned top, CTA pinned bottom */
+#auth-screen.view.active {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+html[data-variant='d'] .app-content:has(#auth-screen.active) {
+    overflow: hidden;
+}
+
+.auth-subview.auth-stack.active {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding-bottom: 0;
+}
+
+.auth-stack-top {
+    flex-shrink: 0;
+}
+
+.auth-stack-top .btn-back {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 12px !important;
+}
+
+.auth-stack-top .auth-header {
+    margin-bottom: 16px;
+}
+
+.auth-stack-top .auth-header .text-display {
+    font-size: 32px;
+    line-height: 1.15;
+}
+
+.auth-stack-top .auth-header .text-body {
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+.auth-stack-body {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 16px;
+    overflow-y: auto;
+}
+
+.auth-stack-body .input-group {
+    margin-bottom: 0;
+}
+
+.auth-code-input {
+    text-align: center;
+    font-size: 24px;
+    letter-spacing: 8px;
+}
+
+.auth-stack-footer {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 16px;
+    padding-bottom: max(4px, env(safe-area-inset-bottom, 0px));
+}
+
+.auth-stack-footer .btn {
+    margin: 0 !important;
+    min-height: 50px;
+}
+
+.auth-stack-link {
+    margin: 0 !important;
+}
+
+.auth-forgot-link {
+    text-align: right;
+    margin-top: -8px;
+}
+
+.auth-stack-social {
+    display: flex;
+    gap: 12px;
+}
+
+.auth-stack-social .btn {
+    min-height: 48px;
+}
+
+.auth-stack-footer .divider {
+    margin: 4px 0;
+}
+
 /* Create Account — full-height layout, no scroll (Variant D only) */
 #auth-screen:has(#auth-create.active) {
     padding-top: 12px;
     padding-bottom: 12px;
-    overflow: hidden;
-    height: 100%;
-    box-sizing: border-box;
-}
-
-#auth-screen:has(#auth-create.active).view.active {
-    display: flex;
-    flex-direction: column;
 }
 
 #auth-create.auth-subview {
@@ -752,10 +848,6 @@ html[data-variant='d']:has(#onboarding-screen.active, #auth-screen.active, #home
     min-height: 0;
     overflow: hidden;
     gap: 0;
-}
-
-html[data-variant='d'] .app-content:has(#auth-create.active) {
-    overflow: hidden;
 }
 
 #auth-create .auth-create-top {
