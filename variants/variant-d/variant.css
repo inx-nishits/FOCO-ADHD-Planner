@@ -1,0 +1,6 @@
+/**
+ * Variant D — additional visual language hooks.
+ */
+body[data-variant='d'] .app-shell {
+  /* Foundation: intentionally minimal */
+}

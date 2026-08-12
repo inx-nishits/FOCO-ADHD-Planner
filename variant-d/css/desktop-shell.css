@@ -1,0 +1,74 @@
+/**
+ * Variant D — desktop presentation shell.
+ * Reuses foundation iPhone frame + scale behaviour without changing D screen UI.
+ */
+
+body[data-variant='d'] {
+  --app-bg: #f7f7f5;
+  --stage-bg: #e8e8ed;
+  --app-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
+}
+
+html[data-device-frame='on'][data-variant='d'] body {
+  display: block;
+  height: 100%;
+  width: 100%;
+  min-height: 100dvh;
+  padding: 0 !important;
+  margin: 0;
+  overflow: hidden;
+  background: var(--stage-bg);
+}
+
+html[data-device-frame='on'][data-variant='d'] .app-stage {
+  min-height: 100dvh;
+  min-height: 100svh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(255, 255, 255, 0.7), transparent 60%),
+    var(--stage-bg);
+}
+
+html[data-device-frame='on'][data-variant='d'] .app-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--app-bg);
+  overflow: hidden;
+}
+
+/* Fill shared frame — drop D's own desktop bezel/notch (frame provides those) */
+html[data-device-frame='on'][data-variant='d'] .ios-frame {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html[data-device-frame='on'][data-variant='d'] .hw-button,
+html[data-device-frame='on'][data-variant='d'] .hw-dynamic-island,
+html[data-device-frame='on'][data-variant='d'] .ios-frame::after {
+  display: none !important;
+}
+
+html[data-device-frame='on'][data-variant='d'] .ios-frame > .app-content {
+  padding-top: var(--safe-top) !important;
+  padding-right: var(--safe-right);
+  padding-bottom: var(--safe-bottom);
+  padding-left: var(--safe-left);
+  border-radius: 0;
+}
+
+/* Mobile/PWA viewport lock lives in mobile-shell.css */

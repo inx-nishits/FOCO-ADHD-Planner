@@ -13,7 +13,7 @@ const root = path.resolve(__dirname, '..');
 const source = path.join(root, 'index.html');
 /**
  * Keep in sync when adding shared-shell variants (also update js/variants.js + hosting rewrites).
- * Variant C is a standalone app — do not overwrite its index.html.
+ * Variant C and D are standalone apps — do not overwrite their index.html.
  */
 const variantFolders = ['variant-a', 'variant-b'];
 

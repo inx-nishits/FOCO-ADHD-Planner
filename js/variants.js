@@ -26,6 +26,15 @@ export const VARIANTS = {
     /** Loads its own index.html / assets — not the shared A/B shell */
     standalone: true,
   },
+  d: {
+    id: 'd',
+    name: 'Variant D',
+    path: '/variant-d/',
+    stylesheet: '/variants/variant-d/variant.css',
+    description: 'Light mode FOCO prototype',
+    /** Loads its own index.html / assets — not the shared A/B shell */
+    standalone: true,
+  },
 };
 
 export const VARIANT_IDS = Object.keys(VARIANTS);

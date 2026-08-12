@@ -26,7 +26,7 @@ export const APP_CONFIG = {
   mockUserAvatarUrl: '/assets/images/mock-user-alex.png',
 
   /** Variant IDs shown in the versions switcher */
-  previewVariantIds: ['a', 'b', 'c'],
+  previewVariantIds: ['a', 'b', 'c', 'd'],
 
   /** Show variant switcher (dev / client demos) */
   developmentPreview: true,
